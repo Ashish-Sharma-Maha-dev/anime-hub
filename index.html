@@ -16,24 +16,26 @@ color:#fff;
 overflow-x:hidden;
 }
 
-/* HEADER */
-header{
-height:80vh;
+/* HERO */
+.hero{
+height:100vh;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
-background:linear-gradient(black,#020202);
+background:radial-gradient(circle,#140000,#020202);
 }
-header h1{font-size:50px;}
-header p{opacity:0.7}
+.hero h1{
+font-size:60px;
+text-shadow:0 0 30px red;
+}
+.hero p{opacity:0.7}
 
 /* MENU */
 .menu-btn{
 position:fixed;
-top:20px;
-left:20px;
+top:20px;left:20px;
 z-index:1000;
 cursor:pointer;
 }
@@ -41,18 +43,18 @@ cursor:pointer;
 width:30px;height:3px;background:red;margin:6px 0;
 }
 
-.side-menu{
+.menu{
 position:fixed;
-left:-300px;
+left:-320px;
 top:0;
-width:300px;
+width:320px;
 height:100%;
 background:#000;
 padding-top:60px;
 transition:0.4s;
 z-index:999;
 }
-.side-menu a{
+.menu a{
 display:block;
 padding:15px;
 border-bottom:1px solid #222;
@@ -60,16 +62,16 @@ color:white;
 text-decoration:none;
 }
 
-/* NAV BUTTONS */
+/* NAV */
 .nav{
 display:flex;
-justify-content:center;
 gap:10px;
-margin-top:20px;
 flex-wrap:wrap;
+justify-content:center;
+margin-top:20px;
 }
 .nav button{
-padding:10px 15px;
+padding:10px;
 background:red;
 border:none;
 color:white;
@@ -77,7 +79,7 @@ cursor:pointer;
 }
 
 /* SECTION */
-.section{padding:40px 20px;}
+.section{padding:60px 20px;}
 
 /* GRID */
 .grid{
@@ -95,7 +97,7 @@ transition:0.3s;
 }
 .card:hover{
 transform:scale(1.05);
-box-shadow:0 0 20px red;
+box-shadow:0 0 25px red;
 }
 .card img{
 width:100%;
@@ -103,6 +105,7 @@ height:200px;
 object-fit:cover;
 }
 .card-content{padding:15px;}
+
 button{
 margin-top:10px;
 padding:8px;
@@ -132,9 +135,16 @@ width:100%;
 max-height:300px;
 }
 
+/* BLOG */
+.blog{
+background:#111;
+padding:20px;
+margin:10px 0;
+}
+
 /* RESPONSIVE */
 @media(max-width:600px){
-header h1{font-size:32px;}
+.hero h1{font-size:35px;}
 }
 </style>
 </head>
@@ -146,30 +156,32 @@ header h1{font-size:32px;}
 <div></div><div></div><div></div>
 </div>
 
-<div class="side-menu" id="menu">
+<div class="menu" id="menu">
 <a href="#">Home</a>
 <a href="#">Anime</a>
 <a href="#">Pokémon</a>
 <a href="#">Dragons</a>
 <a href="#">Blogs</a>
-<a href="#">Affiliate Links</a>
-<a href="#">Merchant Store</a>
-<a href="mailto:your@email.com">Contact / Report</a>
+<a href="#">Affiliate Store</a>
+<a href="#">Contact</a>
+<a href="mailto:your@email.com">Report Bug</a>
 </div>
 
-<header>
+<!-- HERO -->
+<section class="hero">
 <h1>KINGU VAULT</h1>
-<p>Anime • Pokémon • Dragons</p>
+<p>Ultimate Anime Experience</p>
 
 <div class="nav">
-<button onclick="showSection('anime')">Anime</button>
-<button onclick="showSection('pokemon')">Pokémon</button>
-<button onclick="showSection('dragons')">Dragons</button>
+<button onclick="show('anime')">Anime</button>
+<button onclick="show('pokemon')">Pokémon</button>
+<button onclick="show('dragons')">Dragons</button>
+<button onclick="show('blogs')">Blogs</button>
 </div>
-</header>
+</section>
 
 <!-- ANIME -->
-<section class="section" id="anime">
+<section id="anime" class="section">
 <h2>Top Anime</h2>
 <div class="grid">
 
@@ -193,7 +205,7 @@ header h1{font-size:32px;}
 </section>
 
 <!-- POKEMON -->
-<section class="section" id="pokemon" style="display:none;">
+<section id="pokemon" class="section" style="display:none;">
 <h2>Top Pokémon</h2>
 <div class="grid">
 
@@ -205,19 +217,11 @@ header h1{font-size:32px;}
 </div>
 </div>
 
-<div class="card">
-<img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/006.png">
-<div class="card-content">
-<h3>Charizard</h3>
-<button onclick="openModal('charizard')">Explore</button>
-</div>
-</div>
-
 </div>
 </section>
 
 <!-- DRAGONS -->
-<section class="section" id="dragons" style="display:none;">
+<section id="dragons" class="section" style="display:none;">
 <h2>Top Dragons</h2>
 <div class="grid">
 
@@ -229,15 +233,23 @@ header h1{font-size:32px;}
 </div>
 </div>
 
-<div class="card">
-<img src="https://images.alphacoders.com/132/1329656.jpeg">
-<div class="card-content">
-<h3>Bahamut</h3>
-<button onclick="openModal('bahamut')">Explore</button>
 </div>
+</section>
+
+<!-- BLOG -->
+<section id="blogs" class="section" style="display:none;">
+<h2>Latest Blogs</h2>
+
+<div class="blog">
+<h3>Top 10 Anime in 2026</h3>
+<p>You can write your blog here...</p>
 </div>
 
+<div class="blog">
+<h3>Best Pokémon Ranked</h3>
+<p>Affiliate + content ready...</p>
 </div>
+
 </section>
 
 <!-- MODAL -->
@@ -254,25 +266,23 @@ header h1{font-size:32px;}
 /* MENU */
 function toggleMenu(){
 let m=document.getElementById("menu");
-m.style.left=m.style.left==="0px"?"-300px":"0px";
+m.style.left=m.style.left==="0px"?"-320px":"0px";
 }
 
 /* SECTION SWITCH */
-function showSection(sec){
-document.getElementById("anime").style.display="none";
-document.getElementById("pokemon").style.display="none";
-document.getElementById("dragons").style.display="none";
+function show(sec){
+["anime","pokemon","dragons","blogs"].forEach(id=>{
+document.getElementById(id).style.display="none";
+});
 document.getElementById(sec).style.display="block";
 }
 
 /* DATA */
 const data={
-jjk:{img:"https://cdn.myanimelist.net/images/anime/1141/142503.jpg",text:"Culling Game arc intense fights.",sound:"https://www.myinstants.com/media/sounds/jjk.mp3"},
-aot:{img:"https://cdn.myanimelist.net/images/anime/1337/99013.jpg",text:"Final war of humanity.",sound:"https://www.myinstants.com/media/sounds/anime-wow-sound-effect.mp3"},
-pikachu:{img:"https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png",text:"Electric mascot.",sound:"https://www.myinstants.com/media/sounds/pikachu.mp3"},
-charizard:{img:"https://assets.pokemon.com/assets/cms2/img/pokedex/full/006.png",text:"Fire dragon power.",sound:"https://www.myinstants.com/media/sounds/fire.mp3"},
-shenron:{img:"https://images.alphacoders.com/132/1328144.jpeg",text:"Wish dragon.",sound:"https://www.myinstants.com/media/sounds/dragon-roar.mp3"},
-bahamut:{img:"https://images.alphacoders.com/132/1329656.jpeg",text:"Celestial dragon.",sound:"https://www.myinstants.com/media/sounds/monster-roar.mp3"}
+jjk:{img:"https://cdn.myanimelist.net/images/anime/1141/142503.jpg",text:"Culling Game arc begins.",sound:"https://www.myinstants.com/media/sounds/jjk.mp3"},
+aot:{img:"https://cdn.myanimelist.net/images/anime/1337/99013.jpg",text:"Final war unfolds.",sound:"https://www.myinstants.com/media/sounds/anime-wow-sound-effect.mp3"},
+pikachu:{img:"https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png",text:"Electric icon.",sound:"https://www.myinstants.com/media/sounds/pikachu.mp3"},
+shenron:{img:"https://images.alphacoders.com/132/1328144.jpeg",text:"Wish granting dragon.",sound:"https://www.myinstants.com/media/sounds/dragon-roar.mp3"}
 };
 
 let audio;

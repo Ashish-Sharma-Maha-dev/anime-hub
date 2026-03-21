@@ -8,22 +8,38 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
 
-/* BACKGROUND */
+/* 🌌 BODY */
 body{
-background:linear-gradient(270deg,#020202,#0a0000,#140000);
-background-size:400% 400%;
-animation:bgMove 12s ease infinite;
+background:#000;
 color:#fff;
 overflow-x:hidden;
 cursor:none;
 }
-@keyframes bgMove{
-0%{background-position:0%}
-50%{background-position:100%}
-100%{background-position:0%}
+
+/* ⭐ STARS */
+#stars{
+position:fixed;
+top:0;left:0;
+z-index:-2;
 }
 
-/* CURSOR */
+/* 🐉 DRAGON BG */
+#bg-dragon{
+position:fixed;
+top:30%;
+left:-300px;
+width:250px;
+opacity:0.15;
+z-index:-1;
+animation:dragonFly 20s linear infinite;
+}
+@keyframes dragonFly{
+0%{left:-300px;top:30%}
+50%{top:50%}
+100%{left:110%;top:40%}
+}
+
+/* 🌈 CURSOR */
 .cursor{
 position:fixed;
 width:20px;height:20px;
@@ -34,10 +50,11 @@ pointer-events:none;
 z-index:9999;
 }
 
-/* MENU */
+/* ☰ MENU */
 .menu-btn{
 position:fixed;
-top:20px;right:20px;
+top:20px;
+left:20px;
 z-index:1000;
 cursor:pointer;
 }
@@ -46,7 +63,7 @@ width:30px;height:3px;background:red;margin:6px 0;
 }
 .side-nav{
 position:fixed;
-right:-300px;
+left:-300px;
 top:0;
 width:300px;height:100%;
 background:#000;
@@ -104,6 +121,9 @@ height:200px;
 object-fit:cover;
 }
 .card-content{padding:15px}
+.card:hover{
+box-shadow:0 0 30px red;
+}
 
 /* BUTTON */
 button{
@@ -112,6 +132,7 @@ background:red;
 border:none;
 color:#fff;
 cursor:pointer;
+margin-top:10px;
 }
 
 /* MODAL */
@@ -134,23 +155,22 @@ width:100%;
 max-height:300px;
 }
 
-/* GOKU */
-#goku{
-position:fixed;
-top:-300px;
-left:50%;
-transform:translateX(-50%);
-width:150px;
-transition:1.5s;
-}
-.fly{
-top:100vh !important;
+/* INPUT */
+input{
+padding:12px;
+border:none;
+border-radius:6px;
+width:250px;
+margin-top:10px;
 }
 
 </style>
 </head>
 
 <body>
+
+<canvas id="stars"></canvas>
+<img id="bg-dragon" src="https://pngimg.com/uploads/dragon/dragon_PNG84450.png">
 
 <div class="cursor" id="cursor"></div>
 
@@ -166,9 +186,6 @@ top:100vh !important;
 <a href="#">Blogs</a>
 <a href="#">Contact</a>
 </div>
-
-<!-- GOKU -->
-<img id="goku" src="https://pngimg.com/uploads/goku/goku_PNG17.png">
 
 <header>
 <h1>KINGU VAULT</h1>
@@ -221,6 +238,14 @@ top:100vh !important;
 
 </div>
 
+<!-- SUBSCRIBE -->
+<div class="section" style="text-align:center;">
+<h2>🚀 Join KINGU VAULT</h2>
+<input type="email" placeholder="Enter your email"><br>
+<button onclick="alert('Subscribed!')">Subscribe</button><br><br>
+<button onclick="alert('Bug reported!')">Report Bug</button>
+</div>
+
 <!-- MODAL -->
 <div class="modal" id="modal">
 <div class="modal-content">
@@ -235,10 +260,10 @@ top:100vh !important;
 /* MENU */
 function toggleMenu(){
 let m=document.getElementById("menu");
-m.style.right = m.style.right==="0px"?"-300px":"0px";
+m.style.left = m.style.left==="0px"?"-300px":"0px";
 }
 
-/* MODAL DATA */
+/* MODAL */
 const data={
 jjk:{img:"https://cdn.myanimelist.net/images/anime/1141/142503.jpg",text:"Culling Game arc."},
 aot:{img:"https://cdn.myanimelist.net/images/anime/1337/99013.jpg",text:"Final war."}
@@ -277,17 +302,28 @@ card.style.transform="rotateX(0) rotateY(0)";
 });
 });
 
-/* GOKU SWIPE */
-let startY=0;
-document.addEventListener("touchstart",e=>startY=e.touches[0].clientY);
-document.addEventListener("touchend",e=>{
-let endY=e.changedTouches[0].clientY;
-if(endY>startY+100){
-let g=document.getElementById("goku");
-g.classList.add("fly");
-setTimeout(()=>g.classList.remove("fly"),1500);
+/* ⭐ STARS */
+const canvas=document.getElementById("stars");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let stars=[];
+for(let i=0;i<120;i++){
+stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.5});
 }
+
+function drawStars(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle="white";
+stars.forEach(s=>{
+ctx.beginPath();
+ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+ctx.fill();
 });
+requestAnimationFrame(drawStars);
+}
+drawStars();
 
 </script>
 

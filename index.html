@@ -8,12 +8,52 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins;cursor:none;}
 
 body{
-background:#020202;
-color:#fff;
+background:linear-gradient(270deg,#020202,#0a0000,#140000);
+background-size:400% 400%;
+animation:bgMove 12s ease infinite;
+color:white;
 overflow-x:hidden;
+}
+
+/* BACKGROUND ANIMATION */
+@keyframes bgMove{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+
+/* LOADER */
+#loader{
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+#loader h1{
+color:red;
+animation:pulse 1s infinite;
+}
+@keyframes pulse{
+0%{opacity:0.5}
+50%{opacity:1}
+100%{opacity:0.5}
+}
+
+/* CUSTOM CURSOR */
+.cursor{
+position:fixed;
+width:15px;height:15px;
+background:red;
+border-radius:50%;
+pointer-events:none;
+z-index:999;
 }
 
 /* HERO */
@@ -24,95 +64,73 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
-background:radial-gradient(circle,#140000,#020202);
+position:relative;
 }
 .hero h1{
-font-size:60px;
-text-shadow:0 0 30px red;
-}
-.hero p{opacity:0.7}
-
-/* MENU */
-.menu-btn{
-position:fixed;
-top:20px;left:20px;
-z-index:1000;
-cursor:pointer;
-}
-.menu-btn div{
-width:30px;height:3px;background:red;margin:6px 0;
+font-size:55px;
+text-shadow:0 0 25px red;
 }
 
-.menu{
-position:fixed;
-left:-320px;
-top:0;
-width:320px;
-height:100%;
-background:#000;
-padding-top:60px;
-transition:0.4s;
-z-index:999;
-}
-.menu a{
-display:block;
-padding:15px;
-border-bottom:1px solid #222;
-color:white;
-text-decoration:none;
-}
-
-/* NAV */
-.nav{
-display:flex;
-gap:10px;
-flex-wrap:wrap;
-justify-content:center;
-margin-top:20px;
-}
-.nav button{
-padding:10px;
+/* GLOW */
+.hero::after{
+content:"";
+position:absolute;
+width:300px;height:300px;
 background:red;
+filter:blur(150px);
+opacity:0.3;
+top:30%;
+left:40%;
+z-index:-1;
+}
+
+/* NAV BUTTON */
+.nav button{
+padding:12px 20px;
+background:linear-gradient(45deg,#ff0000,#aa0000);
 border:none;
 color:white;
+border-radius:10px;
+transition:0.3s;
 cursor:pointer;
+}
+.nav button:hover{
+transform:translateY(-5px);
+box-shadow:0 0 25px red;
+}
+
+/* CARDS */
+.card{
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(15px);
+border-radius:15px;
+overflow:hidden;
+transition:0.4s;
+}
+.card:hover{
+transform:scale(1.08) rotateX(6deg);
+box-shadow:0 0 40px red;
+}
+.card img{
+width:100%;
+height:200px;
+object-fit:cover;
+transition:0.4s;
+}
+.card:hover img{
+transform:scale(1.1);
 }
 
 /* SECTION */
-.section{padding:60px 20px;}
+.section{
+padding:60px 20px;
+}
 
 /* GRID */
 .grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:20px;
-}
-
-/* CARD */
-.card{
-background:#111;
-border-radius:15px;
-overflow:hidden;
-transition:0.3s;
-}
-.card:hover{
-transform:scale(1.05);
-box-shadow:0 0 25px red;
-}
-.card img{
-width:100%;
-height:200px;
-object-fit:cover;
-}
-.card-content{padding:15px;}
-
-button{
-margin-top:10px;
-padding:8px;
-background:red;
-border:none;
-color:white;
-cursor:pointer;
 }
 
 /* MODAL */
@@ -130,42 +148,24 @@ background:#111;
 padding:20px;
 max-width:90%;
 }
-.modal img{
-width:100%;
-max-height:300px;
-}
-
-/* BLOG */
-.blog{
-background:#111;
-padding:20px;
-margin:10px 0;
-}
 
 /* RESPONSIVE */
 @media(max-width:600px){
 .hero h1{font-size:35px;}
 }
+
 </style>
 </head>
 
 <body>
 
-<!-- MENU -->
-<div class="menu-btn" onclick="toggleMenu()">
-<div></div><div></div><div></div>
+<!-- LOADER -->
+<div id="loader">
+<h1>LOADING...</h1>
 </div>
 
-<div class="menu" id="menu">
-<a href="#">Home</a>
-<a href="#">Anime</a>
-<a href="#">Pokémon</a>
-<a href="#">Dragons</a>
-<a href="#">Blogs</a>
-<a href="#">Affiliate Store</a>
-<a href="#">Contact</a>
-<a href="mailto:your@email.com">Report Bug</a>
-</div>
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
 
 <!-- HERO -->
 <section class="hero">
@@ -173,135 +173,47 @@ margin:10px 0;
 <p>Ultimate Anime Experience</p>
 
 <div class="nav">
-<button onclick="show('anime')">Anime</button>
-<button onclick="show('pokemon')">Pokémon</button>
-<button onclick="show('dragons')">Dragons</button>
-<button onclick="show('blogs')">Blogs</button>
+<button>Anime</button>
+<button>Pokémon</button>
+<button>Dragons</button>
+<button>Blogs</button>
 </div>
 </section>
 
-<!-- ANIME -->
-<section id="anime" class="section">
-<h2>Top Anime</h2>
+<!-- SAMPLE SECTION -->
+<section class="section">
 <div class="grid">
 
 <div class="card">
 <img src="https://cdn.myanimelist.net/images/anime/1141/142503.jpg">
-<div class="card-content">
+<div style="padding:15px">
 <h3>Jujutsu Kaisen</h3>
-<button onclick="openModal('jjk')">Explore</button>
 </div>
 </div>
 
 <div class="card">
-<img src="https://cdn.myanimelist.net/images/anime/1337/99013.jpg">
-<div class="card-content">
-<h3>Attack on Titan</h3>
-<button onclick="openModal('aot')">Explore</button>
+<img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/006.png">
+<div style="padding:15px">
+<h3>Charizard</h3>
 </div>
 </div>
 
 </div>
 </section>
-
-<!-- POKEMON -->
-<section id="pokemon" class="section" style="display:none;">
-<h2>Top Pokémon</h2>
-<div class="grid">
-
-<div class="card">
-<img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png">
-<div class="card-content">
-<h3>Pikachu</h3>
-<button onclick="openModal('pikachu')">Explore</button>
-</div>
-</div>
-
-</div>
-</section>
-
-<!-- DRAGONS -->
-<section id="dragons" class="section" style="display:none;">
-<h2>Top Dragons</h2>
-<div class="grid">
-
-<div class="card">
-<img src="https://images.alphacoders.com/132/1328144.jpeg">
-<div class="card-content">
-<h3>Shenron</h3>
-<button onclick="openModal('shenron')">Explore</button>
-</div>
-</div>
-
-</div>
-</section>
-
-<!-- BLOG -->
-<section id="blogs" class="section" style="display:none;">
-<h2>Latest Blogs</h2>
-
-<div class="blog">
-<h3>Top 10 Anime in 2026</h3>
-<p>You can write your blog here...</p>
-</div>
-
-<div class="blog">
-<h3>Best Pokémon Ranked</h3>
-<p>Affiliate + content ready...</p>
-</div>
-
-</section>
-
-<!-- MODAL -->
-<div class="modal" id="modal">
-<div class="modal-content">
-<img id="modalImg">
-<p id="modalText"></p>
-<button onclick="closeModal()">Close</button>
-</div>
-</div>
 
 <script>
 
-/* MENU */
-function toggleMenu(){
-let m=document.getElementById("menu");
-m.style.left=m.style.left==="0px"?"-320px":"0px";
+/* LOADER */
+window.onload=()=>{
+document.getElementById("loader").style.display="none";
 }
 
-/* SECTION SWITCH */
-function show(sec){
-["anime","pokemon","dragons","blogs"].forEach(id=>{
-document.getElementById(id).style.display="none";
+/* CURSOR */
+const cursor=document.getElementById("cursor");
+document.addEventListener("mousemove",e=>{
+cursor.style.left=e.clientX+"px";
+cursor.style.top=e.clientY+"px";
 });
-document.getElementById(sec).style.display="block";
-}
-
-/* DATA */
-const data={
-jjk:{img:"https://cdn.myanimelist.net/images/anime/1141/142503.jpg",text:"Culling Game arc begins.",sound:"https://www.myinstants.com/media/sounds/jjk.mp3"},
-aot:{img:"https://cdn.myanimelist.net/images/anime/1337/99013.jpg",text:"Final war unfolds.",sound:"https://www.myinstants.com/media/sounds/anime-wow-sound-effect.mp3"},
-pikachu:{img:"https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png",text:"Electric icon.",sound:"https://www.myinstants.com/media/sounds/pikachu.mp3"},
-shenron:{img:"https://images.alphacoders.com/132/1328144.jpeg",text:"Wish granting dragon.",sound:"https://www.myinstants.com/media/sounds/dragon-roar.mp3"}
-};
-
-let audio;
-
-function openModal(name){
-let d=data[name];
-document.getElementById("modal").style.display="flex";
-document.getElementById("modalImg").src=d.img;
-document.getElementById("modalText").innerText=d.text;
-
-if(audio) audio.pause();
-audio=new Audio(d.sound);
-audio.play();
-}
-
-function closeModal(){
-document.getElementById("modal").style.display="none";
-if(audio) audio.pause();
-}
 
 </script>
 

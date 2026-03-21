@@ -1,227 +1,295 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KINGU VAULT | THE ULTIMATE ARCHIVE</title>
-    <style>
-        /* --- BASE STYLING --- */
-        body { background-color: #020202; color: #ffffff; font-family: 'Segoe UI', sans-serif; margin: 0; overflow-x: hidden; scroll-behavior: smooth; }
-        #bg-canvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; }
-        
-        /* --- SIDE MENU --- */
-        .menu-btn { position: fixed; top: 20px; right: 20px; z-index: 10001; cursor: pointer; background: rgba(255, 0, 0, 0.2); padding: 10px; border-radius: 5px; border: 1px solid #ff0000; }
-        .menu-btn div { width: 25px; height: 3px; background-color: #ff0000; margin: 5px 0; transition: 0.4s; }
-        .side-nav { height: 100%; width: 0; position: fixed; z-index: 10000; top: 0; right: 0; background-color: rgba(10, 0, 0, 0.95); overflow-x: hidden; transition: 0.5s; padding-top: 80px; backdrop-filter: blur(10px); border-left: 2px solid #ff0000; }
-        .side-nav a { padding: 15px 30px; text-decoration: none; font-size: 1.2rem; color: #888; display: block; transition: 0.3s; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; }
-        .side-nav a:hover { color: #ff0000; padding-left: 45px; background: rgba(255, 0, 0, 0.1); }
-        .close-nav { position: absolute; top: 20px; left: 20px; font-size: 36px; color: #ff0000; cursor: pointer; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KINGU VAULT</title>
 
-        /* --- HEADER --- */
-        header { height: 75vh; background: radial-gradient(circle, #4d0000 0%, #000000 100%); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-bottom: 4px solid #ff0000; position: relative; }
-        .glitch { font-size: 3.5rem; font-weight: 900; color: #ff0000; text-shadow: 0 0 20px #ff0000; text-transform: uppercase; letter-spacing: 8px; }
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
 
-        /* --- GOKU SECRET SUMMON --- */
-        #goku-box { position: fixed; top: -600px; left: 50%; transform: translateX(-50%); width: 250px; transition: 2s cubic-bezier(0.19, 1, 0.22, 1); z-index: 9999; pointer-events: none; }
-        #goku-box img { width: 100%; filter: drop-shadow(0 0 30px #ffea00); }
-        .fly-down { top: 120% !important; }
+/* BACKGROUND */
+body{
+background:linear-gradient(270deg,#020202,#0a0000,#140000);
+background-size:400% 400%;
+animation:bgMove 12s ease infinite;
+color:#fff;
+overflow-x:hidden;
+cursor:none;
+}
+@keyframes bgMove{
+0%{background-position:0%}
+50%{background-position:100%}
+100%{background-position:0%}
+}
 
-        /* --- SECTION STYLING --- */
-        .container { padding: 40px 20px; max-width: 1000px; margin: 0 auto; }
-        h2 { color: #ff0000; font-size: 2.2rem; border-left: 6px solid #ff0000; padding-left: 15px; margin: 60px 0 30px 0; text-transform: uppercase; letter-spacing: 2px; }
-        
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .card { background: #0a0a0a; border-radius: 15px; border: 1px solid #222; overflow: hidden; transition: 0.4s; }
-        .card:hover { border-color: #ff0000; transform: translateY(-10px); box-shadow: 0 10px 30px rgba(255,0,0,0.2); }
-        .card img { width: 100%; height: 400px; object-fit: cover; }
-        .card-content { padding: 20px; }
-        .card h3 { color: #ff3333; margin: 0 0 10px 0; font-size: 1.5rem; }
-        .card p { color: #aaa; font-size: 0.95rem; line-height: 1.6; }
-        
-        button { background: #ff0000; color: white; border: none; padding: 12px 25px; border-radius: 5px; font-weight: bold; cursor: pointer; text-transform: uppercase; transition: 0.3s; margin-top: 15px; }
-        button:hover { background: #cc0000; transform: scale(1.05); }
+/* CURSOR */
+.cursor{
+position:fixed;
+width:20px;height:20px;
+background:red;
+border-radius:50%;
+filter:blur(10px);
+pointer-events:none;
+z-index:9999;
+}
 
-        /* --- DRAGON STATS --- */
-        .stat-bar { background: #1a1a1a; height: 10px; border-radius: 5px; margin: 15px 0; overflow: hidden; border: 1px solid #333; }
-        .stat-fill { background: #ff0000; height: 100%; box-shadow: 0 0 10px #ff0000; }
+/* MENU */
+.menu-btn{
+position:fixed;
+top:20px;right:20px;
+z-index:1000;
+cursor:pointer;
+}
+.menu-btn div{
+width:30px;height:3px;background:red;margin:6px 0;
+}
+.side-nav{
+position:fixed;
+right:-300px;
+top:0;
+width:300px;height:100%;
+background:#000;
+padding-top:60px;
+transition:0.4s;
+}
+.side-nav a{
+display:block;
+padding:15px;
+color:#fff;
+text-decoration:none;
+border-bottom:1px solid #222;
+}
 
-        /* --- MODAL --- */
-        .modal { display: none; position: fixed; z-index: 20000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); backdrop-filter: blur(20px); }
-        .modal-content { background: #080808; margin: 5% auto; padding: 30px; border: 2px solid #ff0000; width: 85%; max-width: 550px; border-radius: 20px; text-align: center; position: relative; }
-        #modal-img { width: 100%; border-radius: 15px; margin: 20px 0; border: 1px solid #444; max-height: 350px; object-fit: cover; }
+/* HEADER */
+header{
+height:90vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+}
+header h1{
+font-size:60px;
+color:red;
+text-shadow:0 0 30px red;
+}
 
-        footer { text-align: center; padding: 100px 20px; color: #444; border-top: 1px solid #111; letter-spacing: 5px; font-size: 0.8rem; }
-    </style>
+/* SECTION */
+.section{
+padding:80px 20px;
+max-width:1100px;
+margin:auto;
+}
+
+/* GRID */
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+/* CARD */
+.card{
+background:#111;
+border-radius:15px;
+overflow:hidden;
+transition:0.3s;
+transform-style:preserve-3d;
+}
+.card img{
+width:100%;
+height:200px;
+object-fit:cover;
+}
+.card-content{padding:15px}
+
+/* BUTTON */
+button{
+padding:10px;
+background:red;
+border:none;
+color:#fff;
+cursor:pointer;
+}
+
+/* MODAL */
+.modal{
+display:none;
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:rgba(0,0,0,0.9);
+justify-content:center;
+align-items:center;
+}
+.modal-content{
+background:#111;
+padding:20px;
+max-width:90%;
+}
+.modal img{
+width:100%;
+max-height:300px;
+}
+
+/* GOKU */
+#goku{
+position:fixed;
+top:-300px;
+left:50%;
+transform:translateX(-50%);
+width:150px;
+transition:1.5s;
+}
+.fly{
+top:100vh !important;
+}
+
+</style>
 </head>
+
 <body>
 
-    <canvas id="bg-canvas"></canvas>
-    <audio id="roar-sound" src="https://www.soundjay.com/nature/sounds/creature-roar-01.mp3"></audio>
+<div class="cursor" id="cursor"></div>
 
-    <div class="menu-btn" onclick="toggleNav()"><div></div><div></div><div></div></div>
-    <div id="mySidenav" class="side-nav">
-        <span class="close-nav" onclick="toggleNav()">&times;</span>
-        <a href="#">Home</a>
-        <a href="#trending">Trending Anime</a>
-        <a href="#shop">Anime Shop</a>
-        <a href="#dragons">Dragon Wiki</a>
-        <a href="#blogs">Latest Blogs</a>
-    </div>
+<!-- MENU -->
+<div class="menu-btn" onclick="toggleMenu()">
+<div></div><div></div><div></div>
+</div>
 
-    <div id="goku-box"><img src="https://i.imgur.com/vH9v5Zz.png" alt="Goku Fly"></div>
+<div class="side-nav" id="menu">
+<a href="#">Home</a>
+<a href="#">Anime</a>
+<a href="#">Shop</a>
+<a href="#">Blogs</a>
+<a href="#">Contact</a>
+</div>
 
-    <header>
-        <div class="glitch">KINGU VAULT</div>
-        <p style="color: #444; font-size: 0.8rem; margin-top: 20px; letter-spacing: 3px;">SECRET ARCHIVE UNLOCKED</p>
-    </header>
+<!-- GOKU -->
+<img id="goku" src="https://pngimg.com/uploads/goku/goku_PNG17.png">
 
-    <div class="container">
-        
-        <h2 id="trending">🔥 Trending Now</h2>
-        <div class="grid">
-            <div class="card">
-                <img src="https://cdn.myanimelist.net/images/anime/1141/142503.jpg">
-                <div class="card-content">
-                    <h3>Jujutsu Kaisen</h3>
-                    <p>Dark sorcery battles reaching peak level. The Shinjuku Showdown arc is here.</p>
-                </div>
-            </div>
-            <div class="card">
-                <img src="https://cdn.myanimelist.net/images/anime/1337/99013.jpg">
-                <div class="card-content">
-                    <h3>Attack on Titan</h3>
-                    <p>The legendary conclusion. Freedom, sacrifice, and the final war arc.</p>
-                </div>
-            </div>
-        </div>
+<header>
+<h1>KINGU VAULT</h1>
+<p>Ultimate Anime Experience</p>
+</header>
 
-        <h2 id="shop">🛒 Anime Shop</h2>
-        <div class="grid">
-            <div class="card">
-                <img src="https://m.media-amazon.com/images/I/71niXI3lxlL._AC_SL1500_.jpg">
-                <div class="card-content">
-                    <h3>Naruto Hoodie</h3>
-                    <p>Premium quality fleece fabric with Akatsuki clouds. Best for winter.</p>
-                    <button onclick="alert('Shop integration coming soon!')">Buy Now - ₹1,499</button>
-                </div>
-            </div>
-            <div class="card">
-                <img src="https://m.media-amazon.com/images/I/61CGHv6kmWL._AC_SL1000_.jpg">
-                <div class="card-content">
-                    <h3>Anime Figurine</h3>
-                    <p>Limited edition highly detailed PVC collectible for your setup.</p>
-                    <button onclick="alert('Shop integration coming soon!')">Buy Now - ₹2,999</button>
-                </div>
-            </div>
-        </div>
+<div class="section">
 
-        <h2 id="dragons">🐉 Ancient Primordials</h2>
-        <div class="grid">
-            <div class="card">
-                <div class="card-content">
-                    <h3>TIAMAT</h3>
-                    <div class="stat-bar"><div class="stat-fill" style="width: 95%;"></div></div>
-                    <button onclick="openDragon('TIAMAT')">Summon History</button>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-content">
-                    <h3>KINGU</h3>
-                    <div class="stat-bar"><div class="stat-fill" style="width: 92%;"></div></div>
-                    <button onclick="openDragon('KINGU')">Summon History</button>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-content">
-                    <h3>SHENRON</h3>
-                    <div class="stat-bar"><div class="stat-fill" style="width: 88%;"></div></div>
-                    <button onclick="openDragon('SHENRON')">Summon History</button>
-                </div>
-            </div>
-        </div>
+<h2>🔥 Trending Anime</h2>
+<div class="grid">
 
-        <h2 id="blogs">📖 Latest Blogs</h2>
-        <div class="grid">
-            <div class="card" style="padding: 20px;">
-                <h3>Top 10 Anime of 2026</h3>
-                <p>Explore the most powerful anime releases of this year and where to watch them.</p>
-                <a href="#" style="color: #ff0000; font-weight: bold; text-decoration: none;">Read More →</a>
-            </div>
-            <div class="card" style="padding: 20px;">
-                <h3>Best Pokémon Ranked</h3>
-                <p>From Pikachu to legendary beasts, see who leads the meta in the latest games.</p>
-                <a href="#" style="color: #ff0000; font-weight: bold; text-decoration: none;">Read More →</a>
-            </div>
-        </div>
+<div class="card">
+<img src="https://cdn.myanimelist.net/images/anime/1141/142503.jpg">
+<div class="card-content">
+<h3>Jujutsu Kaisen</h3>
+<button onclick="openModal('jjk')">Explore</button>
+</div>
+</div>
 
-        <div style="text-align:center; padding: 100px 0;">
-            <h2 style="border:none; padding:0;">🚀 Join KINGU VAULT</h2>
-            <p style="color: #888; font-size: 1.2rem;">Stay updated with anime leaks, Pokémon tips & exclusive shop drops.</p>
-            <button style="font-size: 1.2rem; padding: 15px 40px;">Subscribe Now</button>
-        </div>
+<div class="card">
+<img src="https://cdn.myanimelist.net/images/anime/1337/99013.jpg">
+<div class="card-content">
+<h3>Attack on Titan</h3>
+<button onclick="openModal('aot')">Explore</button>
+</div>
+</div>
 
-    </div>
+</div>
 
-    <div id="dragonModal" class="modal">
-        <div class="modal-content" id="modal-box">
-            <span onclick="closeModal()" style="position:absolute; right:20px; top:10px; font-size:40px; color:#fff; cursor:pointer;">&times;</span>
-            <h2 id="modal-title"></h2>
-            <img id="modal-img" src="" alt="Dragon">
-            <p id="modal-desc" style="text-align:left; color:#ccc; line-height:1.7;"></p>
-        </div>
-    </div>
+<h2>🛒 Shop</h2>
+<div class="grid">
 
-    <footer>&copy; 2026 KINGU VAULT | DESIGNED BY ASHU BHAI</footer>
+<div class="card">
+<img src="https://m.media-amazon.com/images/I/71niXI3lxlL._AC_SL1500_.jpg">
+<div class="card-content">
+<h3>Naruto Hoodie</h3>
+<button>Buy</button>
+</div>
+</div>
 
-    <script>
-        function toggleNav() {
-            const nav = document.getElementById("mySidenav");
-            nav.style.width = nav.style.width === "280px" ? "0" : "280px";
-        }
+</div>
 
-        const dragonData = {
-            'TIAMAT': { color: '#00ccff', img: 'https://i.imgur.com/8QpYFp9.jpg', desc: 'The Mother of Chaos. Her body created the earth.' },
-            'KINGU': { color: '#9133ff', img: 'https://i.imgur.com/GqU4X5m.jpg', desc: 'The General of Tiamat. Holder of the Tablet of Destinies.' },
-            'SHENRON': { color: '#00ff44', img: 'https://i.imgur.com/9v4k96M.png', desc: 'The Eternal Dragon who grants one powerful wish.' }
-        };
+<h2>📖 Blogs</h2>
+<div class="card">
+<div class="card-content">
+<h3>Top Anime 2026</h3>
+<p>Coming soon...</p>
+</div>
+</div>
 
-        function openDragon(name) {
-            const data = dragonData[name];
-            document.getElementById('roar-sound').play().catch(e => {});
-            document.getElementById('modal-title').innerText = name;
-            document.getElementById('modal-title').style.color = data.color;
-            document.getElementById('modal-img').src = data.img;
-            document.getElementById('modal-desc').innerHTML = data.desc;
-            document.getElementById('modal-box').style.borderColor = data.color;
-            document.getElementById('modal-box').style.boxShadow = `0 0 50px ${data.color}`;
-            document.getElementById('dragonModal').style.display = "block";
-        }
+</div>
 
-        function closeModal() { document.getElementById('dragonModal').style.display = "none"; }
+<!-- MODAL -->
+<div class="modal" id="modal">
+<div class="modal-content">
+<img id="img">
+<p id="text"></p>
+<button onclick="closeModal()">Close</button>
+</div>
+</div>
 
-        let touchStartY = 0;
-        document.addEventListener('touchstart', (e) => { touchStartY = e.touches[0].clientY; });
-        document.addEventListener('touchend', (e) => {
-            let touchEndY = e.changedTouches[0].clientY;
-            if (touchEndY > touchStartY + 150) { 
-                const goku = document.getElementById('goku-box');
-                goku.classList.add('fly-down');
-                setTimeout(() => { goku.classList.remove('fly-down'); }, 2500);
-            }
-        });
+<script>
 
-        const canvas = document.getElementById('bg-canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        let particles = [];
-        class Particle {
-            constructor() { this.x = Math.random() * canvas.width; this.y = canvas.height; this.size = Math.random() * 2.5; this.speed = Math.random() * 2; }
-            update() { this.y -= this.speed; if (this.y < 0) this.y = canvas.height; }
-            draw() { ctx.fillStyle = 'rgba(255, 50, 0, 0.4)'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
-        }
-        for(let i=0; i<50; i++) particles.push(new Particle());
-        function animate() { ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p=>{p.update(); p.draw();}); requestAnimationFrame(animate); }
-        animate();
-    </script>
+/* MENU */
+function toggleMenu(){
+let m=document.getElementById("menu");
+m.style.right = m.style.right==="0px"?"-300px":"0px";
+}
+
+/* MODAL DATA */
+const data={
+jjk:{img:"https://cdn.myanimelist.net/images/anime/1141/142503.jpg",text:"Culling Game arc."},
+aot:{img:"https://cdn.myanimelist.net/images/anime/1337/99013.jpg",text:"Final war."}
+};
+
+function openModal(name){
+let d=data[name];
+document.getElementById("modal").style.display="flex";
+document.getElementById("img").src=d.img;
+document.getElementById("text").innerText=d.text;
+}
+
+function closeModal(){
+document.getElementById("modal").style.display="none";
+}
+
+/* CURSOR */
+const cursor=document.getElementById("cursor");
+document.addEventListener("mousemove",e=>{
+cursor.style.left=e.clientX+"px";
+cursor.style.top=e.clientY+"px";
+});
+
+/* 3D CARDS */
+document.querySelectorAll(".card").forEach(card=>{
+card.addEventListener("mousemove",e=>{
+let rect=card.getBoundingClientRect();
+let x=e.clientX-rect.left;
+let y=e.clientY-rect.top;
+let rx=-(y-rect.height/2)/10;
+let ry=(x-rect.width/2)/10;
+card.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg) scale(1.05)`;
+});
+card.addEventListener("mouseleave",()=>{
+card.style.transform="rotateX(0) rotateY(0)";
+});
+});
+
+/* GOKU SWIPE */
+let startY=0;
+document.addEventListener("touchstart",e=>startY=e.touches[0].clientY);
+document.addEventListener("touchend",e=>{
+let endY=e.changedTouches[0].clientY;
+if(endY>startY+100){
+let g=document.getElementById("goku");
+g.classList.add("fly");
+setTimeout(()=>g.classList.remove("fly"),1500);
+}
+});
+
+</script>
+
 </body>
 </html>

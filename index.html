@@ -3,367 +3,157 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KINGU VAULT</title>
+<title>KINGU VAULT - Anime Hub</title>
 
-<!-- GOOGLE FONT -->
+<!-- Google Font for Gen-Z Aesthetic -->
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-
+/****** Global Styles ******/
 * {
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Orbitron', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Orbitron', sans-serif;
 }
 
 body {
-  background:#020202;
-  color:white;
-  overflow-x:hidden;
+  background: #020202;
+  color: #fff;
+  overflow-x: hidden;
 }
 
-/* BACKGROUND PARTICLES */
+/****** Particles Canvas ******/
 canvas {
-  position:fixed;
-  top:0;
-  left:0;
-  z-index:-1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
 
-/* HEADER */
+/****** Header ******/
 header {
-  height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   background: radial-gradient(circle, rgba(255,0,0,0.2), #020202);
+  text-align: center;
 }
 
 header h1 {
-  font-size:50px;
-  letter-spacing:4px;
-  text-shadow:0 0 20px red;
+  font-size: 3.5rem;
+  letter-spacing: 4px;
+  text-shadow: 0 0 20px red;
 }
 
 header p {
-  opacity:0.7;
+  margin-top: 10px;
+  opacity: 0.7;
 }
 
-/* MENU BUTTON */
+/****** Menu ******/
 .menu-btn {
-  position:fixed;
-  top:20px;
-  right:20px;
-  z-index:1000;
-  cursor:pointer;
-}
-.menu-btn div {
-  width:30px;
-  height:3px;
-  background:red;
-  margin:6px 0;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  z-index: 1000;
 }
 
-/* SIDE MENU */
+.menu-btn div {
+  width: 30px;
+  height: 3px;
+  background: red;
+  margin: 6px 0;
+}
+
+/****** Side Menu ******/
 .side-menu {
-  position:fixed;
-  right:-300px;
-  top:0;
-  width:300px;
-  height:100%;
-  background:rgba(0,0,0,0.95);
-  backdrop-filter:blur(10px);
-  padding-top:60px;
-  transition:0.4s;
+  position: fixed;
+  right: -300px;
+  top: 0;
+  width: 300px;
+  height: 100%;
+  background: rgba(0,0,0,0.95);
+  backdrop-filter: blur(10px);
+  padding-top: 60px;
+  transition: 0.4s;
+  z-index: 999;
 }
 
 .side-menu a {
-  display:block;
-  padding:15px;
-  color:white;
-  text-decoration:none;
-  border-bottom:1px solid rgba(255,0,0,0.3);
+  display: block;
+  padding: 15px;
+  color: white;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,0,0,0.3);
 }
+
 .side-menu a:hover {
-  background:red;
+  background: red;
 }
 
-/* SECTION */
+/****** Section & Cards ******/
 .section {
-  padding:60px 20px;
+  padding: 60px 20px;
 }
 
-/* ANIME CARDS */
 .grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
-  gap:20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+  gap: 20px;
 }
 
 .card {
-  background:rgba(255,255,255,0.05);
-  backdrop-filter:blur(15px);
-  border:1px solid rgba(255,0,0,0.3);
-  border-radius:15px;
-  overflow:hidden;
-  transition:0.4s;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255,0,0,0.3);
+  border-radius: 15px;
+  overflow: hidden;
+  transition: 0.4s;
 }
 
 .card:hover {
-  transform:translateY(-10px) scale(1.03);
-  box-shadow:0 0 30px red;
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 0 30px red;
 }
 
 .card img {
-  width:100%;
-  height:200px;
-  object-fit:cover;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
 }
 
 .card-content {
-  padding:15px;
+  padding: 15px;
+  text-align: center;
 }
 
 .card h2 {
-  margin-bottom:10px;
+  margin-bottom: 10px;
 }
 
 .card p {
-  font-size:14px;
-  opacity:0.7;
+  font-size: 14px;
+  opacity: 0.7;
 }
 
 button {
-  margin-top:10px;
-  padding:10px 20px;
-  background:red;
-  border:none;
-  cursor:pointer;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background: red;
+  border: none;
+  color: white;
+  cursor: pointer;
 }
 
-/* MODAL */
+/****** Modal ******/
 .modal {
-  display:none;
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.9);
-  justify-content:center;
-  align-items:center;
-}
-
-.modal-content {
-  background:#111;
-  padding:20px;
-  max-width:90%;
-  border-radius:10px;
-  border:2px solid red;
-  text-align:center;
-}
-
-.modal img {
-  width:100%;
-  max-height:300px;
-  object-fit:cover;
-}
-
-/* GOKU */
-#goku {
-  position:fixed;
-  top:-200px;
-  left:50%;
-  transform:translateX(-50%);
-  width:150px;
-  opacity:0;
-  filter:drop-shadow(0 0 25px yellow);
-  z-index:999;
-}
-
-</style>
-</head>
-
-<body>
-
-<canvas id="particles"></canvas>
-
-<img id="goku" src="https://pngimg.com/uploads/goku/goku_PNG17.png">
-
-<!-- MENU -->
-<div class="menu-btn" onclick="toggleMenu()">
-  <div></div><div></div><div></div>
-</div>
-
-<div class="side-menu" id="menu">
-  <a href="#">Home</a>
-  <a href="#">Anime Vault</a>
-  <a href="#">Top Series</a>
-  <a href="#">Blogs</a>
-  <a href="#">Contact</a>
-</div>
-
-<!-- HEADER -->
-<header>
-  <h1>KINGU VAULT</h1>
-  <p>Ultimate Anime Experience</p>
-</header>
-
-<!-- ANIME SECTION -->
-<div class="section">
-  <h1>Top Anime Collection</h1>
-
-  <div class="grid">
-
-    <!-- ANIME CARDS -->
-    <div class="card">
-      <img src="https://wallpaperaccess.com/full/12492.jpg">
-      <div class="card-content">
-        <h2>Naruto</h2>
-        <p>A ninja's journey from zero to Hokage filled with battles and emotions.</p>
-        <button onclick="openModal('naruto')">Explore</button>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="https://wallpaperaccess.com/full/17997.jpg">
-      <div class="card-content">
-        <h2>Attack on Titan</h2>
-        <p>Humanity fights for survival against giant titans in a dark world.</p>
-        <button onclick="openModal('aot')">Explore</button>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="https://wallpaperaccess.com/full/160610.jpg">
-      <div class="card-content">
-        <h2>One Piece</h2>
-        <p>Luffy sails to become Pirate King with his legendary crew.</p>
-        <button onclick="openModal('onepiece')">Explore</button>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="https://wallpaperaccess.com/full/38516.jpg">
-      <div class="card-content">
-        <h2>Demon Slayer</h2>
-        <p>A boy fights demons to save his sister in a stunning anime world.</p>
-        <button onclick="openModal('ds')">Explore</button>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="https://wallpaperaccess.com/full/317501.jpg">
-      <div class="card-content">
-        <h2>Jujutsu Kaisen</h2>
-        <p>Cursed energy battles and insane fights with powerful sorcerers.</p>
-        <button onclick="openModal('jjk')">Explore</button>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- MODAL -->
-<div class="modal" id="modal">
-  <div class="modal-content" id="modalContent">
-    <img id="modalImg">
-    <p id="modalText"></p>
-    <button onclick="closeModal()">Close</button>
-  </div>
-</div>
-
-<script>
-
-/* MENU */
-function toggleMenu(){
-  let m = document.getElementById("menu");
-  m.style.right = m.style.right==="0px" ? "-300px" : "0px";
-}
-
-/* MODAL DATA */
-const anime = {
-  naruto:{
-    img:"https://wallpaperaccess.com/full/12492.jpg",
-    text:"Naruto Uzumaki dreams of becoming Hokage and earns respect through struggle."
-  },
-  aot:{
-    img:"https://wallpaperaccess.com/full/17997.jpg",
-    text:"A brutal story of survival, war, and truth beyond the walls."
-  },
-  onepiece:{
-    img:"https://wallpaperaccess.com/full/160610.jpg",
-    text:"Adventure, friendship, and the search for the legendary One Piece."
-  },
-  ds:{
-    img:"https://wallpaperaccess.com/full/38516.jpg",
-    text:"Tanjiro fights demons to cure his sister and restore peace."
-  },
-  jjk:{
-    img:"https://wallpaperaccess.com/full/317501.jpg",
-    text:"Sorcerers battle cursed spirits in high-energy combat."
-  }
-};
-
-function openModal(name){
-  let d = anime[name];
-  document.getElementById("modal").style.display="flex";
-  document.getElementById("modalImg").src=d.img;
-  document.getElementById("modalText").innerText=d.text;
-
-  let audio = new Audio("https://www.myinstants.com/media/sounds/anime-wow-sound-effect.mp3");
-  audio.play();
-}
-
-function closeModal(){
-  document.getElementById("modal").style.display="none";
-}
-
-/* GOKU SWIPE */
-let startY=0;
-document.addEventListener("touchstart", e=> startY=e.touches[0].clientY);
-document.addEventListener("touchend", e=>{
-  let endY=e.changedTouches[0].clientY;
-  if(startY < endY-100){
-    let g=document.getElementById("goku");
-    g.style.opacity=1;
-    g.style.top="100vh";
-    setTimeout(()=>{
-      g.style.top="-200px";
-      g.style.opacity=0;
-    },1500);
-  }
-});
-
-/* PARTICLES */
-const canvas=document.getElementById("particles");
-const ctx=canvas.getContext("2d");
-
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
-
-let p=[];
-for(let i=0;i<120;i++){
-  p.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2});
-}
-
-function draw(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle="red";
-  p.forEach(e=>{
-    ctx.beginPath();
-    ctx.arc(e.x,e.y,e.r,0,Math.PI*2);
-    ctx.fill();
-    e.y-=1;
-    if(e.y<0) e.y=canvas.height;
-  });
-  requestAnimationFrame(draw);
-}
-draw();
-
-</script>
-
-</body>
-</html>
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height:

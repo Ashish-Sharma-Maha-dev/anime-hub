@@ -3,116 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KINGU VAULT | THE ULTIMATE ARCHIVE</title>
+    <title>KINGU VAULT | IMAGE FIX</title>
     <style>
-        /* Base Styling */
-        body { 
-            background-color: #020202; 
-            color: #ffffff; 
-            font-family: 'Segoe UI', Roboto, sans-serif; 
-            margin: 0; 
-            overflow-x: hidden; 
-            transition: background 0.5s; 
-        }
-
-        /* Fire Particles Background */
+        body { background-color: #020202; color: #ffffff; font-family: 'Segoe UI', sans-serif; margin: 0; overflow-x: hidden; }
         #bg-canvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; }
-
-        header {
-            background: linear-gradient(180deg, #800000 0%, #000000 100%);
-            padding: 60px 20px; text-align: center; border-bottom: 3px solid #ff0000; position: relative;
-        }
-
-        .glitch { 
-            font-size: 2.8rem; font-weight: 900; color: #ff0000; 
-            text-shadow: 0 0 20px #ff0000; letter-spacing: 5px; text-transform: uppercase; 
-        }
-
-        /* Goku Container */
+        header { background: linear-gradient(180deg, #800000 0%, #000000 100%); padding: 60px 20px; text-align: center; border-bottom: 3px solid #ff0000; position: relative; }
+        .glitch { font-size: 2.8rem; font-weight: 900; color: #ff0000; text-shadow: 0 0 20px #ff0000; letter-spacing: 5px; text-transform: uppercase; }
+        
+        /* GOKU BOX FIX */
         #goku-box { 
-            position: absolute; top: 25%; left: -250px; width: 160px; 
-            transition: 1.3s cubic-bezier(0.45, 0.05, 0.55, 0.95); 
-            z-index: 100; display: flex; align-items: center; 
+            position: absolute; top: 20%; left: -250px; width: 150px; 
+            transition: 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+            z-index: 100; display: flex; 
         }
-        #goku-box img { width: 100%; filter: drop-shadow(0 0 15px #ff0000); }
+        #goku-box img { width: 100%; filter: drop-shadow(0 0 10px #ff0000); }
         .slide-now { left: 120% !important; }
 
         .container { padding: 40px 20px; max-width: 900px; margin: 0 auto; }
-        .section-title { color: #ff0000; border-bottom: 2px solid #ff0000; display: inline-block; margin-bottom: 30px; text-transform: uppercase; }
+        .dragon-item { background: #0f0f0f; margin-bottom: 15px; padding: 20px; border-left: 5px solid #ff0000; border-radius: 8px; cursor: pointer; transition: 0.3s; }
+        .dragon-item:hover { background: #1a1a1a; transform: scale(1.02); }
 
-        /* Dragon List */
-        .dragon-item {
-            background: #0f0f0f; margin-bottom: 15px; padding: 20px;
-            border-left: 5px solid #ff0000; border-radius: 8px;
-            cursor: pointer; transition: 0.3s; border-right: 1px solid #222;
-        }
-        .dragon-item:hover { background: #1a1a1a; transform: scale(1.03); box-shadow: 0 0 20px rgba(255,0,0,0.2); }
-        .dragon-item h4 { margin: 0; color: #ff3333; font-size: 1.5rem; letter-spacing: 1px; }
-        .hint { font-size: 0.7rem; color: #555; text-transform: uppercase; margin-top: 5px; display: block; }
-
-        /* MODAL POP-UP STYLING */
-        .modal {
-            display: none; position: fixed; z-index: 2000; left: 0; top: 0;
-            width: 100%; height: 100%; background-color: rgba(0,0,0,0.92);
-            backdrop-filter: blur(15px); overflow-y: auto;
-        }
-        .modal-content {
-            background: #080808; margin: 8% auto; padding: 25px;
-            border: 3px solid #ff0000; width: 88%; max-width: 600px;
-            border-radius: 20px; position: relative; animation: zoomIn 0.4s ease;
-            text-align: center; box-shadow: 0 0 50px rgba(255,0,0,0.4);
-        }
-        @keyframes zoomIn { from {transform: scale(0.7); opacity: 0;} to {transform: scale(1); opacity: 1;} }
-        
-        .close-btn { position: absolute; right: 20px; top: 10px; color: #fff; font-size: 40px; cursor: pointer; line-height: 1; }
-        
-        #modal-title { font-size: 2.3rem; margin-bottom: 15px; text-transform: uppercase; font-weight: 900; }
-        #modal-img { width: 100%; max-height: 320px; object-fit: cover; border-radius: 12px; margin-bottom: 20px; border: 1px solid #333; }
-        #modal-desc { line-height: 1.8; color: #ccc; font-size: 1.05rem; text-align: left; padding: 0 10px; }
-        #modal-desc b { color: #fff; border-bottom: 1px solid #444; }
-
-        footer { padding: 40px; text-align: center; color: #333; font-size: 0.8rem; letter-spacing: 2px; }
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.95); backdrop-filter: blur(10px); overflow-y: auto; }
+        .modal-content { background: #080808; margin: 5% auto; padding: 25px; border: 2px solid #ff0000; width: 85%; max-width: 550px; border-radius: 15px; position: relative; text-align: center; box-shadow: 0 0 30px rgba(255,0,0,0.3); }
+        .close-btn { position: absolute; right: 20px; top: 10px; color: #fff; font-size: 40px; cursor: pointer; }
+        #modal-img { width: 100%; max-height: 300px; object-fit: cover; border-radius: 10px; margin: 15px 0; border: 1px solid #333; }
+        #modal-title { text-transform: uppercase; font-weight: 900; letter-spacing: 2px; }
     </style>
 </head>
 <body>
 
     <canvas id="bg-canvas"></canvas>
-
     <audio id="roar-sound" src="https://www.soundjay.com/nature/sounds/creature-roar-01.mp3"></audio>
 
     <header id="header-area">
         <div class="glitch">KINGU VAULT</div>
-        <p style="color: #666; font-size: 0.75rem; letter-spacing: 1px;">SWIPE RIGHT ON HEADER TO CALL GOKU</p>
+        <p style="color: #666; font-size: 0.7rem;">SWIPE RIGHT ON "KINGU VAULT" TO SEE GOKU</p>
         
         <div id="goku-box">
-            <img src="https://i.ibb.co/XbC0z9L/goku-fly.png" alt="Goku Fly">
+            <img src="https://upload.wikimedia.org/wikipedia/it/b/bc/Goku_Super_Sayan_3.png" alt="Goku">
         </div>
     </header>
 
     <div class="container">
-        <h2 class="section-title">Ancient Dragon Archive</h2>
-        
         <div id="dragon-list">
-            <div class="dragon-item" onclick="openDragon('TIAMAT')">
-                <h4>1. TIAMAT</h4>
-                <span class="hint">Click to summon details</span>
-            </div>
-            <div class="dragon-item" onclick="openDragon('KINGU')">
-                <h4>2. KINGU</h4>
-                <span class="hint">Click to summon details</span>
-            </div>
-            <div class="dragon-item" onclick="openDragon('TYPHON')">
-                <h4>3. TYPHON</h4>
-                <span class="hint">Click to summon details</span>
-            </div>
-            <div class="dragon-item" onclick="openDragon('BAHAMUT')">
-                <h4>4. BAHAMUT</h4>
-                <span class="hint">Click to summon details</span>
-            </div>
-            <div class="dragon-item" onclick="openDragon('SHENRON')">
-                <h4>5. SHENRON</h4>
-                <span class="hint">Click to summon details</span>
-            </div>
+            <div class="dragon-item" onclick="openDragon('TIAMAT')"><h4>1. TIAMAT</h4></div>
+            <div class="dragon-item" onclick="openDragon('KINGU')"><h4>2. KINGU</h4></div>
+            <div class="dragon-item" onclick="openDragon('TYPHON')"><h4>3. TYPHON</h4></div>
+            <div class="dragon-item" onclick="openDragon('BAHAMUT')"><h4>4. BAHAMUT</h4></div>
+            <div class="dragon-item" onclick="openDragon('SHENRON')"><h4>5. SHENRON</h4></div>
         </div>
     </div>
 
@@ -120,105 +58,69 @@
         <div class="modal-content" id="modal-box">
             <span class="close-btn" onclick="closeModal()">&times;</span>
             <h2 id="modal-title">Name</h2>
-            <img id="modal-img" src="" alt="Dragon Art">
-            <p id="modal-desc">Description...</p>
+            <img id="modal-img" src="" alt="Dragon">
+            <p id="modal-desc" style="text-align:left; line-height:1.6; color:#ccc;"></p>
         </div>
     </div>
 
-    <footer>
-        &copy; 2026 KINGU VAULT | DESIGNED BY ASHU BHAI
-    </footer>
-
     <script>
-        // DRAGON DATABASE
         const dragonData = {
-            'TIAMAT': {
-                color: '#00ccff',
-                img: 'https://i.ibb.co/V9XwK54/tiamat.jpg',
-                desc: '<b>Origin:</b> Babylonian Mythology.<br><br><b>History:</b> The Primordial Mother of the salt sea. She is the embodiment of chaos and the creator of the first dragons. Legend says the world was formed from her defeated body.'
-            },
-            'KINGU': {
-                color: '#9133ff',
-                img: 'https://i.ibb.co/wNb17sX/kingu.jpg',
-                desc: '<b>Origin:</b> Babylonian Mythology.<br><br><b>History:</b> Tiamat\'s chosen general and son. He led the army of monsters and wore the Tablet of Destinies on his chest, granting him authority over the gods.'
-            },
-            'TYPHON': {
-                color: '#ff4500',
-                img: 'https://i.ibb.co/3mYx8Vp/typhon.jpg',
-                desc: '<b>Origin:</b> Greek Mythology.<br><br><b>History:</b> The Father of Monsters. A colossal dragon-giant with a hundred heads. His strength was so immense that even the Olympian gods fled in terror.'
-            },
-            'BAHAMUT': {
-                color: '#e0e0e0',
-                img: 'https://i.ibb.co/N1pX5G4/bahamut.jpg',
-                desc: '<b>Origin:</b> Arabic Folklore / Fantasy.<br><br><b>History:</b> The Divine Sky Sovereign. Known as the King of Good Dragons, he possesses unbreakable platinum scales and guards the balance of the world.'
-            },
-            'SHENRON': {
-                color: '#00ff44',
-                img: 'https://i.ibb.co/YjRjYfX/shenron.jpg',
-                desc: '<b>Origin:</b> Dragon Ball Universe.<br><br><b>History:</b> The Eternal Dragon. Created by Earth\'s Guardian, he resides in the Earth\'s core and appears only to those who gather all 7 Dragon Balls to grant any wish.'
-            }
+            'TIAMAT': { color: '#00ccff', img: 'https://images.unsplash.com/photo-1509023467866-f76223258d99?w=500', desc: '<b>Origin:</b> Babylonian.<br>Goddess of the salt sea.' },
+            'KINGU': { color: '#9133ff', img: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?w=500', desc: '<b>Origin:</b> Babylonian.<br>Commander of the army of Tiamat.' },
+            'TYPHON': { color: '#ff4500', img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500', desc: '<b>Origin:</b> Greek.<br>The deadliest creature in Greek mythology.' },
+            'BAHAMUT': { color: '#e0e0e0', img: 'https://images.unsplash.com/photo-1605142859862-978be7eba909?w=500', desc: '<b>Origin:</b> Arabic.<br>The King of Dragons.' },
+            'SHENRON': { color: '#00ff44', img: 'https://images.unsplash.com/photo-1578632292335-df3abbb0d586?w=500', desc: '<b>Origin:</b> Dragon Ball.<br>The Eternal wish-granting dragon.' }
         };
 
-        // OPEN MODAL FUNCTION
         function openDragon(name) {
             const data = dragonData[name];
-            const modalBox = document.getElementById('modal-box');
-            
-            // Play Sound
             const roar = document.getElementById('roar-sound');
-            roar.currentTime = 0;
-            roar.play().catch(e => console.log("Sound ready after first click."));
+            roar.play().catch(e => {});
 
-            // Fill Content
             document.getElementById('modal-title').innerText = name;
             document.getElementById('modal-title').style.color = data.color;
             document.getElementById('modal-img').src = data.img;
             document.getElementById('modal-desc').innerHTML = data.desc;
             
-            // Dynamic Colors
+            const modalBox = document.getElementById('modal-box');
             modalBox.style.borderColor = data.color;
-            modalBox.style.boxShadow = `0 0 50px ${data.color}`;
-            
+            modalBox.style.boxShadow = `0 0 40px ${data.color}`;
             document.getElementById('dragonModal').style.display = "block";
         }
 
-        function closeModal() {
-            document.getElementById('dragonModal').style.display = "none";
-        }
-
-        // Close on outside click
+        function closeModal() { document.getElementById('dragonModal').style.display = "none"; }
         window.onclick = function(e) { if (e.target == document.getElementById('dragonModal')) closeModal(); }
 
-        // GOKU SWIPE LOGIC
+        // Goku Swipe
         const header = document.getElementById('header-area');
         const goku = document.getElementById('goku-box');
         let startX;
         header.addEventListener('touchstart', (e) => startX = e.touches[0].clientX);
         header.addEventListener('touchend', (e) => {
             let endX = e.changedTouches[0].clientX;
-            if (endX > startX + 65) {
+            if (endX > startX + 60) {
                 goku.classList.add('slide-now');
                 setTimeout(() => { 
                     goku.style.display = 'none'; 
                     goku.classList.remove('slide-now'); 
                     setTimeout(() => { goku.style.display = 'flex'; goku.style.left = '-250px'; }, 100); 
-                }, 1400);
+                }, 1500);
             }
         });
 
-        // FIRE PARTICLES CANVAS
+        // Background Particles
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
         let particles = [];
         class Particle {
-            constructor() { this.x = Math.random() * canvas.width; this.y = canvas.height; this.size = Math.random() * 2; this.speed = Math.random() * 1.5 + 0.5; }
+            constructor() { this.x = Math.random() * canvas.width; this.y = canvas.height; this.size = Math.random() * 2; this.speed = Math.random() * 1.5; }
             update() { this.y -= this.speed; if (this.y < 0) this.y = canvas.height; }
-            draw() { ctx.fillStyle = 'rgba(255, 0, 0, 0.4)'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+            draw() { ctx.fillStyle = 'rgba(255, 0, 0, 0.3)'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
         }
-        function init() { for(let i=0; i<45; i++) particles.push(new Particle()); }
+        for(let i=0; i<40; i++) particles.push(new Particle());
         function animate() { ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p=>{p.update(); p.draw();}); requestAnimationFrame(animate); }
-        init(); animate();
+        animate();
     </script>
 </body>
 </html>

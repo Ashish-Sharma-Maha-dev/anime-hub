@@ -3,109 +3,81 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KINGU VAULT GOD MODE</title>
+<title>KINGU VAULT PRO</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Orbitron',sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins;}
 body{
 background:#020202;
-color:white;
+color:#fff;
 overflow-x:hidden;
+scroll-behavior:smooth;
 }
 
-/* BACKGROUND GLOW */
-body::before{
-content:"";
-position:fixed;
-width:600px;
-height:600px;
-background:radial-gradient(circle,rgba(255,0,0,0.2),transparent);
-top:20%;
-left:20%;
-filter:blur(120px);
-z-index:-1;
-}
-
-/* HEADER */
-header{
+/* PARALLAX SECTION */
+.parallax{
 height:100vh;
 display:flex;
-flex-direction:column;
-justify-content:center;
 align-items:center;
-text-align:center;
+justify-content:center;
+flex-direction:column;
+background:linear-gradient(#020202, #0a0a0a);
 }
-header h1{
-font-size:55px;
-text-shadow:0 0 40px red;
+.parallax h1{
+font-size:60px;
+text-shadow:0 0 30px red;
 }
 
-/* LEFT MENU */
+/* MENU */
 .menu-btn{
 position:fixed;
-top:20px;
 left:20px;
-cursor:pointer;
+top:20px;
 z-index:1000;
+cursor:pointer;
 }
 .menu-btn div{
 width:30px;height:3px;background:red;margin:6px 0;
 }
 
-/* SIDE PANEL */
 .side-menu{
 position:fixed;
 left:-300px;
 top:0;
 width:300px;
 height:100%;
-background:rgba(0,0,0,0.95);
-backdrop-filter:blur(10px);
+background:#000;
+padding-top:60px;
 transition:0.4s;
 z-index:999;
-padding-top:60px;
 }
 .side-menu a{
 display:block;
 padding:15px;
 color:white;
 text-decoration:none;
-border-bottom:1px solid rgba(255,0,0,0.3);
-}
-.side-menu a:hover{background:red}
-
-/* DRAGON */
-#dragon{
-position:fixed;
-top:50%;
-left:-200px;
-width:200px;
-z-index:998;
-opacity:0;
-filter:drop-shadow(0 0 20px red);
+border-bottom:1px solid #333;
 }
 
 /* GRID */
 .section{padding:60px 20px;}
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:25px;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
 }
 
 /* CARD */
 .card{
-background:rgba(255,255,255,0.05);
-backdrop-filter:blur(20px);
-border-radius:20px;
+background:#111;
+border-radius:15px;
 overflow:hidden;
 transition:0.4s;
-border:1px solid rgba(255,0,0,0.3);
 }
 .card:hover{
-transform:scale(1.05) rotateX(5deg);
+transform:scale(1.08) rotateY(8deg);
 box-shadow:0 0 40px red;
 }
 .card img{
@@ -115,12 +87,12 @@ object-fit:cover;
 }
 .card-content{padding:15px;}
 button{
-padding:10px 20px;
+margin-top:10px;
+padding:10px;
 background:red;
 border:none;
 color:white;
 cursor:pointer;
-margin-top:10px;
 }
 
 /* MODAL */
@@ -136,14 +108,22 @@ align-items:center;
 .modal-content{
 background:#111;
 padding:20px;
-border-radius:15px;
 max-width:90%;
-border:2px solid red;
 }
 .modal img{
 width:100%;
 max-height:300px;
-object-fit:cover;
+}
+
+/* SCROLL EFFECT */
+.fade{
+opacity:0;
+transform:translateY(50px);
+transition:1s;
+}
+.show{
+opacity:1;
+transform:translateY(0);
 }
 </style>
 </head>
@@ -157,47 +137,98 @@ object-fit:cover;
 
 <div class="side-menu" id="menu">
 <a href="#">Home</a>
-<a href="#">Anime</a>
-<a href="#">Dragons</a>
-<a href="#">Pokémon</a>
+<a href="#">Anime Shop (Affiliate)</a>
+<a href="#">Top Anime</a>
+<a href="#">Top Pokémon</a>
+<a href="#">Top Dragons</a>
+<a href="#">Contact Us</a>
+<a href="mailto:your@email.com">Report Bug</a>
 </div>
 
-<img id="dragon" src="https://pngimg.com/uploads/dragon/dragon_PNG84450.png">
-
-<header>
+<!-- HEADER -->
+<section class="parallax">
 <h1>KINGU VAULT</h1>
-<p>Ultimate Anime Universe</p>
-</header>
+<p>Ultimate Anime + Pokémon + Dragon Universe</p>
+</section>
 
-<div class="section">
+<!-- ANIME -->
+<section class="section fade">
+<h2>Top 10 Anime 2026</h2>
 <div class="grid">
 
 <div class="card">
-<img src="https://images6.alphacoders.com/606/606263.jpg">
+<img src="https://cdn.myanimelist.net/images/anime/1141/142503.jpg">
 <div class="card-content">
-<h2>Naruto</h2>
-<button onclick="openModal('naruto')">Explore</button>
-</div>
-</div>
-
-<div class="card">
-<img src="https://images4.alphacoders.com/133/1338062.jpeg">
-<div class="card-content">
-<h2>Jujutsu Kaisen</h2>
+<h3>Jujutsu Kaisen</h3>
+<p>Culling Game arc with deadly battles.</p>
 <button onclick="openModal('jjk')">Explore</button>
 </div>
 </div>
 
 <div class="card">
-<img src="https://images5.alphacoders.com/128/1289289.jpg">
+<img src="https://cdn.myanimelist.net/images/anime/1337/99013.jpg">
 <div class="card-content">
-<h2>One Piece</h2>
-<button onclick="openModal('onepiece')">Explore</button>
+<h3>Attack on Titan</h3>
+<p>Final war unfolds.</p>
+<button onclick="openModal('aot')">Explore</button>
+</div>
+</div>
+
+<!-- ADD MORE SAME FORMAT -->
+</div>
+</section>
+
+<!-- POKEMON -->
+<section class="section fade">
+<h2>Top 10 Pokémon</h2>
+<div class="grid">
+
+<div class="card">
+<img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png">
+<div class="card-content">
+<h3>Pikachu</h3>
+<p>Electric icon of Pokémon world.</p>
+<button onclick="openModal('pikachu')">Explore</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/006.png">
+<div class="card-content">
+<h3>Charizard</h3>
+<p>Fire dragon powerhouse.</p>
+<button onclick="openModal('charizard')">Explore</button>
 </div>
 </div>
 
 </div>
+</section>
+
+<!-- DRAGONS -->
+<section class="section fade">
+<h2>Top 10 Dragons</h2>
+<div class="grid">
+
+<div class="card">
+<img src="https://images.alphacoders.com/132/1328144.jpeg">
+<div class="card-content">
+<h3>Shenron</h3>
+<p>Wish granting dragon.</p>
+<button onclick="openModal('shenron')">Explore</button>
 </div>
+</div>
+
+<div class="card">
+<img src="https://images.alphacoders.com/132/1329656.jpeg">
+<div class="card-content">
+<h3>Bahamut</h3>
+<p>Legendary celestial dragon.</p>
+<button onclick="openModal('bahamut')">Explore</button>
+</div>
+</div>
+
+</div>
+</section>
 
 <!-- MODAL -->
 <div class="modal" id="modal">
@@ -210,46 +241,21 @@ object-fit:cover;
 
 <script>
 
-/* MENU + DRAGON */
+/* MENU */
 function toggleMenu(){
 let m=document.getElementById("menu");
-let d=document.getElementById("dragon");
-
-if(m.style.left==="0px"){
-m.style.left="-300px";
-}else{
-m.style.left="0px";
-
-/* DRAGON FLY */
-d.style.opacity=1;
-d.style.left="100%";
-setTimeout(()=>{
-d.style.left="-200px";
-d.style.opacity=0;
-},1500);
-}
+m.style.left=m.style.left==="0px"?"-300px":"0px";
 }
 
-/* DATA + SOUND */
+/* DATA */
 const data={
-naruto:{
-img:"https://images6.alphacoders.com/606/606263.jpg",
-text:"Naruto future explores Otsutsuki threats.",
-sound:"https://www.myinstants.com/media/sounds/naruto-theme.mp3"
-},
-jjk:{
-img:"https://images4.alphacoders.com/133/1338062.jpeg",
-text:"Culling Game intense fights begin.",
-sound:"https://www.myinstants.com/media/sounds/jjk.mp3"
-},
-onepiece:{
-img:"https://images5.alphacoders.com/128/1289289.jpg",
-text:"Final war incoming.",
-sound:"https://www.myinstants.com/media/sounds/one-piece.mp3"
-}
+jjk:{img:"https://cdn.myanimelist.net/images/anime/1141/142503.jpg",text:"Culling Game arc with high stakes survival."},
+aot:{img:"https://cdn.myanimelist.net/images/anime/1337/99013.jpg",text:"Final battle for humanity."},
+pikachu:{img:"https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png",text:"Electric mascot with unstoppable energy."},
+charizard:{img:"https://assets.pokemon.com/assets/cms2/img/pokedex/full/006.png",text:"Fire flying beast with massive power."},
+shenron:{img:"https://images.alphacoders.com/132/1328144.jpeg",text:"Dragon that grants wishes."},
+bahamut:{img:"https://images.alphacoders.com/132/1329656.jpeg",text:"Celestial dragon of destruction."}
 };
-
-let audio;
 
 function openModal(name){
 let d=data[name];
@@ -257,16 +263,24 @@ document.getElementById("modal").style.display="flex";
 document.getElementById("modalImg").src=d.img;
 document.getElementById("modalText").innerText=d.text;
 
-/* SOUND PLAY */
-if(audio) audio.pause();
-audio=new Audio(d.sound);
+let audio=new Audio("https://www.myinstants.com/media/sounds/anime-wow-sound-effect.mp3");
 audio.play();
 }
 
 function closeModal(){
 document.getElementById("modal").style.display="none";
-if(audio) audio.pause();
 }
+
+/* SCROLL ANIMATION */
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add("show");
+}
+});
+});
+
+document.querySelectorAll(".fade").forEach(el=>observer.observe(el));
 
 </script>
 

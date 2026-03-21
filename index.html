@@ -3,31 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KINGU VAULT | IMAGE FIX</title>
+    <title>KINGU VAULT | THE ANCIENT ARCHIVE</title>
     <style>
-        body { background-color: #020202; color: #ffffff; font-family: 'Segoe UI', sans-serif; margin: 0; overflow-x: hidden; }
+        body { background-color: #020202; color: #ffffff; font-family: 'Segoe UI', sans-serif; margin: 0; overflow-x: hidden; scroll-behavior: smooth; }
         #bg-canvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; }
-        header { background: linear-gradient(180deg, #800000 0%, #000000 100%); padding: 60px 20px; text-align: center; border-bottom: 3px solid #ff0000; position: relative; }
-        .glitch { font-size: 2.8rem; font-weight: 900; color: #ff0000; text-shadow: 0 0 20px #ff0000; letter-spacing: 5px; text-transform: uppercase; }
         
-        /* GOKU BOX FIX */
-        #goku-box { 
-            position: absolute; top: 20%; left: -250px; width: 150px; 
-            transition: 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
-            z-index: 100; display: flex; 
+        /* HEADER SECTION */
+        header { 
+            height: 80vh; 
+            background: radial-gradient(circle, #4d0000 0%, #000000 100%); 
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; border-bottom: 4px solid #ff0000; position: relative;
         }
-        #goku-box img { width: 100%; filter: drop-shadow(0 0 10px #ff0000); }
-        .slide-now { left: 120% !important; }
+        .glitch { font-size: 3.5rem; font-weight: 900; color: #ff0000; text-shadow: 0 0 20px #ff0000; text-transform: uppercase; letter-spacing: 8px; }
+        .hero-sub { color: #888; margin-top: 15px; font-size: 1rem; letter-spacing: 2px; }
 
-        .container { padding: 40px 20px; max-width: 900px; margin: 0 auto; }
-        .dragon-item { background: #0f0f0f; margin-bottom: 15px; padding: 20px; border-left: 5px solid #ff0000; border-radius: 8px; cursor: pointer; transition: 0.3s; }
-        .dragon-item:hover { background: #1a1a1a; transform: scale(1.02); }
+        /* GOKU SWIPE DOWN (SUMMON) */
+        #goku-box { 
+            position: fixed; top: -400px; left: 50%; transform: translateX(-50%); 
+            width: 220px; transition: 1.8s cubic-bezier(0.19, 1, 0.22, 1); z-index: 9999; 
+        }
+        #goku-box img { width: 100%; filter: drop-shadow(0 0 25px #ffea00); }
+        .fly-down { top: 120% !important; }
 
-        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.95); backdrop-filter: blur(10px); overflow-y: auto; }
-        .modal-content { background: #080808; margin: 5% auto; padding: 25px; border: 2px solid #ff0000; width: 85%; max-width: 550px; border-radius: 15px; position: relative; text-align: center; box-shadow: 0 0 30px rgba(255,0,0,0.3); }
-        .close-btn { position: absolute; right: 20px; top: 10px; color: #fff; font-size: 40px; cursor: pointer; }
-        #modal-img { width: 100%; max-height: 300px; object-fit: cover; border-radius: 10px; margin: 15px 0; border: 1px solid #333; }
-        #modal-title { text-transform: uppercase; font-weight: 900; letter-spacing: 2px; }
+        .container { padding: 60px 20px; max-width: 1000px; margin: 0 auto; }
+        .section-title { color: #ff0000; font-size: 2rem; border-left: 5px solid #ff0000; padding-left: 15px; margin-bottom: 40px; text-transform: uppercase; }
+
+        /* DRAGON CARDS (Longer Layout) */
+        .dragon-card {
+            background: linear-gradient(145deg, #0f0f0f, #050505);
+            margin-bottom: 50px; padding: 30px; border-radius: 15px;
+            border: 1px solid #222; transition: 0.4s; position: relative; overflow: hidden;
+        }
+        .dragon-card:hover { border-color: #ff0000; transform: translateY(-10px); box-shadow: 0 10px 30px rgba(255,0,0,0.2); }
+        .dragon-card h3 { color: #ff3333; font-size: 1.8rem; margin-top: 0; }
+        .dragon-card p { color: #bbb; line-height: 1.7; font-size: 1.1rem; }
+        
+        /* Stats Bar */
+        .stat-bar { background: #222; height: 8px; border-radius: 4px; margin: 15px 0; overflow: hidden; }
+        .stat-fill { background: #ff0000; height: 100%; box-shadow: 0 0 10px #ff0000; }
+
+        .btn-summon {
+            display: inline-block; background: #ff0000; color: white; padding: 12px 25px;
+            text-decoration: none; border-radius: 5px; font-weight: bold; margin-top: 15px; cursor: pointer;
+        }
+
+        /* MODAL */
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); backdrop-filter: blur(15px); }
+        .modal-content { background: #080808; margin: 5% auto; padding: 25px; border: 2px solid #ff0000; width: 85%; max-width: 550px; border-radius: 15px; text-align: center; position: relative; }
+        .close-btn { position: absolute; right: 15px; top: 5px; color: #fff; font-size: 45px; cursor: pointer; }
+        #modal-img { width: 100%; border-radius: 10px; margin: 15px 0; border: 1px solid #333; max-height: 300px; object-fit: cover; }
+
+        footer { text-align: center; padding: 80px 20px; color: #444; border-top: 1px solid #111; letter-spacing: 3px; font-size: 0.8rem; }
     </style>
 </head>
 <body>
@@ -35,53 +62,90 @@
     <canvas id="bg-canvas"></canvas>
     <audio id="roar-sound" src="https://www.soundjay.com/nature/sounds/creature-roar-01.mp3"></audio>
 
-    <header id="header-area">
+    <div id="goku-box">
+        <img src="https://www.pngplay.com/wp-content/uploads/13/Goku-Flying-PNG-Images-HD.png" alt="Goku Fly">
+    </div>
+
+    <header>
         <div class="glitch">KINGU VAULT</div>
-        <p style="color: #666; font-size: 0.7rem;">SWIPE RIGHT ON "KINGU VAULT" TO SEE GOKU</p>
-        
-        <div id="goku-box">
-            <img src="https://upload.wikimedia.org/wikipedia/it/b/bc/Goku_Super_Sayan_3.png" alt="Goku">
-        </div>
+        <div class="hero-sub">ANCIENT KNOWLEDGE • DRAGON LORE • POWER</div>
+        <p style="color: #ffaa00; font-size: 0.9rem; margin-top: 40px; animate: pulse 2s infinite;">↓ SWIPE DOWN TO SUMMON GOKU ↓</p>
     </header>
 
     <div class="container">
-        <div id="dragon-list">
-            <div class="dragon-item" onclick="openDragon('TIAMAT')"><h4>1. TIAMAT</h4></div>
-            <div class="dragon-item" onclick="openDragon('KINGU')"><h4>2. KINGU</h4></div>
-            <div class="dragon-item" onclick="openDragon('TYPHON')"><h4>3. TYPHON</h4></div>
-            <div class="dragon-item" onclick="openDragon('BAHAMUT')"><h4>4. BAHAMUT</h4></div>
-            <div class="dragon-item" onclick="openDragon('SHENRON')"><h4>5. SHENRON</h4></div>
+        <h2 class="section-title">The 5 Great Primordials</h2>
+
+        <div class="dragon-card">
+            <h3>01. TIAMAT</h3>
+            <p>The Primordial Mother of the Salt Sea. Before the heavens and earth existed, there was Tiamat. She is the origin of all monstrous life and the queen of chaos.</p>
+            <div class="stat-label">Power Level: 95%</div>
+            <div class="stat-bar"><div class="stat-fill" style="width: 95%;"></div></div>
+            <div class="btn-summon" onclick="openDragon('TIAMAT')">VIEW FULL HISTORY</div>
         </div>
+
+        <div class="dragon-card">
+            <h3>02. KINGU</h3>
+            <p>The Commander of Chaos. Chosen by Tiamat to lead the army of 11 monsters against the younger gods. He possessed the Tablet of Destinies.</p>
+            <div class="stat-label">Power Level: 92%</div>
+            <div class="stat-bar"><div class="stat-fill" style="width: 92%;"></div></div>
+            <div class="btn-summon" onclick="openDragon('KINGU')">VIEW FULL HISTORY</div>
+        </div>
+
+        <div class="dragon-card">
+            <h3>03. TYPHON</h3>
+            <p>The Father of All Monsters. A giant so vast that his head brushed the stars and his arms spanned the world. The ultimate challenge to Zeus.</p>
+            <div class="stat-label">Power Level: 98%</div>
+            <div class="stat-bar"><div class="stat-fill" style="width: 98%;"></div></div>
+            <div class="btn-summon" onclick="openDragon('TYPHON')">VIEW FULL HISTORY</div>
+        </div>
+
+        <div class="dragon-card">
+            <h3>04. BAHAMUT</h3>
+            <p>The Sky Sovereign. A majestic platinum dragon known as the King of Good Dragons. His scales are impenetrable and his wisdom is infinite.</p>
+            <div class="stat-label">Power Level: 90%</div>
+            <div class="stat-bar"><div class="stat-fill" style="width: 90%;"></div></div>
+            <div class="btn-summon" onclick="openDragon('BAHAMUT')">VIEW FULL HISTORY</div>
+        </div>
+
+        <div class="dragon-card">
+            <h3>05. SHENRON</h3>
+            <p>The Eternal Dragon. Awakened only when the seven mystical balls are gathered. He has the power to grant any wish that lies within his creator's power.</p>
+            <div class="stat-label">Power Level: 85% (Wish Power: 100%)</div>
+            <div class="stat-bar"><div class="stat-fill" style="width: 85%;"></div></div>
+            <div class="btn-summon" onclick="openDragon('SHENRON')">VIEW FULL HISTORY</div>
+        </div>
+
     </div>
 
     <div id="dragonModal" class="modal">
         <div class="modal-content" id="modal-box">
             <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h2 id="modal-title">Name</h2>
+            <h2 id="modal-title"></h2>
             <img id="modal-img" src="" alt="Dragon">
-            <p id="modal-desc" style="text-align:left; line-height:1.6; color:#ccc;"></p>
+            <p id="modal-desc" style="text-align:left; color:#ccc; line-height:1.6;"></p>
         </div>
     </div>
 
+    <footer>
+        &copy; 2026 KINGU VAULT | BUILT FOR THE CHOSEN ONES | BY ASHU BHAI
+    </footer>
+
     <script>
         const dragonData = {
-            'TIAMAT': { color: '#00ccff', img: 'https://images.unsplash.com/photo-1509023467866-f76223258d99?w=500', desc: '<b>Origin:</b> Babylonian.<br>Goddess of the salt sea.' },
-            'KINGU': { color: '#9133ff', img: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?w=500', desc: '<b>Origin:</b> Babylonian.<br>Commander of the army of Tiamat.' },
-            'TYPHON': { color: '#ff4500', img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500', desc: '<b>Origin:</b> Greek.<br>The deadliest creature in Greek mythology.' },
-            'BAHAMUT': { color: '#e0e0e0', img: 'https://images.unsplash.com/photo-1605142859862-978be7eba909?w=500', desc: '<b>Origin:</b> Arabic.<br>The King of Dragons.' },
-            'SHENRON': { color: '#00ff44', img: 'https://images.unsplash.com/photo-1578632292335-df3abbb0d586?w=500', desc: '<b>Origin:</b> Dragon Ball.<br>The Eternal wish-granting dragon.' }
+            'TIAMAT': { color: '#00ccff', img: 'https://i.pinimg.com/originals/82/8c/8b/828c8b6b15673010b1a039d54e5a953a.jpg', desc: 'Tiamat is a primordial goddess of the salt sea, mating with Abzu, the god of fresh water, to produce younger gods. She is the symbol of the chaos of primordial creation.' },
+            'KINGU': { color: '#9133ff', img: 'https://i.pinimg.com/originals/3d/8e/31/3d8e317454f2c58e1780590740902636.jpg', desc: 'Kingu was a god in Babylonian mythology. After the murder of his father Abzu, he became the consort of his mother Tiamat, who gave him the Tablet of Destinies.' },
+            'TYPHON': { color: '#ff4500', img: 'https://i.pinimg.com/736x/8a/a0/0a/8aa00a6e5b874305888e2c0471960244.jpg', desc: 'Typhon was the last son of Gaia. He was the most deadly creature in Greek mythology. He was described as a vast grisly monster with a hundred snake heads.' },
+            'BAHAMUT': { color: '#e0e0e0', img: 'https://i.pinimg.com/originals/27/7f/4c/277f4c405a8f46e33d0e2c8421c60a5e.jpg', desc: 'In modern fantasy, Bahamut is the King of the Good Dragons. He is a massive dragon with platinum scales and blue eyes. He is a deity of justice and protection.' },
+            'SHENRON': { color: '#00ff44', img: 'https://i.pinimg.com/originals/80/4a/77/804a77093228965f3a005898858d601b.jpg', desc: 'Shenron is a magical dragon from the Dragon Ball franchise. He can be summoned by collecting all seven Dragon Balls of Earth to grant a single wish.' }
         };
 
         function openDragon(name) {
             const data = dragonData[name];
-            const roar = document.getElementById('roar-sound');
-            roar.play().catch(e => {});
-
+            document.getElementById('roar-sound').play().catch(e => {});
             document.getElementById('modal-title').innerText = name;
             document.getElementById('modal-title').style.color = data.color;
             document.getElementById('modal-img').src = data.img;
             document.getElementById('modal-desc').innerHTML = data.desc;
-            
             const modalBox = document.getElementById('modal-box');
             modalBox.style.borderColor = data.color;
             modalBox.style.boxShadow = `0 0 40px ${data.color}`;
@@ -89,26 +153,20 @@
         }
 
         function closeModal() { document.getElementById('dragonModal').style.display = "none"; }
-        window.onclick = function(e) { if (e.target == document.getElementById('dragonModal')) closeModal(); }
 
-        // Goku Swipe
-        const header = document.getElementById('header-area');
-        const goku = document.getElementById('goku-box');
-        let startX;
-        header.addEventListener('touchstart', (e) => startX = e.touches[0].clientX);
-        header.addEventListener('touchend', (e) => {
-            let endX = e.changedTouches[0].clientX;
-            if (endX > startX + 60) {
-                goku.classList.add('slide-now');
-                setTimeout(() => { 
-                    goku.style.display = 'none'; 
-                    goku.classList.remove('slide-now'); 
-                    setTimeout(() => { goku.style.display = 'flex'; goku.style.left = '-250px'; }, 100); 
-                }, 1500);
+        // SUMMON GOKU ON SWIPE DOWN
+        let touchStartY = 0;
+        document.addEventListener('touchstart', (e) => { touchStartY = e.touches[0].clientY; });
+        document.addEventListener('touchend', (e) => {
+            let touchEndY = e.changedTouches[0].clientY;
+            if (touchEndY > touchStartY + 120) { 
+                const goku = document.getElementById('goku-box');
+                goku.classList.add('fly-down');
+                setTimeout(() => { goku.classList.remove('fly-down'); }, 2000);
             }
         });
 
-        // Background Particles
+        // Fire Particles
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
@@ -118,7 +176,7 @@
             update() { this.y -= this.speed; if (this.y < 0) this.y = canvas.height; }
             draw() { ctx.fillStyle = 'rgba(255, 0, 0, 0.3)'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
         }
-        for(let i=0; i<40; i++) particles.push(new Particle());
+        for(let i=0; i<45; i++) particles.push(new Particle());
         function animate() { ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p=>{p.update(); p.draw();}); requestAnimationFrame(animate); }
         animate();
     </script>

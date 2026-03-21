@@ -8,212 +8,214 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins;cursor:none;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins}
 
 body{
-background:linear-gradient(270deg,#020202,#0a0000,#140000);
-background-size:400% 400%;
-animation:bgMove 12s ease infinite;
-color:white;
+background:linear-gradient(270deg,#000,#1a0033,#000814,#140000,#1a1a1a);
+background-size:500% 500%;
+animation:bg 15s ease infinite;
+color:#fff;
 overflow-x:hidden;
 }
 
-/* BACKGROUND ANIMATION */
-@keyframes bgMove{
-0%{background-position:0% 50%}
-50%{background-position:100% 50%}
-100%{background-position:0% 50%}
+@keyframes bg{
+0%{background-position:0%}
+50%{background-position:100%}
+100%{background-position:0%}
 }
 
-/* LOADER */
-#loader{
-position:fixed;
-top:0;left:0;
-width:100%;height:100%;
-background:black;
-display:flex;
-justify-content:center;
-align-items:center;
-z-index:9999;
-}
-#loader h1{
-color:red;
-animation:pulse 1s infinite;
-}
-@keyframes pulse{
-0%{opacity:0.5}
-50%{opacity:1}
-100%{opacity:0.5}
-}
+/* MENU */
+.menu-btn{position:fixed;top:20px;left:20px;z-index:1000;cursor:pointer}
+.menu-btn div{width:30px;height:3px;background:red;margin:6px 0}
 
-/* CUSTOM CURSOR */
-.cursor{
-position:fixed;
-width:15px;height:15px;
-background:red;
-border-radius:50%;
-pointer-events:none;
-z-index:999;
-}
+.menu{position:fixed;left:-300px;top:0;width:300px;height:100%;background:#000;padding-top:60px;transition:0.4s}
+.menu a{display:block;padding:15px;color:#fff;text-decoration:none;border-bottom:1px solid #222}
 
 /* HERO */
-.hero{
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-position:relative;
-}
+.hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
 .hero h1{
-font-size:55px;
-text-shadow:0 0 25px red;
+font-size:50px;
+background:linear-gradient(90deg,#ff0000,#a855f7,#00b4ff,#ffd700);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 }
 
-/* GLOW */
-.hero::after{
-content:"";
-position:absolute;
-width:300px;height:300px;
-background:red;
-filter:blur(150px);
-opacity:0.3;
-top:30%;
-left:40%;
-z-index:-1;
-}
-
-/* NAV BUTTON */
+/* NAV */
 .nav button{
-padding:12px 20px;
-background:linear-gradient(45deg,#ff0000,#aa0000);
-border:none;
-color:white;
-border-radius:10px;
-transition:0.3s;
-cursor:pointer;
-}
-.nav button:hover{
-transform:translateY(-5px);
-box-shadow:0 0 25px red;
-}
-
-/* CARDS */
-.card{
-background:rgba(255,255,255,0.05);
-backdrop-filter:blur(15px);
-border-radius:15px;
-overflow:hidden;
-transition:0.4s;
-}
-.card:hover{
-transform:scale(1.08) rotateX(6deg);
-box-shadow:0 0 40px red;
-}
-.card img{
-width:100%;
-height:200px;
-object-fit:cover;
-transition:0.4s;
-}
-.card:hover img{
-transform:scale(1.1);
+padding:10px 15px;
+background:linear-gradient(45deg,#ff0000,#a855f7);
+border:none;color:#fff;margin:5px;border-radius:8px;cursor:pointer
 }
 
 /* SECTION */
-.section{
-padding:60px 20px;
-}
+.section{padding:80px 20px}
 
 /* GRID */
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+
+/* CARD */
+.card{
+background:rgba(255,255,255,0.05);
+border-radius:15px;
+overflow:hidden;
+transition:0.3s
 }
+.card:hover{transform:scale(1.05);box-shadow:0 0 30px red}
+.card img{width:100%;height:200px;object-fit:cover}
+.card-content{padding:15px}
+
+button{padding:8px;background:red;border:none;color:#fff;cursor:pointer}
 
 /* MODAL */
-.modal{
-display:none;
-position:fixed;
-top:0;left:0;
-width:100%;height:100%;
-background:rgba(0,0,0,0.9);
-justify-content:center;
-align-items:center;
-}
-.modal-content{
-background:#111;
-padding:20px;
-max-width:90%;
-}
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#000d;justify-content:center;align-items:center}
+.modal-content{background:#111;padding:20px;max-width:90%}
+.modal img{width:100%;max-height:300px}
 
-/* RESPONSIVE */
-@media(max-width:600px){
-.hero h1{font-size:35px;}
-}
-
+/* SCROLL */
+.fade{opacity:0;transform:translateY(50px);transition:1s}
+.show{opacity:1;transform:translateY(0)}
 </style>
 </head>
 
 <body>
 
-<!-- LOADER -->
-<div id="loader">
-<h1>LOADING...</h1>
+<!-- MENU -->
+<div class="menu-btn" onclick="toggleMenu()">
+<div></div><div></div><div></div>
 </div>
 
-<!-- CURSOR -->
-<div class="cursor" id="cursor"></div>
+<div class="menu" id="menu">
+<a href="#">Home</a>
+<a href="#">Anime</a>
+<a href="#">Pokémon</a>
+<a href="#">Dragons</a>
+<a href="#">Blogs</a>
+<a href="#">Affiliate Shop</a>
+<a href="#">Contact</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
 <h1>KINGU VAULT</h1>
-<p>Ultimate Anime Experience</p>
+<p>Ultimate Anime Platform</p>
 
 <div class="nav">
-<button>Anime</button>
-<button>Pokémon</button>
-<button>Dragons</button>
-<button>Blogs</button>
+<button onclick="show('anime')">Anime</button>
+<button onclick="show('pokemon')">Pokémon</button>
+<button onclick="show('dragons')">Dragons</button>
+<button onclick="show('blogs')">Blogs</button>
 </div>
 </section>
 
-<!-- SAMPLE SECTION -->
-<section class="section">
+<!-- ANIME -->
+<section id="anime" class="section fade">
+<h2>Top Anime</h2>
 <div class="grid">
 
 <div class="card">
 <img src="https://cdn.myanimelist.net/images/anime/1141/142503.jpg">
-<div style="padding:15px">
+<div class="card-content">
 <h3>Jujutsu Kaisen</h3>
+<button onclick="openModal('jjk')">Explore</button>
 </div>
 </div>
 
 <div class="card">
-<img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/006.png">
-<div style="padding:15px">
-<h3>Charizard</h3>
+<img src="https://cdn.myanimelist.net/images/anime/1337/99013.jpg">
+<div class="card-content">
+<h3>Attack on Titan</h3>
+<button onclick="openModal('aot')">Explore</button>
 </div>
 </div>
 
 </div>
 </section>
 
+<!-- SHOP -->
+<section class="section fade">
+<h2>Anime Shop</h2>
+<div class="grid">
+
+<div class="card">
+<img src="https://m.media-amazon.com/images/I/71niXI3lxlL._AC_SL1500_.jpg">
+<div class="card-content">
+<h3>Naruto Hoodie</h3>
+<button>Buy</button>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- BLOG -->
+<section id="blogs" class="section fade">
+<h2>Blogs</h2>
+
+<div class="card">
+<div class="card-content">
+<h3>Top Anime 2026</h3>
+<p>Write your blog here...</p>
+</div>
+</div>
+
+</section>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+<div class="modal-content">
+<img id="img">
+<p id="text"></p>
+<button onclick="closeModal()">Close</button>
+</div>
+</div>
+
 <script>
 
-/* LOADER */
-window.onload=()=>{
-document.getElementById("loader").style.display="none";
+function toggleMenu(){
+let m=document.getElementById("menu");
+m.style.left=m.style.left==="0px"?"-300px":"0px";
 }
 
-/* CURSOR */
-const cursor=document.getElementById("cursor");
-document.addEventListener("mousemove",e=>{
-cursor.style.left=e.clientX+"px";
-cursor.style.top=e.clientY+"px";
+function show(id){
+["anime","pokemon","dragons","blogs"].forEach(x=>{
+let el=document.getElementById(x);
+if(el) el.style.display="none";
 });
+let target=document.getElementById(id);
+if(target) target.style.display="block";
+}
+
+const data={
+jjk:{img:"https://cdn.myanimelist.net/images/anime/1141/142503.jpg",text:"Culling Game arc.",sound:"https://www.myinstants.com/media/sounds/jjk.mp3"},
+aot:{img:"https://cdn.myanimelist.net/images/anime/1337/99013.jpg",text:"Final war.",sound:"https://www.myinstants.com/media/sounds/anime-wow-sound-effect.mp3"}
+};
+
+let audio;
+
+function openModal(name){
+let d=data[name];
+document.getElementById("modal").style.display="flex";
+document.getElementById("img").src=d.img;
+document.getElementById("text").innerText=d.text;
+
+if(audio) audio.pause();
+audio=new Audio(d.sound);
+audio.play();
+}
+
+function closeModal(){
+document.getElementById("modal").style.display="none";
+if(audio) audio.pause();
+}
+
+/* SCROLL */
+const observer=new IntersectionObserver(e=>{
+e.forEach(x=>{
+if(x.isIntersecting)x.target.classList.add("show");
+});
+});
+
+document.querySelectorAll(".fade").forEach(el=>observer.observe(el));
 
 </script>
 

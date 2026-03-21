@@ -3,136 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KINGU VAULT ULTIMATE</title>
+<title>KINGU VAULT</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Orbitron',sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins;}
 
 body{
 background:#020202;
-color:white;
+color:#fff;
 overflow-x:hidden;
-perspective:1200px;
 }
 
-/* BACKGROUND GLOW */
-.bg-glow{
-position:fixed;
-width:600px;height:600px;
-background:radial-gradient(circle,rgba(255,0,0,0.25),transparent);
-top:30%;left:30%;
-filter:blur(120px);
-z-index:-1;
-}
-
-/* PARALLAX */
-.section{
-min-height:100vh;
+/* HEADER */
+header{
+height:80vh;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-padding:60px 20px;
-transform-style:preserve-3d;
+text-align:center;
+background:linear-gradient(black,#020202);
 }
-
-/* HEADER */
-h1{
-font-size:60px;
-text-shadow:0 0 40px red;
-}
-
-/* SLIDER */
-.slider{
-width:100%;
-overflow:hidden;
-margin-top:40px;
-}
-.track{
-display:flex;
-animation:scroll 30s linear infinite;
-}
-.track img{
-width:280px;height:180px;
-margin:10px;
-border-radius:15px;
-transition:0.4s;
-}
-.track img:hover{
-transform:scale(1.1) rotateY(12deg);
-box-shadow:0 0 25px red;
-}
-@keyframes scroll{
-0%{transform:translateX(0)}
-100%{transform:translateX(-50%)}
-}
-
-/* GRID */
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:25px;
-width:100%;
-}
-
-/* CARD */
-.card{
-background:rgba(255,255,255,0.05);
-backdrop-filter:blur(20px);
-border-radius:20px;
-overflow:hidden;
-transition:0.5s;
-transform:rotateX(10deg);
-border:1px solid rgba(255,0,0,0.3);
-}
-.card:hover{
-transform:rotateX(0deg) scale(1.08);
-box-shadow:0 0 50px red;
-}
-.card img{
-width:100%;
-height:200px;
-object-fit:cover;
-}
-.card-content{padding:15px;}
-
-button{
-padding:10px 20px;
-background:red;
-border:none;
-color:white;
-cursor:pointer;
-margin-top:10px;
-}
-
-/* MODAL */
-.modal{
-display:none;
-position:fixed;
-top:0;left:0;
-width:100%;height:100%;
-background:rgba(0,0,0,0.9);
-justify-content:center;
-align-items:center;
-}
-.modal-content{
-background:#111;
-padding:20px;
-max-width:90%;
-border-radius:15px;
-border:2px solid red;
-}
-.modal img{
-width:100%;
-max-height:300px;
-}
+header h1{font-size:50px;}
+header p{opacity:0.7}
 
 /* MENU */
 .menu-btn{
 position:fixed;
-top:20px;left:20px;
+top:20px;
+left:20px;
 z-index:1000;
 cursor:pointer;
 }
@@ -149,21 +50,96 @@ height:100%;
 background:#000;
 padding-top:60px;
 transition:0.4s;
+z-index:999;
 }
 .side-menu a{
 display:block;
 padding:15px;
+border-bottom:1px solid #222;
 color:white;
 text-decoration:none;
-border-bottom:1px solid #333;
 }
 
+/* NAV BUTTONS */
+.nav{
+display:flex;
+justify-content:center;
+gap:10px;
+margin-top:20px;
+flex-wrap:wrap;
+}
+.nav button{
+padding:10px 15px;
+background:red;
+border:none;
+color:white;
+cursor:pointer;
+}
+
+/* SECTION */
+.section{padding:40px 20px;}
+
+/* GRID */
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+/* CARD */
+.card{
+background:#111;
+border-radius:15px;
+overflow:hidden;
+transition:0.3s;
+}
+.card:hover{
+transform:scale(1.05);
+box-shadow:0 0 20px red;
+}
+.card img{
+width:100%;
+height:200px;
+object-fit:cover;
+}
+.card-content{padding:15px;}
+button{
+margin-top:10px;
+padding:8px;
+background:red;
+border:none;
+color:white;
+cursor:pointer;
+}
+
+/* MODAL */
+.modal{
+display:none;
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:rgba(0,0,0,0.9);
+justify-content:center;
+align-items:center;
+}
+.modal-content{
+background:#111;
+padding:20px;
+max-width:90%;
+}
+.modal img{
+width:100%;
+max-height:300px;
+}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+header h1{font-size:32px;}
+}
 </style>
 </head>
 
 <body>
-
-<div class="bg-glow"></div>
 
 <!-- MENU -->
 <div class="menu-btn" onclick="toggleMenu()">
@@ -172,57 +148,91 @@ border-bottom:1px solid #333;
 
 <div class="side-menu" id="menu">
 <a href="#">Home</a>
-<a href="#">Anime Shop</a>
+<a href="#">Anime</a>
+<a href="#">Pokémon</a>
+<a href="#">Dragons</a>
+<a href="#">Blogs</a>
 <a href="#">Affiliate Links</a>
-<a href="#">Contact</a>
-<a href="mailto:your@email.com">Report Bug</a>
+<a href="#">Merchant Store</a>
+<a href="mailto:your@email.com">Contact / Report</a>
 </div>
 
-<!-- HEADER -->
-<section class="section">
+<header>
 <h1>KINGU VAULT</h1>
+<p>Anime • Pokémon • Dragons</p>
 
-<div class="slider">
-<div class="track">
-<img src="https://cdn.myanimelist.net/images/anime/1141/142503.jpg">
-<img src="https://cdn.myanimelist.net/images/anime/1337/99013.jpg">
-<img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png">
-<img src="https://images.alphacoders.com/132/1328144.jpeg">
-
-<!-- duplicate -->
-<img src="https://cdn.myanimelist.net/images/anime/1141/142503.jpg">
-<img src="https://cdn.myanimelist.net/images/anime/1337/99013.jpg">
-<img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png">
-<img src="https://images.alphacoders.com/132/1328144.jpeg">
+<div class="nav">
+<button onclick="showSection('anime')">Anime</button>
+<button onclick="showSection('pokemon')">Pokémon</button>
+<button onclick="showSection('dragons')">Dragons</button>
 </div>
-</div>
+</header>
 
-</section>
-
-<!-- CONTENT -->
-<section class="section">
+<!-- ANIME -->
+<section class="section" id="anime">
+<h2>Top Anime</h2>
 <div class="grid">
 
 <div class="card">
 <img src="https://cdn.myanimelist.net/images/anime/1141/142503.jpg">
 <div class="card-content">
-<h2>Jujutsu Kaisen</h2>
+<h3>Jujutsu Kaisen</h3>
 <button onclick="openModal('jjk')">Explore</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://cdn.myanimelist.net/images/anime/1337/99013.jpg">
+<div class="card-content">
+<h3>Attack on Titan</h3>
+<button onclick="openModal('aot')">Explore</button>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- POKEMON -->
+<section class="section" id="pokemon" style="display:none;">
+<h2>Top Pokémon</h2>
+<div class="grid">
+
+<div class="card">
+<img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png">
+<div class="card-content">
+<h3>Pikachu</h3>
+<button onclick="openModal('pikachu')">Explore</button>
 </div>
 </div>
 
 <div class="card">
 <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/006.png">
 <div class="card-content">
-<h2>Charizard</h2>
+<h3>Charizard</h3>
 <button onclick="openModal('charizard')">Explore</button>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- DRAGONS -->
+<section class="section" id="dragons" style="display:none;">
+<h2>Top Dragons</h2>
+<div class="grid">
+
+<div class="card">
+<img src="https://images.alphacoders.com/132/1328144.jpeg">
+<div class="card-content">
+<h3>Shenron</h3>
+<button onclick="openModal('shenron')">Explore</button>
 </div>
 </div>
 
 <div class="card">
 <img src="https://images.alphacoders.com/132/1329656.jpeg">
 <div class="card-content">
-<h2>Bahamut</h2>
+<h3>Bahamut</h3>
 <button onclick="openModal('bahamut')">Explore</button>
 </div>
 </div>
@@ -247,23 +257,22 @@ let m=document.getElementById("menu");
 m.style.left=m.style.left==="0px"?"-300px":"0px";
 }
 
+/* SECTION SWITCH */
+function showSection(sec){
+document.getElementById("anime").style.display="none";
+document.getElementById("pokemon").style.display="none";
+document.getElementById("dragons").style.display="none";
+document.getElementById(sec).style.display="block";
+}
+
 /* DATA */
 const data={
-jjk:{
-img:"https://cdn.myanimelist.net/images/anime/1141/142503.jpg",
-text:"Culling Game arc with extreme battles.",
-sound:"https://www.myinstants.com/media/sounds/jjk.mp3"
-},
-charizard:{
-img:"https://assets.pokemon.com/assets/cms2/img/pokedex/full/006.png",
-text:"Fire dragon Pokémon with mega evolution power.",
-sound:"https://www.myinstants.com/media/sounds/anime-wow-sound-effect.mp3"
-},
-bahamut:{
-img:"https://images.alphacoders.com/132/1329656.jpeg",
-text:"Celestial dragon of destruction.",
-sound:"https://www.myinstants.com/media/sounds/monster-roar.mp3"
-}
+jjk:{img:"https://cdn.myanimelist.net/images/anime/1141/142503.jpg",text:"Culling Game arc intense fights.",sound:"https://www.myinstants.com/media/sounds/jjk.mp3"},
+aot:{img:"https://cdn.myanimelist.net/images/anime/1337/99013.jpg",text:"Final war of humanity.",sound:"https://www.myinstants.com/media/sounds/anime-wow-sound-effect.mp3"},
+pikachu:{img:"https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png",text:"Electric mascot.",sound:"https://www.myinstants.com/media/sounds/pikachu.mp3"},
+charizard:{img:"https://assets.pokemon.com/assets/cms2/img/pokedex/full/006.png",text:"Fire dragon power.",sound:"https://www.myinstants.com/media/sounds/fire.mp3"},
+shenron:{img:"https://images.alphacoders.com/132/1328144.jpeg",text:"Wish dragon.",sound:"https://www.myinstants.com/media/sounds/dragon-roar.mp3"},
+bahamut:{img:"https://images.alphacoders.com/132/1329656.jpeg",text:"Celestial dragon.",sound:"https://www.myinstants.com/media/sounds/monster-roar.mp3"}
 };
 
 let audio;

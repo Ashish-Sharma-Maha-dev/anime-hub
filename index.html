@@ -5,8 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KINGU VAULT</title>
 
+<!-- GOOGLE FONT -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
 <style>
-* { margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif; }
+
+* {
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Orbitron', sans-serif;
+}
 
 body {
   background:#020202;
@@ -14,82 +23,123 @@ body {
   overflow-x:hidden;
 }
 
+/* BACKGROUND PARTICLES */
+canvas {
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:-1;
+}
+
 /* HEADER */
 header {
   height:100vh;
-  background: radial-gradient(circle, rgba(120,0,0,0.4), #020202);
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:40px;
-  font-weight:bold;
+  flex-direction:column;
+  background: radial-gradient(circle, rgba(255,0,0,0.2), #020202);
 }
 
-/* HAMBURGER */
+header h1 {
+  font-size:50px;
+  letter-spacing:4px;
+  text-shadow:0 0 20px red;
+}
+
+header p {
+  opacity:0.7;
+}
+
+/* MENU BUTTON */
 .menu-btn {
   position:fixed;
   top:20px;
   right:20px;
-  cursor:pointer;
   z-index:1000;
+  cursor:pointer;
 }
 .menu-btn div {
   width:30px;
-  height:4px;
+  height:3px;
   background:red;
-  margin:5px 0;
+  margin:6px 0;
 }
 
 /* SIDE MENU */
 .side-menu {
   position:fixed;
-  right:-250px;
+  right:-300px;
   top:0;
-  width:250px;
+  width:300px;
   height:100%;
-  background:#000;
+  background:rgba(0,0,0,0.95);
+  backdrop-filter:blur(10px);
   padding-top:60px;
-  transition:0.3s;
-  z-index:999;
+  transition:0.4s;
 }
+
 .side-menu a {
   display:block;
   padding:15px;
   color:white;
   text-decoration:none;
-  border-bottom:1px solid red;
+  border-bottom:1px solid rgba(255,0,0,0.3);
 }
 .side-menu a:hover {
   background:red;
 }
 
-/* DRAGON SECTION */
+/* SECTION */
 .section {
   padding:60px 20px;
 }
 
-.card {
-  background:#111;
-  margin:20px 0;
-  padding:20px;
-  border-left:5px solid red;
+/* ANIME CARDS */
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
+  gap:20px;
 }
 
-.bar {
-  background:#333;
-  height:10px;
-  margin:10px 0;
+.card {
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(15px);
+  border:1px solid rgba(255,0,0,0.3);
+  border-radius:15px;
+  overflow:hidden;
+  transition:0.4s;
 }
-.fill {
-  height:100%;
-  background:red;
+
+.card:hover {
+  transform:translateY(-10px) scale(1.03);
+  box-shadow:0 0 30px red;
+}
+
+.card img {
+  width:100%;
+  height:200px;
+  object-fit:cover;
+}
+
+.card-content {
+  padding:15px;
+}
+
+.card h2 {
+  margin-bottom:10px;
+}
+
+.card p {
+  font-size:14px;
+  opacity:0.7;
 }
 
 button {
+  margin-top:10px;
   padding:10px 20px;
   background:red;
   border:none;
-  color:white;
   cursor:pointer;
 }
 
@@ -101,7 +151,7 @@ button {
   left:0;
   width:100%;
   height:100%;
-  background:rgba(0,0,0,0.8);
+  background:rgba(0,0,0,0.9);
   justify-content:center;
   align-items:center;
 }
@@ -109,14 +159,15 @@ button {
 .modal-content {
   background:#111;
   padding:20px;
-  border:3px solid red;
   max-width:90%;
+  border-radius:10px;
+  border:2px solid red;
   text-align:center;
 }
 
 .modal img {
   width:100%;
-  max-height:250px;
+  max-height:300px;
   object-fit:cover;
 }
 
@@ -128,17 +179,10 @@ button {
   transform:translateX(-50%);
   width:150px;
   opacity:0;
+  filter:drop-shadow(0 0 25px yellow);
   z-index:999;
-  filter: drop-shadow(0 0 20px yellow);
 }
 
-/* CANVAS */
-canvas {
-  position:fixed;
-  top:0;
-  left:0;
-  z-index:-1;
-}
 </style>
 </head>
 
@@ -148,62 +192,85 @@ canvas {
 
 <img id="goku" src="https://pngimg.com/uploads/goku/goku_PNG17.png">
 
+<!-- MENU -->
 <div class="menu-btn" onclick="toggleMenu()">
-  <div></div>
-  <div></div>
-  <div></div>
+  <div></div><div></div><div></div>
 </div>
 
 <div class="side-menu" id="menu">
   <a href="#">Home</a>
-  <a href="#">New Shop</a>
-  <a href="#">Dragon Wiki</a>
-  <a href="#">Latest Blogs</a>
-  <a href="#">Contact Dev</a>
+  <a href="#">Anime Vault</a>
+  <a href="#">Top Series</a>
+  <a href="#">Blogs</a>
+  <a href="#">Contact</a>
 </div>
 
-<header>KINGU VAULT</header>
+<!-- HEADER -->
+<header>
+  <h1>KINGU VAULT</h1>
+  <p>Ultimate Anime Experience</p>
+</header>
 
+<!-- ANIME SECTION -->
 <div class="section">
+  <h1>Top Anime Collection</h1>
 
-  <!-- DRAGONS -->
-  <div class="card">
-    <h2>Tiamat</h2>
-    <div class="bar"><div class="fill" style="width:90%"></div></div>
-    <button onclick="summonDragon('tiamat')">Summon</button>
+  <div class="grid">
+
+    <!-- ANIME CARDS -->
+    <div class="card">
+      <img src="https://wallpaperaccess.com/full/12492.jpg">
+      <div class="card-content">
+        <h2>Naruto</h2>
+        <p>A ninja's journey from zero to Hokage filled with battles and emotions.</p>
+        <button onclick="openModal('naruto')">Explore</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://wallpaperaccess.com/full/17997.jpg">
+      <div class="card-content">
+        <h2>Attack on Titan</h2>
+        <p>Humanity fights for survival against giant titans in a dark world.</p>
+        <button onclick="openModal('aot')">Explore</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://wallpaperaccess.com/full/160610.jpg">
+      <div class="card-content">
+        <h2>One Piece</h2>
+        <p>Luffy sails to become Pirate King with his legendary crew.</p>
+        <button onclick="openModal('onepiece')">Explore</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://wallpaperaccess.com/full/38516.jpg">
+      <div class="card-content">
+        <h2>Demon Slayer</h2>
+        <p>A boy fights demons to save his sister in a stunning anime world.</p>
+        <button onclick="openModal('ds')">Explore</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://wallpaperaccess.com/full/317501.jpg">
+      <div class="card-content">
+        <h2>Jujutsu Kaisen</h2>
+        <p>Cursed energy battles and insane fights with powerful sorcerers.</p>
+        <button onclick="openModal('jjk')">Explore</button>
+      </div>
+    </div>
+
   </div>
-
-  <div class="card">
-    <h2>Kingu</h2>
-    <div class="bar"><div class="fill" style="width:95%"></div></div>
-    <button onclick="summonDragon('kingu')">Summon</button>
-  </div>
-
-  <div class="card">
-    <h2>Typhon</h2>
-    <div class="bar"><div class="fill" style="width:92%"></div></div>
-    <button onclick="summonDragon('typhon')">Summon</button>
-  </div>
-
-  <div class="card">
-    <h2>Bahamut</h2>
-    <div class="bar"><div class="fill" style="width:97%"></div></div>
-    <button onclick="summonDragon('bahamut')">Summon</button>
-  </div>
-
-  <div class="card">
-    <h2>Shenron</h2>
-    <div class="bar"><div class="fill" style="width:100%"></div></div>
-    <button onclick="summonDragon('shenron')">Summon</button>
-  </div>
-
 </div>
 
 <!-- MODAL -->
 <div class="modal" id="modal">
   <div class="modal-content" id="modalContent">
-    <img id="dragonImg">
-    <p id="dragonText"></p>
+    <img id="modalImg">
+    <p id="modalText"></p>
     <button onclick="closeModal()">Close</button>
   </div>
 </div>
@@ -212,47 +279,41 @@ canvas {
 
 /* MENU */
 function toggleMenu(){
-  let menu = document.getElementById("menu");
-  menu.style.right = menu.style.right === "0px" ? "-250px" : "0px";
+  let m = document.getElementById("menu");
+  m.style.right = m.style.right==="0px" ? "-300px" : "0px";
 }
 
-/* DRAGONS DATA */
-const dragons = {
-  tiamat:{
-    img:"https://wallpaperaccess.com/full/39624.jpg",
-    text:"Ancient chaos dragon of Mesopotamian mythology.",
-    color:"blue"
+/* MODAL DATA */
+const anime = {
+  naruto:{
+    img:"https://wallpaperaccess.com/full/12492.jpg",
+    text:"Naruto Uzumaki dreams of becoming Hokage and earns respect through struggle."
   },
-  kingu:{
+  aot:{
+    img:"https://wallpaperaccess.com/full/17997.jpg",
+    text:"A brutal story of survival, war, and truth beyond the walls."
+  },
+  onepiece:{
+    img:"https://wallpaperaccess.com/full/160610.jpg",
+    text:"Adventure, friendship, and the search for the legendary One Piece."
+  },
+  ds:{
+    img:"https://wallpaperaccess.com/full/38516.jpg",
+    text:"Tanjiro fights demons to cure his sister and restore peace."
+  },
+  jjk:{
     img:"https://wallpaperaccess.com/full/317501.jpg",
-    text:"Commander of chaos army and bearer of destiny tablets.",
-    color:"purple"
-  },
-  typhon:{
-    img:"https://wallpaperaccess.com/full/214110.jpg",
-    text:"Greek monster stronger than gods themselves.",
-    color:"red"
-  },
-  bahamut:{
-    img:"https://wallpaperaccess.com/full/16692.jpg",
-    text:"Celestial dragon of immense divine power.",
-    color:"orange"
-  },
-  shenron:{
-    img:"https://wallpaperaccess.com/full/21017.jpg",
-    text:"Wish granting dragon from Dragon Balls.",
-    color:"green"
+    text:"Sorcerers battle cursed spirits in high-energy combat."
   }
 };
 
-function summonDragon(name){
-  let d = dragons[name];
+function openModal(name){
+  let d = anime[name];
   document.getElementById("modal").style.display="flex";
-  document.getElementById("dragonImg").src = d.img;
-  document.getElementById("dragonText").innerText = d.text;
-  document.getElementById("modalContent").style.borderColor = d.color;
+  document.getElementById("modalImg").src=d.img;
+  document.getElementById("modalText").innerText=d.text;
 
-  let audio = new Audio("https://www.myinstants.com/media/sounds/monster-roar.mp3");
+  let audio = new Audio("https://www.myinstants.com/media/sounds/anime-wow-sound-effect.mp3");
   audio.play();
 }
 
@@ -260,59 +321,47 @@ function closeModal(){
   document.getElementById("modal").style.display="none";
 }
 
-/* SWIPE GOKU */
+/* GOKU SWIPE */
 let startY=0;
-document.addEventListener("touchstart", e=> startY = e.touches[0].clientY);
-
+document.addEventListener("touchstart", e=> startY=e.touches[0].clientY);
 document.addEventListener("touchend", e=>{
-  let endY = e.changedTouches[0].clientY;
-  if(startY < endY - 100){
-    let goku = document.getElementById("goku");
-    goku.style.opacity=1;
-    goku.style.top="100vh";
-
+  let endY=e.changedTouches[0].clientY;
+  if(startY < endY-100){
+    let g=document.getElementById("goku");
+    g.style.opacity=1;
+    g.style.top="100vh";
     setTimeout(()=>{
-      goku.style.transition="none";
-      goku.style.top="-200px";
-      goku.style.opacity=0;
-      goku.style.transition="1s";
+      g.style.top="-200px";
+      g.style.opacity=0;
     },1500);
   }
 });
 
 /* PARTICLES */
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
 
-let particles = [];
-
-for(let i=0;i<100;i++){
-  particles.push({
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    r:Math.random()*2
-  });
+let p=[];
+for(let i=0;i<120;i++){
+  p.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2});
 }
 
-function animate(){
+function draw(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
   ctx.fillStyle="red";
-
-  particles.forEach(p=>{
+  p.forEach(e=>{
     ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.arc(e.x,e.y,e.r,0,Math.PI*2);
     ctx.fill();
-    p.y -= 1;
-    if(p.y<0) p.y = canvas.height;
+    e.y-=1;
+    if(e.y<0) e.y=canvas.height;
   });
-
-  requestAnimationFrame(animate);
+  requestAnimationFrame(draw);
 }
-
-animate();
+draw();
 
 </script>
 

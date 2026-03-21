@@ -1,178 +1,320 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KINGU VAULT | THE SECRET ARCHIVE</title>
-    <style>
-        body { background-color: #020202; color: #ffffff; font-family: 'Segoe UI', sans-serif; margin: 0; overflow-x: hidden; scroll-behavior: smooth; }
-        #bg-canvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KINGU VAULT</title>
 
-        /* --- SIDE MENU STYLING --- */
-        .menu-btn {
-            position: fixed; top: 20px; right: 20px; z-index: 10001;
-            cursor: pointer; background: rgba(255, 0, 0, 0.2); padding: 10px; border-radius: 5px;
-            border: 1px solid #ff0000;
-        }
-        .menu-btn div { width: 25px; height: 3px; background-color: #ff0000; margin: 5px 0; transition: 0.4s; }
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif; }
 
-        .side-nav {
-            height: 100%; width: 0; position: fixed; z-index: 10000;
-            top: 0; right: 0; background-color: rgba(10, 0, 0, 0.95);
-            overflow-x: hidden; transition: 0.5s; padding-top: 80px;
-            backdrop-filter: blur(10px); border-left: 2px solid #ff0000;
-        }
-        .side-nav a {
-            padding: 15px 30px; text-decoration: none; font-size: 1.5rem;
-            color: #888; display: block; transition: 0.3s; text-transform: uppercase;
-            font-weight: bold; letter-spacing: 2px;
-        }
-        .side-nav a:hover { color: #ff0000; padding-left: 45px; background: rgba(255, 0, 0, 0.1); }
-        .side-nav .close-nav { position: absolute; top: 20px; left: 20px; font-size: 36px; color: #ff0000; cursor: pointer; }
+body {
+  background:#020202;
+  color:white;
+  overflow-x:hidden;
+}
 
-        /* --- HEADER --- */
-        header { 
-            height: 80vh; background: radial-gradient(circle, #4d0000 0%, #000000 100%); 
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center; border-bottom: 4px solid #ff0000; position: relative;
-        }
-        .glitch { font-size: 3rem; font-weight: 900; color: #ff0000; text-shadow: 0 0 20px #ff0000; text-transform: uppercase; letter-spacing: 5px; }
+/* HEADER */
+header {
+  height:100vh;
+  background: radial-gradient(circle, rgba(120,0,0,0.4), #020202);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:40px;
+  font-weight:bold;
+}
 
-        /* GOKU SECRET SUMMON */
-        #goku-box { 
-            position: fixed; top: -600px; left: 50%; transform: translateX(-50%); 
-            width: 220px; transition: 2s cubic-bezier(0.19, 1, 0.22, 1); 
-            z-index: 9999; pointer-events: none;
-        }
-        #goku-box img { width: 100%; filter: drop-shadow(0 0 30px #ffea00); }
-        .fly-down { top: 120% !important; }
+/* HAMBURGER */
+.menu-btn {
+  position:fixed;
+  top:20px;
+  right:20px;
+  cursor:pointer;
+  z-index:1000;
+}
+.menu-btn div {
+  width:30px;
+  height:4px;
+  background:red;
+  margin:5px 0;
+}
 
-        .container { padding: 60px 20px; max-width: 900px; margin: 0 auto; }
-        .section-title { color: #ff0000; font-size: 2rem; border-left: 5px solid #ff0000; padding-left: 15px; margin-bottom: 50px; text-transform: uppercase; }
+/* SIDE MENU */
+.side-menu {
+  position:fixed;
+  right:-250px;
+  top:0;
+  width:250px;
+  height:100%;
+  background:#000;
+  padding-top:60px;
+  transition:0.3s;
+  z-index:999;
+}
+.side-menu a {
+  display:block;
+  padding:15px;
+  color:white;
+  text-decoration:none;
+  border-bottom:1px solid red;
+}
+.side-menu a:hover {
+  background:red;
+}
 
-        .dragon-card {
-            background: rgba(10, 10, 10, 0.95); margin-bottom: 60px; padding: 40px; 
-            border-radius: 20px; border: 1px solid #222; transition: 0.4s;
-        }
-        .dragon-card h3 { color: #ff3333; font-size: 2.2rem; margin: 0 0 20px 0; }
-        .stat-bar { background: #1a1a1a; height: 12px; border-radius: 6px; margin-bottom: 25px; overflow: hidden; border: 1px solid #333; }
-        .stat-fill { background: linear-gradient(90deg, #660000, #ff0000); height: 100%; box-shadow: 0 0 15px #ff0000; }
+/* DRAGON SECTION */
+.section {
+  padding:60px 20px;
+}
 
-        .btn-summon {
-            display: inline-block; background: #ff0000; color: white; padding: 15px 35px;
-            text-decoration: none; border-radius: 8px; font-weight: bold; cursor: pointer;
-        }
+.card {
+  background:#111;
+  margin:20px 0;
+  padding:20px;
+  border-left:5px solid red;
+}
 
-        .modal { display: none; position: fixed; z-index: 20000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); backdrop-filter: blur(20px); }
-        .modal-content { background: #080808; margin: 5% auto; padding: 30px; border: 2px solid #ff0000; width: 85%; max-width: 550px; border-radius: 20px; text-align: center; position: relative; }
-        #modal-img { width: 100%; border-radius: 15px; margin: 20px 0; border: 1px solid #444; max-height: 350px; object-fit: cover; }
+.bar {
+  background:#333;
+  height:10px;
+  margin:10px 0;
+}
+.fill {
+  height:100%;
+  background:red;
+}
 
-        footer { text-align: center; padding: 100px 20px; color: #333; border-top: 1px solid #111; letter-spacing: 5px; }
-    </style>
+button {
+  padding:10px 20px;
+  background:red;
+  border:none;
+  color:white;
+  cursor:pointer;
+}
+
+/* MODAL */
+.modal {
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.8);
+  justify-content:center;
+  align-items:center;
+}
+
+.modal-content {
+  background:#111;
+  padding:20px;
+  border:3px solid red;
+  max-width:90%;
+  text-align:center;
+}
+
+.modal img {
+  width:100%;
+  max-height:250px;
+  object-fit:cover;
+}
+
+/* GOKU */
+#goku {
+  position:fixed;
+  top:-200px;
+  left:50%;
+  transform:translateX(-50%);
+  width:150px;
+  opacity:0;
+  z-index:999;
+  filter: drop-shadow(0 0 20px yellow);
+}
+
+/* CANVAS */
+canvas {
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:-1;
+}
+</style>
 </head>
+
 <body>
 
-    <canvas id="bg-canvas"></canvas>
-    <audio id="roar-sound" src="https://www.soundjay.com/nature/sounds/creature-roar-01.mp3"></audio>
+<canvas id="particles"></canvas>
 
-    <div class="menu-btn" onclick="toggleNav()">
-        <div></div><div></div><div></div>
-    </div>
+<img id="goku" src="https://pngimg.com/uploads/goku/goku_PNG17.png">
 
-    <div id="mySidenav" class="side-nav">
-        <span class="close-nav" onclick="toggleNav()">&times;</span>
-        <a href="#">Home</a>
-        <a href="#">New Shop</a>
-        <a href="#dragon-list">Dragon Wiki</a>
-        <a href="#">Latest Blogs</a>
-        <a href="#">Contact Dev</a>
-    </div>
+<div class="menu-btn" onclick="toggleMenu()">
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
 
-    <div id="goku-box"><img src="https://i.ibb.co/XbC0z9L/goku-fly.png" alt="Goku Fly"></div>
+<div class="side-menu" id="menu">
+  <a href="#">Home</a>
+  <a href="#">New Shop</a>
+  <a href="#">Dragon Wiki</a>
+  <a href="#">Latest Blogs</a>
+  <a href="#">Contact Dev</a>
+</div>
 
-    <header>
-        <div class="glitch">KINGU VAULT</div>
-        <p style="color: #444; font-size: 0.8rem; margin-top: 20px; letter-spacing: 3px;">SECRET ARCHIVE UNLOCKED</p>
-    </header>
+<header>KINGU VAULT</header>
 
-    <div class="container" id="dragon-list">
-        <h2 class="section-title">Ancient Primordials</h2>
-        <div class="dragon-card">
-            <h3>TIAMAT</h3>
-            <div class="stat-bar"><div class="stat-fill" style="width: 95%;"></div></div>
-            <div class="btn-summon" onclick="openDragon('TIAMAT')">Summon History</div>
-        </div>
-        <div class="dragon-card">
-            <h3>KINGU</h3>
-            <div class="stat-bar"><div class="stat-fill" style="width: 92%;"></div></div>
-            <div class="btn-summon" onclick="openDragon('KINGU')">Summon History</div>
-        </div>
-        <div class="dragon-card">
-            <h3>SHENRON</h3>
-            <div class="stat-bar"><div class="stat-fill" style="width: 88%;"></div></div>
-            <div class="btn-summon" onclick="openDragon('SHENRON')">Summon History</div>
-        </div>
-    </div>
+<div class="section">
 
-    <div id="dragonModal" class="modal">
-        <div class="modal-content">
-            <span onclick="closeModal()" style="position:absolute; right:20px; top:10px; font-size:40px; cursor:pointer;">&times;</span>
-            <h2 id="modal-title"></h2>
-            <img id="modal-img" src="">
-            <p id="modal-desc" style="text-align:left; color:#ccc; line-height:1.7;"></p>
-        </div>
-    </div>
+  <!-- DRAGONS -->
+  <div class="card">
+    <h2>Tiamat</h2>
+    <div class="bar"><div class="fill" style="width:90%"></div></div>
+    <button onclick="summonDragon('tiamat')">Summon</button>
+  </div>
 
-    <footer>&copy; 2026 KINGU VAULT | ASHU BHAI</footer>
+  <div class="card">
+    <h2>Kingu</h2>
+    <div class="bar"><div class="fill" style="width:95%"></div></div>
+    <button onclick="summonDragon('kingu')">Summon</button>
+  </div>
 
-    <script>
-        // TOGGLE SIDE MENU
-        function toggleNav() {
-            const nav = document.getElementById("mySidenav");
-            nav.style.width = nav.style.width === "280px" ? "0" : "280px";
-        }
+  <div class="card">
+    <h2>Typhon</h2>
+    <div class="bar"><div class="fill" style="width:92%"></div></div>
+    <button onclick="summonDragon('typhon')">Summon</button>
+  </div>
 
-        const dragonData = {
-            'TIAMAT': { color: '#00ccff', img: 'https://i.ibb.co/V9XwK54/tiamat.jpg', desc: 'The Mother of Chaos.' },
-            'KINGU': { color: '#9133ff', img: 'https://i.ibb.co/wNb17sX/kingu.jpg', desc: 'The Great General.' },
-            'SHENRON': { color: '#00ff44', img: 'https://i.ibb.co/YjRjYfX/shenron.jpg', desc: 'The Dragon God of Earth.' }
-        };
+  <div class="card">
+    <h2>Bahamut</h2>
+    <div class="bar"><div class="fill" style="width:97%"></div></div>
+    <button onclick="summonDragon('bahamut')">Summon</button>
+  </div>
 
-        function openDragon(name) {
-            const data = dragonData[name];
-            document.getElementById('roar-sound').play().catch(e => {});
-            document.getElementById('modal-title').innerText = name;
-            document.getElementById('modal-title').style.color = data.color;
-            document.getElementById('modal-img').src = data.img;
-            document.getElementById('modal-desc').innerHTML = data.desc;
-            document.getElementById('dragonModal').style.display = "block";
-        }
+  <div class="card">
+    <h2>Shenron</h2>
+    <div class="bar"><div class="fill" style="width:100%"></div></div>
+    <button onclick="summonDragon('shenron')">Summon</button>
+  </div>
 
-        function closeModal() { document.getElementById('dragonModal').style.display = "none"; }
+</div>
 
-        let touchStartY = 0;
-        document.addEventListener('touchstart', (e) => { touchStartY = e.touches[0].clientY; });
-        document.addEventListener('touchend', (e) => {
-            let touchEndY = e.changedTouches[0].clientY;
-            if (touchEndY > touchStartY + 150) { 
-                const goku = document.getElementById('goku-box');
-                goku.classList.add('fly-down');
-                setTimeout(() => { goku.classList.remove('fly-down'); }, 2500);
-            }
-        });
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-content" id="modalContent">
+    <img id="dragonImg">
+    <p id="dragonText"></p>
+    <button onclick="closeModal()">Close</button>
+  </div>
+</div>
 
-        const canvas = document.getElementById('bg-canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        let particles = [];
-        class Particle {
-            constructor() { this.x = Math.random() * canvas.width; this.y = canvas.height; this.size = Math.random() * 2; this.speed = Math.random() * 1.5; }
-            update() { this.y -= this.speed; if (this.y < 0) this.y = canvas.height; }
-            draw() { ctx.fillStyle = 'rgba(255, 50, 0, 0.4)'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
-        }
-        for(let i=0; i<40; i++) particles.push(new Particle());
-        function animate() { ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p=>{p.update(); p.draw();}); requestAnimationFrame(animate); }
-        animate();
-    </script>
+<script>
+
+/* MENU */
+function toggleMenu(){
+  let menu = document.getElementById("menu");
+  menu.style.right = menu.style.right === "0px" ? "-250px" : "0px";
+}
+
+/* DRAGONS DATA */
+const dragons = {
+  tiamat:{
+    img:"https://wallpaperaccess.com/full/39624.jpg",
+    text:"Ancient chaos dragon of Mesopotamian mythology.",
+    color:"blue"
+  },
+  kingu:{
+    img:"https://wallpaperaccess.com/full/317501.jpg",
+    text:"Commander of chaos army and bearer of destiny tablets.",
+    color:"purple"
+  },
+  typhon:{
+    img:"https://wallpaperaccess.com/full/214110.jpg",
+    text:"Greek monster stronger than gods themselves.",
+    color:"red"
+  },
+  bahamut:{
+    img:"https://wallpaperaccess.com/full/16692.jpg",
+    text:"Celestial dragon of immense divine power.",
+    color:"orange"
+  },
+  shenron:{
+    img:"https://wallpaperaccess.com/full/21017.jpg",
+    text:"Wish granting dragon from Dragon Balls.",
+    color:"green"
+  }
+};
+
+function summonDragon(name){
+  let d = dragons[name];
+  document.getElementById("modal").style.display="flex";
+  document.getElementById("dragonImg").src = d.img;
+  document.getElementById("dragonText").innerText = d.text;
+  document.getElementById("modalContent").style.borderColor = d.color;
+
+  let audio = new Audio("https://www.myinstants.com/media/sounds/monster-roar.mp3");
+  audio.play();
+}
+
+function closeModal(){
+  document.getElementById("modal").style.display="none";
+}
+
+/* SWIPE GOKU */
+let startY=0;
+document.addEventListener("touchstart", e=> startY = e.touches[0].clientY);
+
+document.addEventListener("touchend", e=>{
+  let endY = e.changedTouches[0].clientY;
+  if(startY < endY - 100){
+    let goku = document.getElementById("goku");
+    goku.style.opacity=1;
+    goku.style.top="100vh";
+
+    setTimeout(()=>{
+      goku.style.transition="none";
+      goku.style.top="-200px";
+      goku.style.opacity=0;
+      goku.style.transition="1s";
+    },1500);
+  }
+});
+
+/* PARTICLES */
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for(let i=0;i<100;i++){
+  particles.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    r:Math.random()*2
+  });
+}
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle="red";
+
+  particles.forEach(p=>{
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fill();
+    p.y -= 1;
+    if(p.y<0) p.y = canvas.height;
+  });
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+
+</script>
+
 </body>
 </html>

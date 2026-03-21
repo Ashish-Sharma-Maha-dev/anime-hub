@@ -3,157 +3,242 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KINGU VAULT - Anime Hub</title>
+<title>KINGU VAULT</title>
 
-<!-- Google Font for Gen-Z Aesthetic -->
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-/****** Global Styles ******/
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Orbitron', sans-serif;
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Orbitron',sans-serif;}
+body{background:#020202;color:#fff;overflow-x:hidden;}
+
+/* HEADER */
+header{
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+background:radial-gradient(circle,rgba(255,0,0,0.2),#020202);
+text-align:center;
+}
+header h1{font-size:45px;text-shadow:0 0 20px red;}
+
+/* GRID */
+.section{padding:60px 20px;}
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:20px;
 }
 
-body {
-  background: #020202;
-  color: #fff;
-  overflow-x: hidden;
+/* CARD */
+.card{
+background:#111;
+border-radius:15px;
+overflow:hidden;
+transition:0.4s;
+border:1px solid rgba(255,0,0,0.3);
+}
+.card:hover{
+transform:translateY(-10px) scale(1.03);
+box-shadow:0 0 30px red;
+}
+.card img{width:100%;height:200px;object-fit:cover;}
+.card-content{padding:15px;}
+button{padding:10px 20px;background:red;border:none;color:white;cursor:pointer;margin-top:10px;}
+
+/* MODAL */
+.modal{
+display:none;
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:rgba(0,0,0,0.9);
+justify-content:center;
+align-items:center;
+}
+.modal-content{
+background:#111;
+padding:20px;
+max-width:90%;
+border-radius:10px;
+border:2px solid red;
+}
+.modal img{width:100%;max-height:300px;object-fit:cover;}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>KINGU VAULT</h1>
+<p>Top 10 Anime 2026</p>
+</header>
+
+<div class="section">
+<div class="grid">
+
+<!-- CARDS -->
+
+<div class="card">
+<img src="https://images6.alphacoders.com/606/606263.jpg">
+<div class="card-content">
+<h2>Naruto</h2>
+<p>Ninja journey full of power and emotions.</p>
+<button onclick="openModal('naruto')">Explore</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images4.alphacoders.com/133/1338062.jpeg">
+<div class="card-content">
+<h2>Jujutsu Kaisen</h2>
+<p>Cursed energy battles.</p>
+<button onclick="openModal('jjk')">Explore</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images3.alphacoders.com/134/1342308.jpeg">
+<div class="card-content">
+<h2>Attack on Titan</h2>
+<p>Human vs Titans war.</p>
+<button onclick="openModal('aot')">Explore</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images5.alphacoders.com/128/1289289.jpg">
+<div class="card-content">
+<h2>One Piece</h2>
+<p>Adventure of Pirate King.</p>
+<button onclick="openModal('onepiece')">Explore</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images7.alphacoders.com/133/1335126.jpeg">
+<div class="card-content">
+<h2>Demon Slayer</h2>
+<p>Fight against demons.</p>
+<button onclick="openModal('ds')">Explore</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images2.alphacoders.com/132/1329656.jpeg">
+<div class="card-content">
+<h2>Jujutsu Kaisen 3</h2>
+<p>Culling Game arc begins.</p>
+<button onclick="openModal('jjk3')">Explore</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images8.alphacoders.com/132/1328144.jpeg">
+<div class="card-content">
+<h2>Solo Leveling</h2>
+<p>Weak to strongest hunter.</p>
+<button onclick="openModal('solo')">Explore</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images3.alphacoders.com/131/1315603.jpeg">
+<div class="card-content">
+<h2>Chainsaw Man</h2>
+<p>Devil hunting chaos.</p>
+<button onclick="openModal('cm')">Explore</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images5.alphacoders.com/133/1335471.jpeg">
+<div class="card-content">
+<h2>Blue Lock</h2>
+<p>Ultimate ego football.</p>
+<button onclick="openModal('bl')">Explore</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images6.alphacoders.com/133/1338754.jpeg">
+<div class="card-content">
+<h2>Tokyo Revengers</h2>
+<p>Time travel gang wars.</p>
+<button onclick="openModal('tr')">Explore</button>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+<div class="modal-content">
+<img id="modalImg">
+<p id="modalText"></p>
+<button onclick="closeModal()">Close</button>
+</div>
+</div>
+
+<script>
+
+const data={
+naruto:{
+img:"https://images6.alphacoders.com/606/606263.jpg",
+text:"Naruto becomes Hokage and future arcs may explore Boruto era conflicts, new enemies, and hidden Otsutsuki threats."
+},
+jjk:{
+img:"https://images4.alphacoders.com/133/1338062.jpeg",
+text:"The cursed world expands and upcoming arcs may reveal stronger curses and Gojo’s true limits."
+},
+aot:{
+img:"https://images3.alphacoders.com/134/1342308.jpeg",
+text:"Final war consequences and deeper lore of Titans and human freedom."
+},
+onepiece:{
+img:"https://images5.alphacoders.com/128/1289289.jpg",
+text:"Luffy moves closer to One Piece and final war against World Government is expected."
+},
+ds:{
+img:"https://images7.alphacoders.com/133/1335126.jpeg",
+text:"Final demon battles and Muzan’s ultimate defeat path."
+},
+jjk3:{
+img:"https://images2.alphacoders.com/132/1329656.jpeg",
+text:"Culling Game introduces deadly survival fights and new sorcerers."
+},
+solo:{
+img:"https://images8.alphacoders.com/132/1328144.jpeg",
+text:"Sung Jin-Woo evolves into Shadow Monarch and global threats arise."
+},
+cm:{
+img:"https://images3.alphacoders.com/131/1315603.jpeg",
+text:"New devils, chaos and Denji’s unpredictable destiny."
+},
+bl:{
+img:"https://images5.alphacoders.com/133/1335471.jpeg",
+text:"Ego battles intensify and Japan’s ultimate striker will be chosen."
+},
+tr:{
+img:"https://images6.alphacoders.com/133/1338754.jpeg",
+text:"Time loops continue and darker gang conflicts unfold."
+}
+};
+
+function openModal(name){
+let d=data[name];
+document.getElementById("modal").style.display="flex";
+document.getElementById("modalImg").src=d.img;
+document.getElementById("modalText").innerText=d.text;
 }
 
-/****** Particles Canvas ******/
-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -1;
+function closeModal(){
+document.getElementById("modal").style.display="none";
 }
 
-/****** Header ******/
-header {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background: radial-gradient(circle, rgba(255,0,0,0.2), #020202);
-  text-align: center;
-}
+</script>
 
-header h1 {
-  font-size: 3.5rem;
-  letter-spacing: 4px;
-  text-shadow: 0 0 20px red;
-}
-
-header p {
-  margin-top: 10px;
-  opacity: 0.7;
-}
-
-/****** Menu ******/
-.menu-btn {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  cursor: pointer;
-  z-index: 1000;
-}
-
-.menu-btn div {
-  width: 30px;
-  height: 3px;
-  background: red;
-  margin: 6px 0;
-}
-
-/****** Side Menu ******/
-.side-menu {
-  position: fixed;
-  right: -300px;
-  top: 0;
-  width: 300px;
-  height: 100%;
-  background: rgba(0,0,0,0.95);
-  backdrop-filter: blur(10px);
-  padding-top: 60px;
-  transition: 0.4s;
-  z-index: 999;
-}
-
-.side-menu a {
-  display: block;
-  padding: 15px;
-  color: white;
-  text-decoration: none;
-  border-bottom: 1px solid rgba(255,0,0,0.3);
-}
-
-.side-menu a:hover {
-  background: red;
-}
-
-/****** Section & Cards ******/
-.section {
-  padding: 60px 20px;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
-  gap: 20px;
-}
-
-.card {
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(15px);
-  border: 1px solid rgba(255,0,0,0.3);
-  border-radius: 15px;
-  overflow: hidden;
-  transition: 0.4s;
-}
-
-.card:hover {
-  transform: translateY(-10px) scale(1.03);
-  box-shadow: 0 0 30px red;
-}
-
-.card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-.card-content {
-  padding: 15px;
-  text-align: center;
-}
-
-.card h2 {
-  margin-bottom: 10px;
-}
-
-.card p {
-  font-size: 14px;
-  opacity: 0.7;
-}
-
-button {
-  margin-top: 10px;
-  padding: 10px 20px;
-  background: red;
-  border: none;
-  color: white;
-  cursor: pointer;
-}
-
-/****** Modal ******/
-.modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height:
+</body>
+</html>

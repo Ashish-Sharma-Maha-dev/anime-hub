@@ -10,15 +10,53 @@
 
 body{background:#000;color:#fff;overflow-x:hidden}
 
-/* MENU */
+/* ⭐ STARS */
+#stars{position:fixed;top:0;left:0;z-index:-3}
+
+/* 🐉 DRAGON */
+#bg-dragon{
+position:fixed;
+top:20%;
+left:-400px;
+width:300px;
+opacity:.12;
+z-index:-1;
+animation:dragonFly 25s linear infinite;
+}
+@keyframes dragonFly{
+0%{left:-400px}
+100%{left:120%}
+}
+
+/* ☰ MENU */
 .menu-btn{position:fixed;top:20px;left:20px;z-index:1000;cursor:pointer}
 .menu-btn div{width:30px;height:3px;background:red;margin:6px 0}
-.side-nav{position:fixed;left:-300px;top:0;width:300px;height:100%;background:#000;padding-top:60px;transition:.4s}
-.side-nav a{display:block;padding:15px;color:#fff;text-decoration:none;border-bottom:1px solid #222}
+
+.side-nav{
+position:fixed;
+left:-300px;
+top:0;
+width:300px;height:100%;
+background:#000;
+padding-top:60px;
+transition:.4s;
+}
+.side-nav a{
+display:block;
+padding:15px;
+color:#fff;
+text-decoration:none;
+border-bottom:1px solid #222;
+}
 
 /* HEADER */
-header{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
-header h1{font-size:60px;color:red}
+header{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+}
 
 /* SECTION */
 .section{padding:80px 20px;max-width:1100px;margin:auto}
@@ -32,36 +70,44 @@ header h1{font-size:60px;color:red}
 /* BUTTON */
 button{padding:10px;background:red;border:none;color:#fff;margin-top:10px;cursor:pointer}
 
-/* SOCIAL ICONS */
-.social-icons{
-text-align:center;
-padding:40px;
-border-top:1px solid #111;
+/* MODAL */
+.modal{
+display:none;
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:rgba(0,0,0,0.95);
+justify-content:center;
+align-items:center;
+z-index:10000;
 }
-.social-icons a{
-margin:10px;
-display:inline-block;
-font-size:22px;
-color:red;
-text-decoration:none;
+.modal-content{
+background:#111;
+padding:20px;
+max-width:90%;
 }
-.social-icons a:hover{color:#fff}
+.modal img{width:100%;max-height:300px}
+
+/* SOCIAL */
+.social{text-align:center;padding:40px}
+.social a{margin:10px;color:red;text-decoration:none;font-size:18px}
 
 /* CONTACT */
-.contact-box{
-text-align:center;
-}
 input,textarea{
-width:250px;
 padding:10px;
 margin:10px;
 border:none;
 border-radius:6px;
+width:250px;
 }
+
 </style>
 </head>
 
 <body>
+
+<canvas id="stars"></canvas>
+<img id="bg-dragon" src="https://pngimg.com/uploads/dragon/dragon_PNG84450.png">
 
 <!-- MENU -->
 <div class="menu-btn" onclick="toggleMenu()">
@@ -72,25 +118,23 @@ border-radius:6px;
 <a href="#">Home</a>
 <a href="#anime">Anime</a>
 <a href="#blogs">Blogs</a>
-<a href="#contact">Contact Us</a>
+<a href="#contact">Contact</a>
 </div>
 
 <header>
 <h1>KINGU VAULT</h1>
-<p>Ultimate Anime Platform</p>
 </header>
 
-<!-- ANIME SECTION -->
+<!-- ANIME -->
 <div class="section" id="anime">
-<h2>🔥 Trending Anime</h2>
+<h2>🔥 Anime</h2>
 <div class="grid">
 
-<!-- FIXED MATCH -->
 <div class="card">
 <img src="https://cdn.myanimelist.net/images/anime/1141/142503.jpg">
 <div class="card-content">
 <h3>Jujutsu Kaisen</h3>
-<button onclick="alert('Jujutsu Kaisen details')">Explore</button>
+<button onclick="openAnime('jujutsu kaisen')">Explore</button>
 </div>
 </div>
 
@@ -98,78 +142,114 @@ border-radius:6px;
 <img src="https://cdn.myanimelist.net/images/anime/1337/99013.jpg">
 <div class="card-content">
 <h3>Attack on Titan</h3>
-<button onclick="alert('Attack on Titan details')">Explore</button>
-</div>
-</div>
-
-<div class="card">
-<img src="https://cdn.myanimelist.net/images/anime/1286/99889.jpg">
-<div class="card-content">
-<h3>Demon Slayer</h3>
-<button onclick="alert('Demon Slayer details')">Explore</button>
-</div>
-</div>
-
-<div class="card">
-<img src="https://cdn.myanimelist.net/images/anime/1735/127256.jpg">
-<div class="card-content">
-<h3>Solo Leveling</h3>
-<button onclick="alert('Solo Leveling details')">Explore</button>
+<button onclick="openAnime('attack on titan')">Explore</button>
 </div>
 </div>
 
 </div>
 </div>
 
-<!-- BLOG SECTION -->
+<!-- BLOG -->
 <div class="section" id="blogs">
 <h2>📖 Blogs</h2>
-
-<div class="card">
-<div class="card-content">
-<h3>Top Anime 2026</h3>
-<p>Best upcoming anime list...</p>
-</div>
+<p>Coming soon...</p>
 </div>
 
-<div class="card">
-<div class="card-content">
-<h3>Strongest Anime Characters</h3>
-<p>Ranking based on power levels...</p>
-</div>
-</div>
-
-</div>
-
-<!-- CONTACT SECTION -->
+<!-- CONTACT -->
 <div class="section" id="contact">
-<h2>📩 Contact Us</h2>
-
-<div class="contact-box">
-<input type="text" placeholder="Your Name"><br>
-<input type="email" placeholder="Your Email"><br>
-<textarea placeholder="Your Message"></textarea><br>
+<h2>📩 Contact</h2>
+<input placeholder="Name"><br>
+<input placeholder="Email"><br>
+<textarea placeholder="Message"></textarea><br>
 <button>Send</button>
 </div>
 
+<!-- SOCIAL -->
+<div class="social">
+<a href="https://instagram.com" target="_blank">Instagram</a>
+<a href="https://facebook.com" target="_blank">Facebook</a>
+<a href="https://t.me" target="_blank">Telegram</a>
 </div>
 
-<!-- SOCIAL ICONS -->
-<div class="social-icons">
-
-<a href="https://instagram.com" target="_blank">📸 Instagram</a>
-
-<a href="https://facebook.com" target="_blank">📘 Facebook</a>
-
-<a href="https://t.me" target="_blank">✈️ Telegram</a>
-
+<!-- MODAL -->
+<div class="modal" id="modal">
+<div class="modal-content">
+<img id="img">
+<div id="text"></div>
+<input id="aiInput" placeholder="Ask about anime">
+<button onclick="askAI()">Ask AI</button>
+<button onclick="closeModal()">Close</button>
+</div>
 </div>
 
 <script>
+
+/* MENU */
 function toggleMenu(){
 let m=document.getElementById("menu");
 m.style.left=m.style.left==="0px"?"-300px":"0px";
 }
+
+/* ⭐ STARS */
+const canvas=document.getElementById("stars");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let stars=[];
+for(let i=0;i<120;i++){
+stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.5,a:Math.random(),s:Math.random()*0.02});
+}
+
+function drawStars(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+stars.forEach(st=>{
+st.a+=st.s;
+if(st.a>1||st.a<0)st.s*=-1;
+ctx.fillStyle=`rgba(255,255,255,${st.a})`;
+ctx.beginPath();
+ctx.arc(st.x,st.y,st.r,0,Math.PI*2);
+ctx.fill();
+});
+requestAnimationFrame(drawStars);
+}
+drawStars();
+
+/* 🎯 ANIME DETAIL (API) */
+async function openAnime(name){
+let res=await fetch(`https://api.jikan.moe/v4/anime?q=${name}`);
+let data=await res.json();
+let a=data.data[0];
+
+document.getElementById("modal").style.display="flex";
+document.getElementById("img").src=a.images.jpg.image_url;
+
+document.getElementById("text").innerHTML=`
+<h2>${a.title}</h2>
+<p>${a.synopsis}</p>
+<p><b>Episodes:</b> ${a.episodes}</p>
+<p><b>Status:</b> ${a.status}</p>
+<p><b>Score:</b> ${a.score}</p>
+<p><b>Aired:</b> ${a.aired.string}</p>
+`;
+}
+
+function closeModal(){
+document.getElementById("modal").style.display="none";
+}
+
+/* 🤖 FAKE AI */
+function askAI(){
+let q=document.getElementById("aiInput").value.toLowerCase();
+let ans="";
+
+if(q.includes("season")) ans="Next season expected 2026 🔥";
+else if(q.includes("strong")) ans="Depends on anime 😏";
+else ans="Try asking about season or story";
+
+document.getElementById("text").innerHTML+=`<p style="color:red;">🤖 ${ans}</p>`;
+}
+
 </script>
 
 </body>

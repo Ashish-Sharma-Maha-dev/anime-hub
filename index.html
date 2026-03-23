@@ -8,64 +8,60 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
 
-body{background:#000;color:#fff;overflow-x:hidden;cursor:none}
-
-/* STARS */
-#stars{position:fixed;top:0;left:0;z-index:-3}
-
-/* HERO DOTS */
-#wave-dots{position:absolute;top:0;left:0;width:100%;height:100%;z-index:-2;opacity:.6}
-
-/* DRAGON */
-#bg-dragon{position:fixed;top:20%;left:-400px;width:300px;opacity:.12;z-index:-1;animation:dragonFly 25s linear infinite;}
-@keyframes dragonFly{
-0%{left:-400px;transform:scale(.8)}
-50%{top:40%;transform:scale(1.1)}
-100%{left:120%;transform:scale(.9)}
-}
-
-/* CURSOR */
-.cursor{position:fixed;width:20px;height:20px;border-radius:50%;pointer-events:none;z-index:9999;filter:blur(8px);}
+body{background:#000;color:#fff;overflow-x:hidden}
 
 /* MENU */
-.menu-btn{position:fixed;top:20px;left:20px;z-index:1000;cursor:pointer;}
-.menu-btn div{width:30px;height:3px;background:red;margin:6px 0;}
-.side-nav{position:fixed;left:-300px;top:0;width:300px;height:100%;background:#000;padding-top:60px;transition:.4s;}
-.side-nav a{display:block;padding:15px;color:#fff;text-decoration:none;border-bottom:1px solid #222;}
+.menu-btn{position:fixed;top:20px;left:20px;z-index:1000;cursor:pointer}
+.menu-btn div{width:30px;height:3px;background:red;margin:6px 0}
+.side-nav{position:fixed;left:-300px;top:0;width:300px;height:100%;background:#000;padding-top:60px;transition:.4s}
+.side-nav a{display:block;padding:15px;color:#fff;text-decoration:none;border-bottom:1px solid #222}
 
 /* HEADER */
-header{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;overflow:hidden;}
-header h1{font-size:60px;letter-spacing:6px;}
+header{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+header h1{font-size:60px;color:red}
 
 /* SECTION */
-.section{padding:80px 20px;max-width:1100px;margin:auto;}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;}
+.section{padding:80px 20px;max-width:1100px;margin:auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
 
 /* CARD */
-.card{background:#111;border-radius:15px;overflow:hidden;transition:.3s;transform-style:preserve-3d;}
-.card img{width:100%;height:200px;object-fit:cover;}
+.card{background:#111;border-radius:15px;overflow:hidden}
+.card img{width:100%;height:200px;object-fit:cover}
 .card-content{padding:15px}
-.card:hover{box-shadow:0 0 30px red}
 
 /* BUTTON */
-button{padding:10px;background:red;border:none;color:#fff;cursor:pointer;margin-top:10px;}
+button{padding:10px;background:red;border:none;color:#fff;margin-top:10px;cursor:pointer}
 
-/* MODAL */
-.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);justify-content:center;align-items:center;z-index:10000;}
-.modal-content{background:#111;padding:20px;max-width:90%;border-radius:10px;}
-.modal img{width:100%;max-height:300px;object-fit:cover;}
+/* SOCIAL ICONS */
+.social-icons{
+text-align:center;
+padding:40px;
+border-top:1px solid #111;
+}
+.social-icons a{
+margin:10px;
+display:inline-block;
+font-size:22px;
+color:red;
+text-decoration:none;
+}
+.social-icons a:hover{color:#fff}
 
-/* INPUT */
-input{padding:12px;border:none;border-radius:6px;width:250px;margin-top:10px;}
-
+/* CONTACT */
+.contact-box{
+text-align:center;
+}
+input,textarea{
+width:250px;
+padding:10px;
+margin:10px;
+border:none;
+border-radius:6px;
+}
 </style>
 </head>
 
 <body>
-
-<canvas id="stars"></canvas>
-<img id="bg-dragon" src="https://pngimg.com/uploads/dragon/dragon_PNG84450.png">
-<div class="cursor" id="cursor"></div>
 
 <!-- MENU -->
 <div class="menu-btn" onclick="toggleMenu()">
@@ -74,29 +70,27 @@ input{padding:12px;border:none;border-radius:6px;width:250px;margin-top:10px;}
 
 <div class="side-nav" id="menu">
 <a href="#">Home</a>
-<a href="#">Anime</a>
-<a href="#">Shop</a>
-<a href="#">Blogs</a>
-<a href="#">Contact</a>
+<a href="#anime">Anime</a>
+<a href="#blogs">Blogs</a>
+<a href="#contact">Contact Us</a>
 </div>
 
-<!-- HERO -->
 <header>
-<canvas id="wave-dots"></canvas>
 <h1>KINGU VAULT</h1>
-<p>Worldclass Anime Experience</p>
+<p>Ultimate Anime Platform</p>
 </header>
 
-<div class="section">
-
+<!-- ANIME SECTION -->
+<div class="section" id="anime">
 <h2>🔥 Trending Anime</h2>
 <div class="grid">
 
+<!-- FIXED MATCH -->
 <div class="card">
 <img src="https://cdn.myanimelist.net/images/anime/1141/142503.jpg">
 <div class="card-content">
 <h3>Jujutsu Kaisen</h3>
-<button onclick="openAnime('jujutsu')">Explore</button>
+<button onclick="alert('Jujutsu Kaisen details')">Explore</button>
 </div>
 </div>
 
@@ -104,166 +98,78 @@ input{padding:12px;border:none;border-radius:6px;width:250px;margin-top:10px;}
 <img src="https://cdn.myanimelist.net/images/anime/1337/99013.jpg">
 <div class="card-content">
 <h3>Attack on Titan</h3>
-<button onclick="openAnime('attack on titan')">Explore</button>
+<button onclick="alert('Attack on Titan details')">Explore</button>
 </div>
 </div>
-
-</div>
-
-<h2>⚡ Power Universe</h2>
-<div class="grid">
 
 <div class="card">
-<img src="https://cdn.myanimelist.net/images/anime/1171/109222.jpg">
+<img src="https://cdn.myanimelist.net/images/anime/1286/99889.jpg">
 <div class="card-content">
 <h3>Demon Slayer</h3>
-<button onclick="openAnime('demon slayer')">Explore</button>
+<button onclick="alert('Demon Slayer details')">Explore</button>
 </div>
 </div>
 
 <div class="card">
-<img src="https://cdn.myanimelist.net/images/anime/1764/106659.jpg">
+<img src="https://cdn.myanimelist.net/images/anime/1735/127256.jpg">
 <div class="card-content">
 <h3>Solo Leveling</h3>
-<button onclick="openAnime('solo leveling')">Explore</button>
+<button onclick="alert('Solo Leveling details')">Explore</button>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- BLOG SECTION -->
+<div class="section" id="blogs">
+<h2>📖 Blogs</h2>
+
+<div class="card">
+<div class="card-content">
+<h3>Top Anime 2026</h3>
+<p>Best upcoming anime list...</p>
+</div>
+</div>
+
+<div class="card">
+<div class="card-content">
+<h3>Strongest Anime Characters</h3>
+<p>Ranking based on power levels...</p>
 </div>
 </div>
 
 </div>
 
+<!-- CONTACT SECTION -->
+<div class="section" id="contact">
+<h2>📩 Contact Us</h2>
+
+<div class="contact-box">
+<input type="text" placeholder="Your Name"><br>
+<input type="email" placeholder="Your Email"><br>
+<textarea placeholder="Your Message"></textarea><br>
+<button>Send</button>
 </div>
 
-<!-- MODAL -->
-<div class="modal" id="modal">
-<div class="modal-content">
-
-<img id="img">
-<div id="text"></div>
-
-<input id="aiInput" placeholder="Ask about this anime...">
-
-<button onclick="askAI()">Ask AI</button>
-<button onclick="closeModal()">Close</button>
-
 </div>
+
+<!-- SOCIAL ICONS -->
+<div class="social-icons">
+
+<a href="https://instagram.com" target="_blank">📸 Instagram</a>
+
+<a href="https://facebook.com" target="_blank">📘 Facebook</a>
+
+<a href="https://t.me" target="_blank">✈️ Telegram</a>
+
 </div>
 
 <script>
-
-/* MENU */
 function toggleMenu(){
 let m=document.getElementById("menu");
 m.style.left=m.style.left==="0px"?"-300px":"0px";
 }
-
-/* CURSOR */
-const cursor=document.getElementById("cursor");
-document.addEventListener("mousemove",e=>{
-cursor.style.left=e.clientX+"px";
-cursor.style.top=e.clientY+"px";
-cursor.style.background=`hsl(${e.clientX%360},100%,50%)`;
-});
-
-/* 3D CARDS */
-document.querySelectorAll(".card").forEach(card=>{
-card.addEventListener("mousemove",e=>{
-let r=card.getBoundingClientRect();
-let x=e.clientX-r.left;
-let y=e.clientY-r.top;
-let rx=-(y-r.height/2)/10;
-let ry=(x-r.width/2)/10;
-card.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg) scale(1.05)`;
-});
-card.addEventListener("mouseleave",()=>card.style.transform="rotateX(0) rotateY(0)");
-});
-
-/* STARS */
-const canvas=document.getElementById("stars");
-const ctx=canvas.getContext("2d");
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
-
-let stars=[];
-for(let i=0;i<120;i++){
-stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.5,a:Math.random(),s:Math.random()*0.02});
-}
-
-function drawStars(){
-ctx.clearRect(0,0,canvas.width,canvas.height);
-stars.forEach(st=>{
-st.a+=st.s;
-if(st.a>1||st.a<0)st.s*=-1;
-ctx.fillStyle=`rgba(255,255,255,${st.a})`;
-ctx.beginPath();
-ctx.arc(st.x,st.y,st.r,0,Math.PI*2);
-ctx.fill();
-});
-requestAnimationFrame(drawStars);
-}
-drawStars();
-
-/* HERO DOTS */
-const wc=document.getElementById("wave-dots");
-const wctx=wc.getContext("2d");
-wc.width=window.innerWidth;
-wc.height=window.innerHeight;
-
-let dots=[];
-for(let i=0;i<200;i++){
-dots.push({x:Math.random()*wc.width,y:Math.random()*wc.height,r:Math.random()*2});
-}
-let ang=0;
-function drawWave(){
-wctx.clearRect(0,0,wc.width,wc.height);
-dots.forEach(d=>{
-let off=Math.sin((d.x+ang)*0.01)*20;
-wctx.beginPath();
-wctx.arc(d.x,d.y+off,d.r,0,Math.PI*2);
-wctx.fillStyle="rgba(255,255,255,0.6)";
-wctx.fill();
-});
-ang+=2;
-requestAnimationFrame(drawWave);
-}
-drawWave();
-
-/* AI + API */
-let currentAnime="";
-
-async function openAnime(name){
-currentAnime=name;
-
-let res=await fetch(`https://api.jikan.moe/v4/anime?q=${name}`);
-let data=await res.json();
-let a=data.data[0];
-
-document.getElementById("modal").style.display="flex";
-document.getElementById("img").src=a.images.jpg.image_url;
-
-document.getElementById("text").innerHTML=`
-<h2>${a.title}</h2>
-<p>${a.synopsis}</p>
-<p><b>Episodes:</b> ${a.episodes}</p>
-<p><b>Status:</b> ${a.status}</p>
-<p><b>Score:</b> ${a.score}</p>
-`;
-}
-
-function closeModal(){
-document.getElementById("modal").style.display="none";
-}
-
-function askAI(){
-let q=document.getElementById("aiInput").value.toLowerCase();
-let ans="";
-
-if(q.includes("season")) ans="Next season expected 2026 🔥";
-else if(q.includes("strong")) ans="Strongest character depends on anime 😏";
-else ans="Ask about season or story 😄";
-
-document.getElementById("text").innerHTML+=`<p style="color:red;">🤖 ${ans}</p>`;
-}
-
 </script>
 
 </body>

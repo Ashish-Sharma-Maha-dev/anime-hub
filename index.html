@@ -59,9 +59,9 @@ body{background:#000;color:#fff;overflow-x:hidden; scroll-behavior: smooth;}
 }
 .side-nav a:hover{ background: red; padding-left: 40px; }
 
-/* HEADER */
+/* HEADER - Height fixed for better UX */
 header{
-    height:100vh;
+    height: 60vh;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -69,7 +69,7 @@ header{
     text-align: center;
 }
 header h1 {
-    font-size: 4rem;
+    font-size: 3.5rem;
     letter-spacing: 5px;
     text-shadow: 0 0 20px red;
     animation: glow 2s ease-in-out infinite alternate;
@@ -77,13 +77,17 @@ header h1 {
 @keyframes glow { from { text-shadow: 0 0 10px red; } to { text-shadow: 0 0 30px red, 0 0 10px white; } }
 
 /* SEARCH SECTION */
-.search-container { text-align: center; margin-bottom: 40px; }
-#searchBox { padding: 12px; width: 60%; border-radius: 25px; border: 1px solid red; background: transparent; color: white; outline: none; }
+.search-container { text-align: center; margin: 20px 0 40px 0; }
+#searchBox { padding: 12px; width: 70%; border-radius: 25px; border: 1px solid red; background: rgba(0,0,0,0.5); color: white; outline: none; }
 #searchBox:focus { box-shadow: 0 0 15px red; }
 
-/* SECTION & GRID */
-.section{padding:60px 20px;max-width:1200px;margin:auto}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px}
+/* SECTION & GRID - Fixed for 2 cards on Mobile */
+.section{padding:40px 15px;max-width:1200px;margin:auto}
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); 
+    gap:15px;
+}
 
 /* MODERN ANIME CARD */
 .card{
@@ -95,16 +99,17 @@ header h1 {
     position: relative;
 }
 .card:hover{
-    transform: translateY(-10px) scale(1.02);
+    transform: translateY(-5px);
     border-color: red;
     box-shadow: 0 10px 30px rgba(255,0,0,0.3);
 }
-.card img{width:100%;height:350px;object-fit:cover;}
-.card-content{padding:15px; text-align: center;}
+.card img{width:100%;height:230px;object-fit:cover;}
+.card-content{padding:12px; text-align: center;}
+.card h3 { font-size: 1rem; margin-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
 
 /* GLOWING BUTTON */
 .btn-explore{
-    padding:10px 20px;
+    padding:8px 15px;
     background:red;
     border:none;
     color:#fff;
@@ -114,6 +119,7 @@ header h1 {
     font-weight: bold;
     transition: 0.3s;
     text-transform: uppercase;
+    font-size: 0.8rem;
 }
 .btn-explore:hover{ background: white; color: red; box-shadow: 0 0 20px white; }
 
@@ -131,29 +137,23 @@ header h1 {
 }
 .modal-content{
     background:#111;
-    padding:30px;
+    padding:25px;
     border-radius: 20px;
-    max-width: 500px;
+    max-width: 450px;
     width: 90%;
     border: 1px solid red;
     position: relative;
-    max-height: 80vh;
+    max-height: 85vh;
     overflow-y: auto;
 }
 .modal img{width:100%; border-radius: 10px; margin-bottom: 15px;}
-#text h2 { color: red; margin-bottom: 10px; }
-#text p { font-size: 0.9rem; line-height: 1.5; color: #ccc; }
-
-.ai-box { margin-top: 20px; border-top: 1px solid #333; padding-top: 15px; }
-.ai-box input { width: 70%; padding: 8px; background: #222; border: 1px solid #444; color: white; border-radius: 5px; }
+#text h2 { color: red; margin-bottom: 10px; font-size: 1.5rem;}
 
 /* SOCIALS */
 .social{text-align:center;padding:40px; background: #080808;}
 .social a{margin:15px;color:red;text-decoration:none;font-size:20px; transition: 0.3s;}
-.social a:hover { color: white; text-shadow: 0 0 10px red; }
 
 /* CONTACT FORM */
-.contact-form { text-align: center; }
 input, textarea{
     padding:12px;
     margin:10px;
@@ -164,8 +164,6 @@ input, textarea{
     background: #111;
     color: white;
 }
-input:focus, textarea:focus { border-color: red; outline: none; box-shadow: 0 0 10px rgba(255,0,0,0.5); }
-
 </style>
 </head>
 
@@ -192,13 +190,13 @@ input:focus, textarea:focus { border-color: red; outline: none; box-shadow: 0 0 
 
 <div class="section">
     <div class="search-container">
-        <input type="text" id="searchBox" placeholder="Search any anime... (e.g. Naruto, One Piece)">
+        <input type="text" id="searchBox" placeholder="Search any anime...">
         <button class="btn-explore" onclick="searchAnime()">Search</button>
     </div>
 </div>
 
 <div class="section" id="anime">
-    <h2>🔥 Featured Anime</h2>
+    <h2 style="margin-bottom: 20px;">🔥 Featured Anime</h2>
     <div class="grid" id="animeGrid">
         <div class="card">
             <img src="https://cdn.myanimelist.net/images/anime/1141/142503.jpg">
@@ -207,7 +205,6 @@ input:focus, textarea:focus { border-color: red; outline: none; box-shadow: 0 0 
                 <button class="btn-explore" onclick="openAnime('jujutsu kaisen')">Explore</button>
             </div>
         </div>
-
         <div class="card">
             <img src="https://cdn.myanimelist.net/images/anime/1337/99013.jpg">
             <div class="card-content">
@@ -221,24 +218,8 @@ input:focus, textarea:focus { border-color: red; outline: none; box-shadow: 0 0 
 <div class="section" id="blogs">
     <h2 style="border-left: 5px solid red; padding-left: 10px;">📖 Blogs</h2>
     <div style="background: #111; padding: 20px; border-radius: 10px; margin-top: 20px;">
-        <p>Latest updates coming soon... Stay tuned for Jujutsu Kaisen Season 3 news!</p>
+        <p>Latest updates coming soon... Stay tuned for Black Clover Season 5 news!</p>
     </div>
-</div>
-
-<div class="section" id="contact">
-    <h2 style="text-align: center; margin-bottom: 20px;">📩 Contact Me</h2>
-    <div class="contact-form">
-        <input placeholder="Name"><br>
-        <input placeholder="Email"><br>
-        <textarea placeholder="Message" rows="4"></textarea><br>
-        <button class="btn-explore" style="width: 200px;">Send Message</button>
-    </div>
-</div>
-
-<div class="social">
-    <a href="#">Instagram</a>
-    <a href="#">Facebook</a>
-    <a href="#">Telegram</a>
 </div>
 
 <div class="modal" id="modal">
@@ -246,91 +227,55 @@ input:focus, textarea:focus { border-color: red; outline: none; box-shadow: 0 0 
         <span onclick="closeModal()" style="position: absolute; right: 20px; top: 10px; cursor: pointer; color: red; font-size: 30px;">&times;</span>
         <img id="img">
         <div id="text"></div>
-        
-        <div class="ai-box">
-            <input id="aiInput" placeholder="Ask AI about this anime...">
-            <button class="btn-explore" onclick="askAI()" style="margin-top: 0; padding: 8px;">Ask</button>
+        <div class="ai-box" style="margin-top: 20px; border-top: 1px solid #333; padding-top: 15px;">
+            <input id="aiInput" placeholder="Ask AI about this anime..." style="width: 70%; padding: 8px; background: #222; border: 1px solid #444; color: white;">
+            <button class="btn-explore" onclick="askAI()" style="margin-top: 0;">Ask</button>
         </div>
     </div>
 </div>
 
 <script>
-/* MENU LOGIC */
 function toggleMenu(){
     let m = document.getElementById("menu");
     m.style.left = m.style.left === "0px" ? "-300px" : "0px";
 }
 
-/* ⭐ ANIMATED STARS */
+/* ⭐ STARS */
 const canvas = document.getElementById("stars");
 const ctx = canvas.getContext("2d");
-function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-}
-window.onresize = resize;
-resize();
-
+function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+window.onresize = resize; resize();
 let stars = [];
-for(let i=0; i<150; i++){
-    stars.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        r: Math.random() * 1.5,
-        a: Math.random(),
-        s: Math.random() * 0.02
-    });
-}
-
+for(let i=0; i<150; i++){ stars.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, r: Math.random() * 1.5, a: Math.random(), s: Math.random() * 0.02 }); }
 function drawStars(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
-    stars.forEach(st => {
-        st.a += st.s;
-        if(st.a > 1 || st.a < 0) st.s *= -1;
-        ctx.fillStyle = `rgba(255,255,255,${st.a})`;
-        ctx.beginPath();
-        ctx.arc(st.x, st.y, st.r, 0, Math.PI*2);
-        ctx.fill();
-    });
+    stars.forEach(st => { st.a += st.s; if(st.a > 1 || st.a < 0) st.s *= -1; ctx.fillStyle = `rgba(255,255,255,${st.a})`; ctx.beginPath(); ctx.arc(st.x, st.y, st.r, 0, Math.PI*2); ctx.fill(); });
     requestAnimationFrame(drawStars);
 }
 drawStars();
 
-/* 🎯 JIKAN API - SEARCH & RENDER */
+/* 🎯 JIKAN API */
 async function searchAnime() {
     let query = document.getElementById("searchBox").value;
     if(!query) return;
-
     let res = await fetch(`https://api.jikan.moe/v4/anime?q=${query}&limit=6`);
     let result = await res.json();
-    let animeList = result.data;
-
     let grid = document.getElementById("animeGrid");
-    grid.innerHTML = ""; // Clear existing
-
-    animeList.forEach(anime => {
-        grid.innerHTML += `
-            <div class="card">
-                <img src="${anime.images.jpg.large_image_url}">
-                <div class="card-content">
-                    <h3>${anime.title}</h3>
-                    <button class="btn-explore" onclick="openAnimeByID(${anime.mal_id})">Explore</button>
-                </div>
-            </div>
-        `;
+    grid.innerHTML = ""; 
+    result.data.forEach(anime => {
+        grid.innerHTML += `<div class="card"><img src="${anime.images.jpg.large_image_url}"><div class="card-content"><h3>${anime.title}</h3><button class="btn-explore" onclick="openAnimeByID(${anime.mal_id})">Explore</button></div></div>`;
     });
 }
 
-/* OPEN ANIME BY ID (FOR SEARCH RESULTS) */
 async function openAnimeByID(id) {
     let res = await fetch(`https://api.jikan.moe/v4/anime/${id}`);
     let result = await res.json();
     showModal(result.data);
 }
 
-/* ORIGINAL OPEN ANIME (BY NAME) */
+/* FIXED IMAGE MISMATCH */
 async function openAnime(name){
-    let res = await fetch(`https://api.jikan.moe/v4/anime?q=${name}`);
+    let res = await fetch(`https://api.jikan.moe/v4/anime?q=${name}&limit=1`);
     let data = await res.json();
     showModal(data.data[0]);
 }
@@ -338,38 +283,18 @@ async function openAnime(name){
 function showModal(a) {
     document.getElementById("modal").style.display = "flex";
     document.getElementById("img").src = a.images.jpg.large_image_url;
-    document.getElementById("text").innerHTML = `
-        <h2>${a.title}</h2>
-        <p>${a.synopsis ? a.synopsis.substring(0, 300) + '...' : 'No description available.'}</p>
-        <div style="margin-top:10px; display: flex; justify-content: space-between; color: red; font-weight: bold;">
-            <span>⭐ ${a.score || 'N/A'}</span>
-            <span>🎬 ${a.episodes || '?'} EPS</span>
-            <span>🔥 ${a.status}</span>
-        </div>
-    `;
+    document.getElementById("text").innerHTML = `<h2>${a.title}</h2><p style="font-size:0.9rem; color:#ccc;">${a.synopsis ? a.synopsis.substring(0, 250) + '...' : 'No description.'}</p><div style="margin-top:10px; color:red; font-weight:bold;">⭐ ${a.score || 'N/A'} | 🎬 ${a.episodes || '?'} EPS</div>`;
 }
 
-function closeModal(){
-    document.getElementById("modal").style.display = "none";
-}
+function closeModal(){ document.getElementById("modal").style.display = "none"; }
 
-/* 🤖 AI CHAT (ENHANCED) */
 function askAI(){
     let q = document.getElementById("aiInput").value.toLowerCase();
     let textDiv = document.getElementById("text");
-    let ans = "";
-
-    if(q.includes("season")) ans = "Official release date is still pending, but leaks suggest late 2025 or 2026! 🚀";
-    else if(q.includes("strongest")) ans = "That's a tough one! In this anime, the power levels keep peaking. Who do you think? 😏";
-    else if(q.includes("watch")) ans = "Definitely a must-watch! The animation and plot are top-tier. 🍿";
-    else ans = "Interesting question! For now, keep an eye on official MAL updates.";
-
-    textDiv.innerHTML += `<div style="background: rgba(255,0,0,0.1); padding: 10px; margin-top: 10px; border-left: 3px solid red;">
-        <b style="color: red;">🤖 KINGU AI:</b> ${ans}
-    </div>`;
+    let ans = q.includes("season") ? "Next season is rumored for late 2026! 🚀" : "Power levels are peaking in this one! 😏";
+    textDiv.innerHTML += `<p style="color:red; margin-top:10px; border-left:3px solid red; padding-left:10px;">🤖 AI: ${ans}</p>`;
     document.getElementById("aiInput").value = "";
 }
 </script>
-
 </body>
 </html>

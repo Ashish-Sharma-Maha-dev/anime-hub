@@ -6,14 +6,14 @@
 <title>KINGU VAULT | Anime Universe</title>
 
 <style>
-/* CSS Reset & Basics */
+/* CSS Reset */
 *{margin:0;padding:0;box-sizing:border-box;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
 body{background:#000;color:#fff;overflow-x:hidden; scroll-behavior: smooth;}
 
-/* ⭐ STARS BACKGROUND */
+/* ⭐ STARS */
 #stars{position:fixed;top:0;left:0;z-index:-3; width: 100%; height: 100%;}
 
-/* 🐉 DRAGON ANIMATION */
+/* 🐉 DRAGON */
 #bg-dragon{
     position:fixed;
     top:20%;
@@ -31,9 +31,8 @@ body{background:#000;color:#fff;overflow-x:hidden; scroll-behavior: smooth;}
     100%{left:-400px; transform: scaleX(-1);}
 }
 
-/* ☰ MODERN SIDE NAVIGATION */
-.menu-btn{position:fixed;top:20px;left:20px;z-index:1001;cursor:pointer; background: rgba(255,0,0,0.1); padding: 10px; border-radius: 5px; transition: 0.3s;}
-.menu-btn:hover{background: rgba(255,0,0,0.3); box-shadow: 0 0 15px red;}
+/* ☰ NAVIGATION */
+.menu-btn{position:fixed;top:20px;left:20px;z-index:1001;cursor:pointer; background: rgba(255,0,0,0.1); padding: 10px; border-radius: 5px;}
 .menu-btn div{width:25px;height:3px;background:red;margin:5px 0; border-radius: 10px;}
 
 .side-nav{
@@ -44,22 +43,14 @@ body{background:#000;color:#fff;overflow-x:hidden; scroll-behavior: smooth;}
     background:rgba(0,0,0,0.95);
     backdrop-filter: blur(10px);
     padding-top:80px;
-    transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: 0.5s;
     z-index: 1000;
     border-right: 2px solid red;
 }
-.side-nav a{
-    display:block;
-    padding:15px 25px;
-    color:#fff;
-    text-decoration:none;
-    font-size: 1.2rem;
-    transition: 0.3s;
-    border-bottom: 1px solid #111;
-}
-.side-nav a:hover{ background: red; padding-left: 40px; }
+.side-nav a{ display:block; padding:15px 25px; color:#fff; text-decoration:none; font-size: 1.2rem; border-bottom: 1px solid #111; }
+.side-nav a:hover{ background: red; }
 
-/* HEADER - Height fixed for better UX */
+/* HEADER */
 header{
     height: 60vh;
     display:flex;
@@ -68,103 +59,51 @@ header{
     flex-direction:column;
     text-align: center;
 }
-header h1 {
-    font-size: 3.5rem;
-    letter-spacing: 5px;
-    text-shadow: 0 0 20px red;
-    animation: glow 2s ease-in-out infinite alternate;
-}
-@keyframes glow { from { text-shadow: 0 0 10px red; } to { text-shadow: 0 0 30px red, 0 0 10px white; } }
+header h1 { font-size: 3.5rem; letter-spacing: 5px; text-shadow: 0 0 20px red; }
 
-/* SEARCH SECTION */
-.search-container { text-align: center; margin: 20px 0 40px 0; }
+/* SEARCH AREA */
+.search-container { text-align: center; margin: 30px 0; }
 #searchBox { padding: 12px; width: 70%; border-radius: 25px; border: 1px solid red; background: rgba(0,0,0,0.5); color: white; outline: none; }
-#searchBox:focus { box-shadow: 0 0 15px red; }
 
-/* SECTION & GRID - Fixed for 2 cards on Mobile */
-.section{padding:40px 15px;max-width:1200px;margin:auto}
+/* GRID SYSTEM - Fixed for 2 cards on mobile */
+.section{padding:30px 15px; max-width:1200px; margin:auto}
 .grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); 
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); 
     gap:15px;
 }
 
-/* MODERN ANIME CARD */
-.card{
-    background:#111;
-    border-radius:15px;
-    overflow:hidden;
-    transition: 0.4s;
-    border: 1px solid #222;
-    position: relative;
-}
-.card:hover{
-    transform: translateY(-5px);
-    border-color: red;
-    box-shadow: 0 10px 30px rgba(255,0,0,0.3);
-}
-.card img{width:100%;height:230px;object-fit:cover;}
+/* CARDS */
+.card{ background:#111; border-radius:15px; overflow:hidden; border: 1px solid #222; transition: 0.3s; }
+.card:hover{ border-color: red; transform: translateY(-5px); }
+.card img{width:100%; height:230px; object-fit:cover;}
 .card-content{padding:12px; text-align: center;}
-.card h3 { font-size: 1rem; margin-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.card h3 { font-size: 1rem; margin-bottom: 5px; }
 
-/* GLOWING BUTTON */
+/* BUTTONS */
 .btn-explore{
-    padding:8px 15px;
-    background:red;
-    border:none;
-    color:#fff;
-    margin-top:10px;
-    cursor:pointer;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: 0.3s;
-    text-transform: uppercase;
-    font-size: 0.8rem;
+    padding:8px 15px; background:red; border:none; color:#fff; 
+    cursor:pointer; border-radius: 5px; font-weight: bold; text-transform: uppercase;
 }
-.btn-explore:hover{ background: white; color: red; box-shadow: 0 0 20px white; }
 
-/* MODAL / POPUP */
+/* MODAL */
 .modal{
-    display:none;
-    position:fixed;
-    top:0;left:0;
-    width:100%;height:100%;
-    background:rgba(0,0,0,0.9);
-    backdrop-filter: blur(8px);
-    justify-content:center;
-    align-items:center;
-    z-index:10000;
+    display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+    background:rgba(0,0,0,0.9); backdrop-filter: blur(8px); justify-content:center; align-items:center; z-index:10000;
 }
 .modal-content{
-    background:#111;
-    padding:25px;
-    border-radius: 20px;
-    max-width: 450px;
-    width: 90%;
-    border: 1px solid red;
-    position: relative;
-    max-height: 85vh;
-    overflow-y: auto;
+    background:#111; padding:25px; border-radius: 20px; max-width: 450px; width: 90%;
+    border: 1px solid red; position: relative; max-height: 85vh; overflow-y: auto;
 }
 .modal img{width:100%; border-radius: 10px; margin-bottom: 15px;}
-#text h2 { color: red; margin-bottom: 10px; font-size: 1.5rem;}
 
-/* CONTACT FORM & SOCIALS */
-.social{text-align:center;padding:40px; background: #080808;}
-.social a{margin:15px;color:red;text-decoration:none;font-size:20px; transition: 0.3s;}
-input, textarea{
-    padding:12px;
-    margin:10px;
-    border: 1px solid #333;
-    border-radius:8px;
-    width: 100%;
-    max-width: 400px;
-    background: #111;
-    color: white;
-}
+/* SOCIALS SECTION (Restored) */
+.social-section { text-align:center; padding:40px; background: #080808; border-top: 1px solid #222; margin-top: 40px; }
+.social-section a { margin: 0 15px; color: red; text-decoration: none; font-size: 1.1rem; font-weight: bold; transition: 0.3s; }
+.social-section a:hover { color: white; text-shadow: 0 0 10px red; }
+
 </style>
 </head>
-
 <body>
 
 <canvas id="stars"></canvas>
@@ -186,15 +125,13 @@ input, textarea{
     <p style="color: red; font-weight: bold; letter-spacing: 2px;">YOUR ANIME SANCTUARY</p>
 </header>
 
-<div class="section">
-    <div class="search-container">
-        <input type="text" id="searchBox" placeholder="Search any anime...">
-        <button class="btn-explore" onclick="searchAnime()">Search</button>
-    </div>
+<div class="search-container">
+    <input type="text" id="searchBox" placeholder="Search any anime...">
+    <button class="btn-explore" onclick="searchAnime()">Search</button>
 </div>
 
 <div class="section" id="anime">
-    <h2 style="margin-bottom: 20px;">🔥 Featured Anime</h2>
+    <h2 style="margin-bottom: 20px; border-left: 5px solid red; padding-left: 10px;">🔥 Featured Anime</h2>
     <div class="grid" id="animeGrid">
         <div class="card">
             <img src="https://cdn.myanimelist.net/images/anime/1141/142503.jpg">
@@ -215,9 +152,16 @@ input, textarea{
 
 <div class="section" id="blogs">
     <h2 style="border-left: 5px solid red; padding-left: 10px;">📖 Blogs</h2>
-    <div style="background: #111; padding: 20px; border-radius: 10px; margin-top: 20px;">
+    <div style="background: #111; padding: 20px; border-radius: 10px; margin-top: 20px; border: 1px solid #222;">
         <p>Latest updates coming soon... Stay tuned for Black Clover news!</p>
     </div>
+</div>
+
+<div class="social-section">
+    <a href="#">Instagram</a>
+    <a href="#">Facebook</a>
+    <a href="#">Telegram</a>
+    <a href="#">Twitter</a>
 </div>
 
 <div class="modal" id="modal">
@@ -225,9 +169,9 @@ input, textarea{
         <span onclick="closeModal()" style="position: absolute; right: 20px; top: 10px; cursor: pointer; color: red; font-size: 30px;">&times;</span>
         <img id="img">
         <div id="text"></div>
-        <div class="ai-box" style="margin-top: 20px; border-top: 1px solid #333; padding-top: 15px;">
-            <input id="aiInput" placeholder="Ask AI about this anime..." style="width: 70%; padding: 8px; background: #222; border: 1px solid #444; color: white;">
-            <button class="btn-explore" onclick="askAI()" style="margin-top: 0;">Ask</button>
+        <div style="margin-top: 20px; border-top: 1px solid #333; padding-top: 15px;">
+            <input id="aiInput" placeholder="Ask AI..." style="width: 70%; padding: 8px; background: #222; border: 1px solid #444; color: white;">
+            <button class="btn-explore" onclick="askAI()" style="padding: 8px;">Ask</button>
         </div>
     </div>
 </div>
@@ -238,7 +182,7 @@ function toggleMenu(){
     m.style.left = m.style.left === "0px" ? "-300px" : "0px";
 }
 
-/* ⭐ STARS ANIMATION */
+/* ⭐ STARS */
 const canvas = document.getElementById("stars");
 const ctx = canvas.getContext("2d");
 function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
@@ -252,7 +196,7 @@ function drawStars(){
 }
 drawStars();
 
-/* 🎯 JIKAN API LOGIC */
+/* 🎯 API LOGIC */
 async function searchAnime() {
     let query = document.getElementById("searchBox").value;
     if(!query) return;
@@ -271,7 +215,6 @@ async function openAnimeByID(id) {
     showModal(result.data);
 }
 
-/* FIXED IMAGE MISMATCH - limit=1 ensures correct anime details fetch */
 async function openAnime(name){
     let res = await fetch(`https://api.jikan.moe/v4/anime?q=${name}&limit=1`);
     let data = await res.json();
@@ -281,17 +224,15 @@ async function openAnime(name){
 function showModal(a) {
     document.getElementById("modal").style.display = "flex";
     document.getElementById("img").src = a.images.jpg.large_image_url;
-    document.getElementById("text").innerHTML = `<h2>${a.title}</h2><p style="font-size:0.9rem; color:#ccc;">${a.synopsis ? a.synopsis.substring(0, 250) + '...' : 'No description available.'}</p><div style="margin-top:10px; color:red; font-weight:bold;">⭐ ${a.score || 'N/A'} | 🎬 ${a.episodes || '?'} EPS</div>`;
+    document.getElementById("text").innerHTML = `<h2 style="color:red;">${a.title}</h2><p style="font-size:0.9rem; color:#ccc; margin-top:10px;">${a.synopsis ? a.synopsis.substring(0, 250) + '...' : 'No description.'}</p>`;
 }
 
 function closeModal(){ document.getElementById("modal").style.display = "none"; }
 
 function askAI(){
     let q = document.getElementById("aiInput").value.toLowerCase();
-    let textDiv = document.getElementById("text");
-    let ans = q.includes("season") ? "Next season news is coming soon! 🚀" : "Power levels are crazy in this one! 😏";
-    textDiv.innerHTML += `<p style="color:red; margin-top:10px; border-left:3px solid red; padding-left:10px;">🤖 AI: ${ans}</p>`;
-    document.getElementById("aiInput").value = "";
+    let ans = q.includes("season") ? "Rumored for 2026! 🚀" : "Power levels are peaking! 😏";
+    document.getElementById("text").innerHTML += `<p style="color:red; margin-top:10px; border-left:3px solid red; padding-left:10px;">🤖 AI: ${ans}</p>`;
 }
 </script>
 </body>

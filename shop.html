@@ -3,56 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KINGU SHOP | Anime Merch</title>
+    <title>KINGU SHOP | Merch</title>
     <style>
-        body { background: #000; color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; }
-        header { background: #111; padding: 15px; text-align: center; border-bottom: 2px solid red; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+        body { background: #000; color: white; font-family: sans-serif; margin: 0; padding: 0; }
+        header { background: #111; padding: 15px; text-align: center; border-bottom: 2px solid red; display: flex; justify-content: space-between; align-items: center; }
         .back-btn { color: white; text-decoration: none; background: red; padding: 8px 15px; border-radius: 5px; font-weight: bold; }
-        .shop-container { padding: 40px 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
-        .card { background: #0a0a0a; padding: 20px; border-radius: 15px; border: 1px solid #222; text-align: center; transition: 0.3s; }
-        .card:hover { border-color: red; transform: translateY(-5px); box-shadow: 0 0 20px rgba(255,0,0,0.3); }
-        /* Placeholder styling for images */
-        .img-box { width: 100%; height: 250px; background: #222; border-radius: 10px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #555; overflow: hidden; }
-        .img-box img { width: 100%; height: 100%; object-fit: cover; }
-        .price { color: red; font-size: 1.5rem; font-weight: bold; margin: 10px 0; }
-        .buy-btn { width: 100%; background: white; color: black; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
-        .buy-btn:hover { background: red; color: white; }
+        .shop-container { padding: 40px 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .card { background: #0a0a0a; padding: 15px; border-radius: 10px; border: 1px solid #333; text-align: center; }
+        .card img { width: 100%; height: 250px; object-fit: contain; border-radius: 5px; background: white; }
+        .price { color: red; font-size: 1.4rem; font-weight: bold; margin: 10px 0; }
+        .buy-btn { width: 100%; background: white; color: black; border: none; padding: 10px; border-radius: 5px; font-weight: bold; cursor: pointer; }
     </style>
 </head>
 <body>
 
 <header>
     <a href="index.html" class="back-btn">⬅ Home</a>
-    <span style="font-weight: bold; color: white; text-shadow: 0 0 10px red;">KINGU MERCH STORE</span>
-    <div style="width: 60px;"></div>
+    <h2 style="margin:0; color:white;">KINGU SHOP</h2>
+    <div style="width:50px;"></div>
 </header>
 
 <div class="shop-container">
     <div class="card">
-        <div class="img-box">
-            <img src="https://placehold.co/400x400/111/white?text=Sukuna+Tee" alt="Sukuna Tee">
-        </div>
-        <h3>Sukuna Anime Tee</h3>
+        <img src="https://m.media-amazon.com/images/I/51rU6G+O7rL._AC_SX679_.jpg" alt="T-Shirt">
+        <h3>Sukuna "King" Tee</h3>
         <p class="price">₹599</p>
-        <button class="buy-btn" onclick="window.open('https://wa.me/910000000000?text=Order Sukuna Tee', '_blank')">🛒 ORDER NOW</button>
+        <button class="buy-btn" onclick="window.open('https://wa.me/910000000000?text=Order Sukuna Tee', '_blank')">ORDER NOW</button>
     </div>
 
     <div class="card">
-        <div class="img-box">
-            <img src="https://placehold.co/400x400/111/white?text=Gojo+Figure" alt="Gojo Figure">
-        </div>
+        <img src="https://m.media-amazon.com/images/I/61k8YV8Z-2L._AC_SL1500_.jpg" alt="Figure">
         <h3>Gojo Satoru Figure</h3>
         <p class="price">₹1,299</p>
-        <button class="buy-btn" onclick="window.open('https://wa.me/910000000000?text=Order Gojo Figure', '_blank')">🛒 ORDER NOW</button>
+        <button class="buy-btn" onclick="window.open('https://wa.me/910000000000?text=Order Gojo Figure', '_blank')">ORDER NOW</button>
     </div>
 
     <div class="card">
-        <div class="img-box">
-            <img src="https://placehold.co/400x400/111/white?text=Black+Bulls+Hoodie" alt="Black Bulls Hoodie">
-        </div>
+        <img src="https://m.media-amazon.com/images/I/61-v8f8hXRL._AC_SX679_.jpg" alt="Hoodie">
         <h3>Black Bulls Hoodie</h3>
         <p class="price">₹999</p>
-        <button class="buy-btn" onclick="window.open('https://wa.me/910000000000?text=Order Black Bulls Hoodie', '_blank')">🛒 ORDER NOW</button>
+        <button class="buy-btn" onclick="window.open('https://wa.me/910000000000?text=Order Hoodie', '_blank')">ORDER NOW</button>
     </div>
 </div>
 

@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KINGU SHOP | Anime & Gaming Merch</title>
+    <title>KINGU SHOP | Anime Merch</title>
     <style>
         body { background: #000; color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; }
         header { background: #111; padding: 15px; text-align: center; border-bottom: 2px solid red; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
         .back-btn { color: white; text-decoration: none; background: red; padding: 8px 15px; border-radius: 5px; font-weight: bold; }
         .shop-container { padding: 40px 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
-        .card { background: #0a0a0a; padding: 20px; border-radius: 15px; border: 1px solid #222; text-align: center; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between;}
+        .card { background: #0a0a0a; padding: 20px; border-radius: 15px; border: 1px solid #222; text-align: center; transition: 0.3s; }
         .card:hover { border-color: red; transform: translateY(-5px); box-shadow: 0 0 20px rgba(255,0,0,0.3); }
-        .card img { width: 100%; height: 280px; object-fit: cover; border-radius: 10px; margin-bottom: 15px; border: 1px solid #333; background: #fff; }
-        .card h3 { margin: 5px 0; font-size: 1.2rem; }
-        .price { color: red; font-size: 1.5rem; font-weight: bold; margin: 10px 0 20px 0; }
-        .buy-btn { width: 100%; background: white; color: black; border: none; padding: 12px; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; text-transform: uppercase; transition: 0.2s; }
+        .card img { width: 100%; height: 250px; object-fit: contain; border-radius: 10px; margin-bottom: 15px; background: #111; }
+        .price { color: red; font-size: 1.5rem; font-weight: bold; margin: 10px 0; }
+        .buy-btn { width: 100%; background: white; color: black; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
         .buy-btn:hover { background: red; color: white; }
     </style>
 </head>
@@ -22,54 +21,31 @@
 
 <header>
     <a href="index.html" class="back-btn">⬅ Home</a>
-    <span style="font-weight: bold; font-size: 1.2rem; color: white; text-shadow: 0 0 10px red; letter-spacing: 1px;">KINGU MERCH STORE</span>
-    <div style="width: 70px;"></div>
+    <span style="font-weight: bold; color: white; text-shadow: 0 0 10px red;">KINGU MERCH STORE</span>
+    <div style="width: 60px;"></div>
 </header>
 
 <div class="shop-container">
-    
     <div class="card">
-        <img src="https://rukminim2.flixcart.com/image/850/1000/xif0q/t-shirt/j/v/3/m-sukuna-jujutsu-kaisen-anime-tshirt-kashish-original-imagp6hgyygm3gze.jpeg" alt="Sukuna Tee">
-        <h3>Sukuna "King of Curses" Tee</h3>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR07_gH3_m1uHkK_kH2B9v1_eY770_zH_h_Cg&s" alt="Sukuna Tee">
+        <h3>Sukuna Anime Tee</h3>
         <p class="price">₹599</p>
-        <button class="buy-btn" onclick="window.open('https://wa.me/910000000000?text=I want to order Sukuna Tee', '_blank')">🛒 ORDER NOW</button>
+        <button class="buy-btn" onclick="window.open('https://wa.me/910000000000?text=Order Sukuna Tee', '_blank')">🛒 ORDER NOW</button>
     </div>
 
     <div class="card">
-        <img src="https://rukminim2.flixcart.com/image/850/1000/xif0q/action-figure/x/s/k/6-gojo-satoru-action-figure-jujutsu-kaisen-gojo-satoru-figure-original-imagzhg8gkzcvzxh.jpeg" alt="Gojo Figure">
+        <img src="https://m.media-amazon.com/images/I/51r+R5mBfQL._AC_SL1000_.jpg" alt="Gojo Figure">
         <h3>Gojo Satoru Figure</h3>
         <p class="price">₹1,299</p>
-        <button class="buy-btn" onclick="window.open('https://wa.me/910000000000?text=I want to order Gojo Figure', '_blank')">🛒 ORDER NOW</button>
+        <button class="buy-btn" onclick="window.open('https://wa.me/910000000000?text=Order Gojo Figure', '_blank')">🛒 ORDER NOW</button>
     </div>
 
     <div class="card">
-        <img src="https://rukminim2.flixcart.com/image/850/1000/xif0q/sweatshirt/y/g/i/s-black-clover-hoodie-black-bulls-squad-logo-black-pullover-original-imahf48zbhfy8q2p.jpeg" alt="Black Clover Hoodie">
-        <h3>Black Clover Black Bulls Hoodie</h3>
+        <img src="https://i.ebayimg.com/images/g/7pIAAOSw9~VlZ~e~/s-l1200.jpg" alt="Black Clover Hoodie">
+        <h3>Black Bulls Hoodie</h3>
         <p class="price">₹999</p>
-        <button class="buy-btn" onclick="window.open('https://wa.me/910000000000?text=I want to order Black Clover Hoodie', '_blank')">🛒 ORDER NOW</button>
+        <button class="buy-btn" onclick="window.open('https://wa.me/910000000000?text=Order Black Clover Hoodie', '_blank')">🛒 ORDER NOW</button>
     </div>
-
-    <div class="card">
-        <img src="https://rukminim2.flixcart.com/image/850/1000/kgigvww0/mug/t/u/v/god-of-war-kratos-1-1-coffeemug206-shatter-original-imafwqzyxg7zghzt.jpeg" alt="God of War Mug">
-        <h3>God of War Kratos Mug</h3>
-        <p class="price">₹299</p>
-        <button class="buy-btn" onclick="window.open('https://wa.me/910000000000?text=I want to order God of War Mug', '_blank')">🛒 ORDER NOW</button>
-    </div>
-
-    <div class="card">
-        <img src="https://rukminim2.flixcart.com/image/850/1000/xif0q/t-shirt/z/1/3/s-tekken-8-gaming-t-shirt-print-shoppy-original-imags3y7ggh5ggzx.jpeg" alt="Tekken 8 Shirt">
-        <h3>Tekken 8 Jin Kazama Tee</h3>
-        <p class="price">₹499</p>
-        <button class="buy-btn" onclick="window.open('https://wa.me/910000000000?text=I want to order Tekken 8 Tee', '_blank')">🛒 ORDER NOW</button>
-    </div>
-
-    <div class="card">
-        <img src="https://rukminim2.flixcart.com/image/850/1000/xif0q/pendant-locket/y/6/x/na-na-frtnk102-pendant-rich-and-famous-original-imahf5yfh3bzh6m5.jpeg" alt="Fairy Tail Pendant">
-        <h3>Fairy Tail Guild Pendant</h3>
-        <p class="price">₹199</p>
-        <button class="buy-btn" onclick="window.open('https://wa.me/910000000000?text=I want to order Fairy Tail Pendant', '_blank')">🛒 ORDER NOW</button>
-    </div>
-
 </div>
 
 </body>

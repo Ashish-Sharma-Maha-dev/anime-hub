@@ -149,11 +149,9 @@ header h1 {
 .modal img{width:100%; border-radius: 10px; margin-bottom: 15px;}
 #text h2 { color: red; margin-bottom: 10px; font-size: 1.5rem;}
 
-/* SOCIALS */
+/* CONTACT FORM & SOCIALS */
 .social{text-align:center;padding:40px; background: #080808;}
 .social a{margin:15px;color:red;text-decoration:none;font-size:20px; transition: 0.3s;}
-
-/* CONTACT FORM */
 input, textarea{
     padding:12px;
     margin:10px;
@@ -218,7 +216,7 @@ input, textarea{
 <div class="section" id="blogs">
     <h2 style="border-left: 5px solid red; padding-left: 10px;">📖 Blogs</h2>
     <div style="background: #111; padding: 20px; border-radius: 10px; margin-top: 20px;">
-        <p>Latest updates coming soon... Stay tuned for Black Clover Season 5 news!</p>
+        <p>Latest updates coming soon... Stay tuned for Black Clover news!</p>
     </div>
 </div>
 
@@ -240,7 +238,7 @@ function toggleMenu(){
     m.style.left = m.style.left === "0px" ? "-300px" : "0px";
 }
 
-/* ⭐ STARS */
+/* ⭐ STARS ANIMATION */
 const canvas = document.getElementById("stars");
 const ctx = canvas.getContext("2d");
 function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
@@ -254,7 +252,7 @@ function drawStars(){
 }
 drawStars();
 
-/* 🎯 JIKAN API */
+/* 🎯 JIKAN API LOGIC */
 async function searchAnime() {
     let query = document.getElementById("searchBox").value;
     if(!query) return;
@@ -273,7 +271,7 @@ async function openAnimeByID(id) {
     showModal(result.data);
 }
 
-/* FIXED IMAGE MISMATCH */
+/* FIXED IMAGE MISMATCH - limit=1 ensures correct anime details fetch */
 async function openAnime(name){
     let res = await fetch(`https://api.jikan.moe/v4/anime?q=${name}&limit=1`);
     let data = await res.json();
@@ -283,7 +281,7 @@ async function openAnime(name){
 function showModal(a) {
     document.getElementById("modal").style.display = "flex";
     document.getElementById("img").src = a.images.jpg.large_image_url;
-    document.getElementById("text").innerHTML = `<h2>${a.title}</h2><p style="font-size:0.9rem; color:#ccc;">${a.synopsis ? a.synopsis.substring(0, 250) + '...' : 'No description.'}</p><div style="margin-top:10px; color:red; font-weight:bold;">⭐ ${a.score || 'N/A'} | 🎬 ${a.episodes || '?'} EPS</div>`;
+    document.getElementById("text").innerHTML = `<h2>${a.title}</h2><p style="font-size:0.9rem; color:#ccc;">${a.synopsis ? a.synopsis.substring(0, 250) + '...' : 'No description available.'}</p><div style="margin-top:10px; color:red; font-weight:bold;">⭐ ${a.score || 'N/A'} | 🎬 ${a.episodes || '?'} EPS</div>`;
 }
 
 function closeModal(){ document.getElementById("modal").style.display = "none"; }
@@ -291,7 +289,7 @@ function closeModal(){ document.getElementById("modal").style.display = "none"; 
 function askAI(){
     let q = document.getElementById("aiInput").value.toLowerCase();
     let textDiv = document.getElementById("text");
-    let ans = q.includes("season") ? "Next season is rumored for late 2026! 🚀" : "Power levels are peaking in this one! 😏";
+    let ans = q.includes("season") ? "Next season news is coming soon! 🚀" : "Power levels are crazy in this one! 😏";
     textDiv.innerHTML += `<p style="color:red; margin-top:10px; border-left:3px solid red; padding-left:10px;">🤖 AI: ${ans}</p>`;
     document.getElementById("aiInput").value = "";
 }

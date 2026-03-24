@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KINGU SHOP | Anime Merch</title>
+    <style>
+        body { background: #000; color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; }
+        header { background: #111; padding: 15px; text-align: center; border-bottom: 2px solid red; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+        .back-btn { color: white; text-decoration: none; background: red; padding: 8px 15px; border-radius: 5px; font-weight: bold; }
+        .shop-container { padding: 40px 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1100px; margin: 0 auto; }
+        .card { background: #0a0a0a; padding: 20px; border-radius: 15px; border: 1px solid #222; text-align: center; transition: 0.3s; }
+        .card:hover { border-color: red; transform: translateY(-5px); box-shadow: 0 0 20px rgba(255,0,0,0.3); }
+        .card img { width: 100%; border-radius: 10px; margin-bottom: 15px; }
+        .price { color: red; font-size: 1.5rem; font-weight: bold; margin: 15px 0; }
+        .buy-btn { width: 100%; background: white; color: black; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="back-btn">⬅ Home</a>
+    <span style="font-weight: bold; color: white; text-shadow: 0 0 10px red;">KINGU SHOP</span>
+    <div style="width: 60px;"></div>
+</header>
+
+<div class="shop-container">
+    <div class="card">
+        <img src="https://img.freepik.com/premium-photo/black-tshirt-with-anime-print-it_902639-25413.jpg">
+        <h3>Sukuna "King of Curses" Tee</h3>
+        <p class="price">₹599</p>
+        <button class="buy-btn" onclick="window.open('https://t.me/KinguVaultOfficial', '_blank')">Buy on Telegram</button>
+    </div>
+    <div class="card">
+        <img src="https://m.media-amazon.com/images/I/61mD-zXo+6L._AC_SL1500_.jpg">
+        <h3>Gojo Satoru Figure</h3>
+        <p class="price">₹1,299</p>
+        <button class="buy-btn" onclick="window.open('https://t.me/KinguVaultOfficial', '_blank')">Buy on Telegram</button>
+    </div>
+</div>
+
+</body>
+</html>

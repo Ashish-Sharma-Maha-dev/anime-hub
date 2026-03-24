@@ -6,14 +6,14 @@
 <title>KINGU VAULT | Anime Universe</title>
 
 <style>
-/* CSS Reset */
+/* CSS Reset & Basics */
 *{margin:0;padding:0;box-sizing:border-box;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
 body{background:#000;color:#fff;overflow-x:hidden; scroll-behavior: smooth;}
 
-/* ⭐ STARS */
+/* ⭐ STARS BACKGROUND */
 #stars{position:fixed;top:0;left:0;z-index:-3; width: 100%; height: 100%;}
 
-/* 🐉 DRAGON */
+/* 🐉 DRAGON ANIMATION */
 #bg-dragon{
     position:fixed;
     top:20%;
@@ -31,8 +31,9 @@ body{background:#000;color:#fff;overflow-x:hidden; scroll-behavior: smooth;}
     100%{left:-400px; transform: scaleX(-1);}
 }
 
-/* ☰ NAVIGATION */
-.menu-btn{position:fixed;top:20px;left:20px;z-index:1001;cursor:pointer; background: rgba(255,0,0,0.1); padding: 10px; border-radius: 5px;}
+/* ☰ MODERN SIDE NAVIGATION */
+.menu-btn{position:fixed;top:20px;left:20px;z-index:1001;cursor:pointer; background: rgba(255,0,0,0.1); padding: 10px; border-radius: 5px; transition: 0.3s;}
+.menu-btn:hover{background: rgba(255,0,0,0.3); box-shadow: 0 0 15px red;}
 .menu-btn div{width:25px;height:3px;background:red;margin:5px 0; border-radius: 10px;}
 
 .side-nav{
@@ -43,67 +44,131 @@ body{background:#000;color:#fff;overflow-x:hidden; scroll-behavior: smooth;}
     background:rgba(0,0,0,0.95);
     backdrop-filter: blur(10px);
     padding-top:80px;
-    transition: 0.5s;
+    transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 1000;
     border-right: 2px solid red;
 }
-.side-nav a{ display:block; padding:15px 25px; color:#fff; text-decoration:none; font-size: 1.2rem; border-bottom: 1px solid #111; }
-.side-nav a:hover{ background: red; }
+.side-nav a{
+    display:block;
+    padding:15px 25px;
+    color:#fff;
+    text-decoration:none;
+    font-size: 1.2rem;
+    transition: 0.3s;
+    border-bottom: 1px solid #111;
+}
+.side-nav a:hover{ background: red; padding-left: 40px; }
 
 /* HEADER */
 header{
-    height: 60vh;
+    height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
     flex-direction:column;
     text-align: center;
 }
-header h1 { font-size: 3.5rem; letter-spacing: 5px; text-shadow: 0 0 20px red; }
-
-/* SEARCH AREA */
-.search-container { text-align: center; margin: 30px 0; }
-#searchBox { padding: 12px; width: 70%; border-radius: 25px; border: 1px solid red; background: rgba(0,0,0,0.5); color: white; outline: none; }
-
-/* GRID SYSTEM - Fixed for 2 cards on mobile */
-.section{padding:30px 15px; max-width:1200px; margin:auto}
-.grid{
-    display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); 
-    gap:15px;
+header h1 {
+    font-size: 4rem;
+    letter-spacing: 5px;
+    text-shadow: 0 0 20px red;
+    animation: glow 2s ease-in-out infinite alternate;
 }
+@keyframes glow { from { text-shadow: 0 0 10px red; } to { text-shadow: 0 0 30px red, 0 0 10px white; } }
 
-/* CARDS */
-.card{ background:#111; border-radius:15px; overflow:hidden; border: 1px solid #222; transition: 0.3s; }
-.card:hover{ border-color: red; transform: translateY(-5px); }
-.card img{width:100%; height:230px; object-fit:cover;}
-.card-content{padding:12px; text-align: center;}
-.card h3 { font-size: 1rem; margin-bottom: 5px; }
+/* SEARCH SECTION */
+.search-container { text-align: center; margin-bottom: 40px; }
+#searchBox { padding: 12px; width: 60%; border-radius: 25px; border: 1px solid red; background: transparent; color: white; outline: none; }
+#searchBox:focus { box-shadow: 0 0 15px red; }
 
-/* BUTTONS */
+/* SECTION & GRID */
+.section{padding:60px 20px;max-width:1200px;margin:auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px}
+
+/* MODERN ANIME CARD */
+.card{
+    background:#111;
+    border-radius:15px;
+    overflow:hidden;
+    transition: 0.4s;
+    border: 1px solid #222;
+    position: relative;
+}
+.card:hover{
+    transform: translateY(-10px) scale(1.02);
+    border-color: red;
+    box-shadow: 0 10px 30px rgba(255,0,0,0.3);
+}
+.card img{width:100%;height:350px;object-fit:cover;}
+.card-content{padding:15px; text-align: center;}
+
+/* GLOWING BUTTON */
 .btn-explore{
-    padding:8px 15px; background:red; border:none; color:#fff; 
-    cursor:pointer; border-radius: 5px; font-weight: bold; text-transform: uppercase;
+    padding:10px 20px;
+    background:red;
+    border:none;
+    color:#fff;
+    margin-top:10px;
+    cursor:pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: 0.3s;
+    text-transform: uppercase;
 }
+.btn-explore:hover{ background: white; color: red; box-shadow: 0 0 20px white; }
 
-/* MODAL */
+/* MODAL / POPUP */
 .modal{
-    display:none; position:fixed; top:0; left:0; width:100%; height:100%;
-    background:rgba(0,0,0,0.9); backdrop-filter: blur(8px); justify-content:center; align-items:center; z-index:10000;
+    display:none;
+    position:fixed;
+    top:0;left:0;
+    width:100%;height:100%;
+    background:rgba(0,0,0,0.9);
+    backdrop-filter: blur(8px);
+    justify-content:center;
+    align-items:center;
+    z-index:10000;
 }
 .modal-content{
-    background:#111; padding:25px; border-radius: 20px; max-width: 450px; width: 90%;
-    border: 1px solid red; position: relative; max-height: 85vh; overflow-y: auto;
+    background:#111;
+    padding:30px;
+    border-radius: 20px;
+    max-width: 500px;
+    width: 90%;
+    border: 1px solid red;
+    position: relative;
+    max-height: 80vh;
+    overflow-y: auto;
 }
 .modal img{width:100%; border-radius: 10px; margin-bottom: 15px;}
+#text h2 { color: red; margin-bottom: 10px; }
+#text p { font-size: 0.9rem; line-height: 1.5; color: #ccc; }
 
-/* SOCIALS SECTION (Restored) */
-.social-section { text-align:center; padding:40px; background: #080808; border-top: 1px solid #222; margin-top: 40px; }
-.social-section a { margin: 0 15px; color: red; text-decoration: none; font-size: 1.1rem; font-weight: bold; transition: 0.3s; }
-.social-section a:hover { color: white; text-shadow: 0 0 10px red; }
+.ai-box { margin-top: 20px; border-top: 1px solid #333; padding-top: 15px; }
+.ai-box input { width: 70%; padding: 8px; background: #222; border: 1px solid #444; color: white; border-radius: 5px; }
+
+/* SOCIALS */
+.social{text-align:center;padding:40px; background: #080808;}
+.social a{margin:15px;color:red;text-decoration:none;font-size:20px; transition: 0.3s;}
+.social a:hover { color: white; text-shadow: 0 0 10px red; }
+
+/* CONTACT FORM */
+.contact-form { text-align: center; }
+input, textarea{
+    padding:12px;
+    margin:10px;
+    border: 1px solid #333;
+    border-radius:8px;
+    width: 100%;
+    max-width: 400px;
+    background: #111;
+    color: white;
+}
+input:focus, textarea:focus { border-color: red; outline: none; box-shadow: 0 0 10px rgba(255,0,0,0.5); }
 
 </style>
 </head>
+
 <body>
 
 <canvas id="stars"></canvas>
@@ -125,13 +190,15 @@ header h1 { font-size: 3.5rem; letter-spacing: 5px; text-shadow: 0 0 20px red; }
     <p style="color: red; font-weight: bold; letter-spacing: 2px;">YOUR ANIME SANCTUARY</p>
 </header>
 
-<div class="search-container">
-    <input type="text" id="searchBox" placeholder="Search any anime...">
-    <button class="btn-explore" onclick="searchAnime()">Search</button>
+<div class="section">
+    <div class="search-container">
+        <input type="text" id="searchBox" placeholder="Search any anime... (e.g. Naruto, One Piece)">
+        <button class="btn-explore" onclick="searchAnime()">Search</button>
+    </div>
 </div>
 
 <div class="section" id="anime">
-    <h2 style="margin-bottom: 20px; border-left: 5px solid red; padding-left: 10px;">🔥 Featured Anime</h2>
+    <h2>🔥 Featured Anime</h2>
     <div class="grid" id="animeGrid">
         <div class="card">
             <img src="https://cdn.myanimelist.net/images/anime/1141/142503.jpg">
@@ -140,6 +207,7 @@ header h1 { font-size: 3.5rem; letter-spacing: 5px; text-shadow: 0 0 20px red; }
                 <button class="btn-explore" onclick="openAnime('jujutsu kaisen')">Explore</button>
             </div>
         </div>
+
         <div class="card">
             <img src="https://cdn.myanimelist.net/images/anime/1337/99013.jpg">
             <div class="card-content">
@@ -152,16 +220,25 @@ header h1 { font-size: 3.5rem; letter-spacing: 5px; text-shadow: 0 0 20px red; }
 
 <div class="section" id="blogs">
     <h2 style="border-left: 5px solid red; padding-left: 10px;">📖 Blogs</h2>
-    <div style="background: #111; padding: 20px; border-radius: 10px; margin-top: 20px; border: 1px solid #222;">
-        <p>Latest updates coming soon... Stay tuned for Black Clover news!</p>
+    <div style="background: #111; padding: 20px; border-radius: 10px; margin-top: 20px;">
+        <p>Latest updates coming soon... Stay tuned for Jujutsu Kaisen Season 3 news!</p>
     </div>
 </div>
 
-<div class="social-section">
+<div class="section" id="contact">
+    <h2 style="text-align: center; margin-bottom: 20px;">📩 Contact Me</h2>
+    <div class="contact-form">
+        <input placeholder="Name"><br>
+        <input placeholder="Email"><br>
+        <textarea placeholder="Message" rows="4"></textarea><br>
+        <button class="btn-explore" style="width: 200px;">Send Message</button>
+    </div>
+</div>
+
+<div class="social">
     <a href="#">Instagram</a>
     <a href="#">Facebook</a>
     <a href="#">Telegram</a>
-    <a href="#">Twitter</a>
 </div>
 
 <div class="modal" id="modal">
@@ -169,54 +246,91 @@ header h1 { font-size: 3.5rem; letter-spacing: 5px; text-shadow: 0 0 20px red; }
         <span onclick="closeModal()" style="position: absolute; right: 20px; top: 10px; cursor: pointer; color: red; font-size: 30px;">&times;</span>
         <img id="img">
         <div id="text"></div>
-        <div style="margin-top: 20px; border-top: 1px solid #333; padding-top: 15px;">
-            <input id="aiInput" placeholder="Ask AI..." style="width: 70%; padding: 8px; background: #222; border: 1px solid #444; color: white;">
-            <button class="btn-explore" onclick="askAI()" style="padding: 8px;">Ask</button>
+        
+        <div class="ai-box">
+            <input id="aiInput" placeholder="Ask AI about this anime...">
+            <button class="btn-explore" onclick="askAI()" style="margin-top: 0; padding: 8px;">Ask</button>
         </div>
     </div>
 </div>
 
 <script>
+/* MENU LOGIC */
 function toggleMenu(){
     let m = document.getElementById("menu");
     m.style.left = m.style.left === "0px" ? "-300px" : "0px";
 }
 
-/* ⭐ STARS */
+/* ⭐ ANIMATED STARS */
 const canvas = document.getElementById("stars");
 const ctx = canvas.getContext("2d");
-function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-window.onresize = resize; resize();
+function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+window.onresize = resize;
+resize();
+
 let stars = [];
-for(let i=0; i<150; i++){ stars.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, r: Math.random() * 1.5, a: Math.random(), s: Math.random() * 0.02 }); }
+for(let i=0; i<150; i++){
+    stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.5,
+        a: Math.random(),
+        s: Math.random() * 0.02
+    });
+}
+
 function drawStars(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
-    stars.forEach(st => { st.a += st.s; if(st.a > 1 || st.a < 0) st.s *= -1; ctx.fillStyle = `rgba(255,255,255,${st.a})`; ctx.beginPath(); ctx.arc(st.x, st.y, st.r, 0, Math.PI*2); ctx.fill(); });
+    stars.forEach(st => {
+        st.a += st.s;
+        if(st.a > 1 || st.a < 0) st.s *= -1;
+        ctx.fillStyle = `rgba(255,255,255,${st.a})`;
+        ctx.beginPath();
+        ctx.arc(st.x, st.y, st.r, 0, Math.PI*2);
+        ctx.fill();
+    });
     requestAnimationFrame(drawStars);
 }
 drawStars();
 
-/* 🎯 API LOGIC */
+/* 🎯 JIKAN API - SEARCH & RENDER */
 async function searchAnime() {
     let query = document.getElementById("searchBox").value;
     if(!query) return;
+
     let res = await fetch(`https://api.jikan.moe/v4/anime?q=${query}&limit=6`);
     let result = await res.json();
+    let animeList = result.data;
+
     let grid = document.getElementById("animeGrid");
-    grid.innerHTML = ""; 
-    result.data.forEach(anime => {
-        grid.innerHTML += `<div class="card"><img src="${anime.images.jpg.large_image_url}"><div class="card-content"><h3>${anime.title}</h3><button class="btn-explore" onclick="openAnimeByID(${anime.mal_id})">Explore</button></div></div>`;
+    grid.innerHTML = ""; // Clear existing
+
+    animeList.forEach(anime => {
+        grid.innerHTML += `
+            <div class="card">
+                <img src="${anime.images.jpg.large_image_url}">
+                <div class="card-content">
+                    <h3>${anime.title}</h3>
+                    <button class="btn-explore" onclick="openAnimeByID(${anime.mal_id})">Explore</button>
+                </div>
+            </div>
+        `;
     });
 }
 
+/* OPEN ANIME BY ID (FOR SEARCH RESULTS) */
 async function openAnimeByID(id) {
     let res = await fetch(`https://api.jikan.moe/v4/anime/${id}`);
     let result = await res.json();
     showModal(result.data);
 }
 
+/* ORIGINAL OPEN ANIME (BY NAME) */
 async function openAnime(name){
-    let res = await fetch(`https://api.jikan.moe/v4/anime?q=${name}&limit=1`);
+    let res = await fetch(`https://api.jikan.moe/v4/anime?q=${name}`);
     let data = await res.json();
     showModal(data.data[0]);
 }
@@ -224,16 +338,38 @@ async function openAnime(name){
 function showModal(a) {
     document.getElementById("modal").style.display = "flex";
     document.getElementById("img").src = a.images.jpg.large_image_url;
-    document.getElementById("text").innerHTML = `<h2 style="color:red;">${a.title}</h2><p style="font-size:0.9rem; color:#ccc; margin-top:10px;">${a.synopsis ? a.synopsis.substring(0, 250) + '...' : 'No description.'}</p>`;
+    document.getElementById("text").innerHTML = `
+        <h2>${a.title}</h2>
+        <p>${a.synopsis ? a.synopsis.substring(0, 300) + '...' : 'No description available.'}</p>
+        <div style="margin-top:10px; display: flex; justify-content: space-between; color: red; font-weight: bold;">
+            <span>⭐ ${a.score || 'N/A'}</span>
+            <span>🎬 ${a.episodes || '?'} EPS</span>
+            <span>🔥 ${a.status}</span>
+        </div>
+    `;
 }
 
-function closeModal(){ document.getElementById("modal").style.display = "none"; }
+function closeModal(){
+    document.getElementById("modal").style.display = "none";
+}
 
+/* 🤖 AI CHAT (ENHANCED) */
 function askAI(){
     let q = document.getElementById("aiInput").value.toLowerCase();
-    let ans = q.includes("season") ? "Rumored for 2026! 🚀" : "Power levels are peaking! 😏";
-    document.getElementById("text").innerHTML += `<p style="color:red; margin-top:10px; border-left:3px solid red; padding-left:10px;">🤖 AI: ${ans}</p>`;
+    let textDiv = document.getElementById("text");
+    let ans = "";
+
+    if(q.includes("season")) ans = "Official release date is still pending, but leaks suggest late 2025 or 2026! 🚀";
+    else if(q.includes("strongest")) ans = "That's a tough one! In this anime, the power levels keep peaking. Who do you think? 😏";
+    else if(q.includes("watch")) ans = "Definitely a must-watch! The animation and plot are top-tier. 🍿";
+    else ans = "Interesting question! For now, keep an eye on official MAL updates.";
+
+    textDiv.innerHTML += `<div style="background: rgba(255,0,0,0.1); padding: 10px; margin-top: 10px; border-left: 3px solid red;">
+        <b style="color: red;">🤖 KINGU AI:</b> ${ans}
+    </div>`;
+    document.getElementById("aiInput").value = "";
 }
 </script>
+
 </body>
 </html>
